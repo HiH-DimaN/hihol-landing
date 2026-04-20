@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+.env
+.env*.local
+*.log
+.DS_Store
+.vscode
+.idea
+.claude
+CLAUDE.md
