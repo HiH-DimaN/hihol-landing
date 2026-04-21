@@ -1,6 +1,7 @@
 import HeroFX from './HeroFX'
 import ChatDemo from './ChatDemo'
 import MagneticCTA from './MagneticCTA'
+import TrustStrip from './TrustStrip'
 
 export default function HeroSection() {
   return (
@@ -84,6 +85,8 @@ export default function HeroSection() {
               Анкета 10 минут — в ответ PDF-отчёт
             </p>
           </div>
+
+          <TrustStrip />
         </div>
 
         {/* Right: live chat demo */}
