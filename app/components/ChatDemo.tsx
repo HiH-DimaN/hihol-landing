@@ -138,7 +138,7 @@ export default function ChatDemo() {
           <BotAvatar />
           <div className="min-w-0">
             <div className="truncate text-sm font-semibold text-white">
-              skutrtech_bot
+              hihol_assistant
             </div>
             <div className="flex items-center gap-1.5 text-xs text-emerald-400">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-soft" />

@@ -1,4 +1,4 @@
-import SkutrTalkCard from './SkutrTalkCard'
+import AssistantCard from './AssistantCard'
 
 type Product = {
   emoji: string
@@ -12,7 +12,7 @@ type Product = {
 const products: Product[] = [
   {
     emoji: '⚙️',
-    name: 'Skutr Flow',
+    name: 'Автоматизация',
     description: 'Автоматизация процессов. n8n + AI + интеграции.',
     features: [
       'Заявки → AI → CRM → уведомления',
@@ -24,7 +24,7 @@ const products: Product[] = [
   },
   {
     emoji: '📊',
-    name: 'Skutr Fetch',
+    name: 'Парсинг данных',
     description: 'Сбор и структурирование данных.',
     features: [
       'Парсинг сайтов и API',
@@ -37,7 +37,7 @@ const products: Product[] = [
   },
   {
     emoji: '📱',
-    name: 'Skutr Mini',
+    name: 'Telegram Mini App',
     description: 'Telegram Mini Apps.',
     features: [
       'Каталог / кабинет / сервис внутри бота',
@@ -51,7 +51,7 @@ const products: Product[] = [
   },
   {
     emoji: '🔧',
-    name: 'Skutr Care',
+    name: 'Сопровождение',
     description: 'Ежемесячное сопровождение запущенного решения.',
     features: [
       'До 5 ч/мес правок',
@@ -142,7 +142,7 @@ export default function PricingSection() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <SkutrTalkCard />
+          <AssistantCard />
           {products.map((p) => (
             <ProductCard key={p.name} p={p} />
           ))}

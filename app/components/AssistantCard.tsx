@@ -67,7 +67,7 @@ function CheckIcon() {
   )
 }
 
-export default function SkutrTalkCard() {
+export default function AssistantCard() {
   const [active, setActive] = useState<TierId>('plus')
   const tier = tiers.find((t) => t.id === active)!
 
@@ -91,7 +91,7 @@ export default function SkutrTalkCard() {
         >
           <span>💬</span>
         </div>
-        <h3 className="text-xl font-bold text-white">Skutr Talk</h3>
+        <h3 className="text-xl font-bold text-white">AI-ассистент</h3>
         <p className="mt-2 text-sm leading-relaxed text-slate-300">
           AI-ассистенты и боты в трёх тарифах.
         </p>
@@ -99,7 +99,7 @@ export default function SkutrTalkCard() {
 
       <div
         role="tablist"
-        aria-label="Тарифы Skutr Talk"
+        aria-label="Тарифы AI-ассистента"
         className="relative flex gap-1 rounded-xl border border-slate-700/70 bg-slate-950/50 p-1"
       >
         {tiers.map((t) => {
@@ -110,7 +110,7 @@ export default function SkutrTalkCard() {
               type="button"
               role="tab"
               aria-selected={isActive}
-              aria-controls={`skutr-talk-${t.id}`}
+              aria-controls={`assistant-${t.id}`}
               onClick={() => setActive(t.id)}
               className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${
                 isActive
@@ -125,7 +125,7 @@ export default function SkutrTalkCard() {
       </div>
 
       <ul
-        id={`skutr-talk-${active}`}
+        id={`assistant-${active}`}
         role="tabpanel"
         className="relative flex min-h-[7rem] flex-col gap-2 text-sm text-slate-200"
       >
