@@ -37,20 +37,11 @@ export const metadata: Metadata = {
     siteName: 'Дмитрий Хихол',
     title,
     description,
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Дмитрий Хихол — AI-решения и автоматизация для среднего бизнеса',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title,
     description,
-    images: ['/og-image.png'],
   },
   robots: {
     index: true,
