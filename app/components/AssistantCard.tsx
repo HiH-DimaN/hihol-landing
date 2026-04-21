@@ -73,7 +73,7 @@ export default function AssistantCard() {
   const tier = tiers.find((t) => t.id === active)!
 
   return (
-    <article className="relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 via-slate-900/80 to-transparent p-6 shadow-[0_0_40px_-16px_rgba(34,211,238,0.55)] backdrop-blur-sm">
+    <article className="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 via-slate-900/80 to-transparent p-6 shadow-[0_0_40px_-16px_rgba(34,211,238,0.55)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/55 hover:shadow-[0_0_60px_-8px_rgba(34,211,238,0.75)]">
       <div
         aria-hidden="true"
         className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-cyan-500/20 blur-2xl"
