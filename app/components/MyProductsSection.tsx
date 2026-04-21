@@ -15,6 +15,19 @@ type Product = {
 
 const products: Product[] = [
   {
+    emoji: '⚙️',
+    name: 'idea-to-deploy',
+    description:
+      'Open-source методология для Claude Code. 25 навыков, 7 специализированных агентов, два quality gate, каждая сессия сохраняется. MIT-лицензия. Это система, по которой я веду каждый клиентский проект — поэтому срок 1–3 недели, а не 1–3 месяца.',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/HiH-DimaN/idea-to-deploy',
+        external: true,
+      },
+    ],
+  },
+  {
     emoji: '📄',
     name: 'Skutr Docs',
     description:
@@ -44,19 +57,6 @@ const products: Product[] = [
       {
         label: 'Узнать больше',
         href: 'https://neuroexpertise.ru',
-        external: true,
-      },
-    ],
-  },
-  {
-    emoji: '⚙️',
-    name: 'idea-to-deploy',
-    description:
-      'Open-source методология для Claude Code. 25 навыков, 7 специализированных агентов, два quality gate, каждая сессия сохраняется. MIT-лицензия. Это система, по которой я веду каждый клиентский проект — поэтому срок 1–3 недели, а не 1–3 месяца.',
-    links: [
-      {
-        label: 'GitHub',
-        href: 'https://github.com/HiH-DimaN/idea-to-deploy',
         external: true,
       },
     ],
