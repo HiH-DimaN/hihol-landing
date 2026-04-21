@@ -86,7 +86,9 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <TrustStrip />
+          <div className="mt-14 lg:mt-16">
+            <TrustStrip />
+          </div>
         </div>
 
         {/* Right: live chat demo */}
