@@ -36,7 +36,7 @@ export default function HeroSection() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         {/* Left: copy + CTA */}
-        <div className="flex flex-col items-center text-center lg:h-full lg:items-start lg:text-left">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-cyan-300 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-soft" />
             AI Automation · 2026
@@ -86,7 +86,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div className="mt-14 lg:mt-auto lg:pt-12">
+          <div className="mt-14 lg:mt-16">
             <TrustStrip />
           </div>
         </div>
