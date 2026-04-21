@@ -166,7 +166,7 @@ export default function CtaSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 goalName="telegram_click"
-                className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-cyan-300"
+                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
               >
                 <TelegramIcon />
                 <span>Telegram</span>
@@ -177,7 +177,7 @@ export default function CtaSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 goalName="whatsapp_click"
-                className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-emerald-300"
+                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
               >
                 <WhatsAppIcon />
                 <span>WhatsApp</span>
@@ -186,7 +186,7 @@ export default function CtaSection() {
               <TrackedLink
                 href="mailto:hihol.dmitry@ya.ru"
                 goalName="email_click"
-                className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-violet-300"
+                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
               >
                 <EmailIcon />
                 <span>hihol.dmitry@ya.ru</span>
