@@ -46,11 +46,11 @@ export default function HeroSection() {
             <span className="text-gradient-accent">звонки и Excel</span>
           </h1>
 
-          <p className="mt-8 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
-            AI-боты и автоматизация для компаний 10–100 человек.
-            От первого созвона до работающей системы — 1–3 недели.
-            Фиксированная цена, документация, поддержка.
-          </p>
+          <div className="mt-8 flex max-w-2xl flex-col gap-3 text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
+            <p>AI-боты и автоматизация для компаний 10–100 человек.</p>
+            <p>От первого созвона до работающей системы — 1–3 недели.</p>
+            <p>Фиксированная цена, документация, поддержка.</p>
+          </div>
 
           <div className="mt-12 flex flex-col items-center gap-4 lg:items-start">
             <MagneticCTA
