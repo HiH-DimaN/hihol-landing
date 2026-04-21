@@ -1,16 +1,23 @@
 'use client'
 
-import { useEffect, useRef, type ReactNode } from 'react'
+import {
+  useEffect,
+  useRef,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+} from 'react'
+import { trackGoal } from '../lib/metrika'
 
 type Props = {
   href: string
   className?: string
   children: ReactNode
-  onClick?: () => void
+  onClick?: (e: ReactMouseEvent<HTMLAnchorElement>) => void
   radius?: number
   strength?: number
   target?: string
   rel?: string
+  goalName?: string
 }
 
 export default function MagneticCTA({
@@ -22,6 +29,7 @@ export default function MagneticCTA({
   strength = 0.4,
   target,
   rel,
+  goalName,
 }: Props) {
   const ref = useRef<HTMLAnchorElement>(null)
 
@@ -72,7 +80,10 @@ export default function MagneticCTA({
       href={href}
       target={target}
       rel={rel}
-      onClick={onClick}
+      onClick={(e) => {
+        if (goalName) trackGoal(goalName)
+        onClick?.(e)
+      }}
       className={className}
       style={{
         transition:

@@ -1,12 +1,67 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import YandexMetrika from './components/YandexMetrika'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin', 'cyrillic'], display: 'swap' })
+
+const siteUrl = 'https://hihol.ru'
+const title = 'Дмитрий Хихол — AI-решения и автоматизация для среднего бизнеса'
+const description =
+  'Разработка AI-ботов, автоматизация процессов и интеграции для компаний 10–100 человек. Фиксированная цена, срок 1–3 недели, полная документация.'
 
 export const metadata: Metadata = {
-  title: 'Дмитрий Хихол — AI-решения для бизнеса',
-  description: '',
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  keywords: [
+    'AI-бот для бизнеса',
+    'автоматизация',
+    'Telegram-бот',
+    'AI-ассистент',
+    'RAG',
+    'чат-бот для клиник',
+    'автоматизация процессов',
+    'n8n',
+    'интеграция CRM',
+  ],
+  authors: [{ name: 'Дмитрий Хихол', url: siteUrl }],
+  creator: 'Дмитрий Хихол',
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    url: siteUrl,
+    siteName: 'Дмитрий Хихол',
+    title,
+    description,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Дмитрий Хихол — AI-решения и автоматизация для среднего бизнеса',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
+  },
 }
 
 export default function RootLayout({
@@ -16,7 +71,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={inter.className}>
-      <body className="bg-slate-950 text-white antialiased">{children}</body>
+      <body className="bg-slate-950 text-white antialiased">
+        {children}
+        <YandexMetrika />
+      </body>
     </html>
   )
 }

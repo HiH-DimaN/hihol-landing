@@ -1,4 +1,5 @@
 import MagneticCTA from './MagneticCTA'
+import TrackedLink from './TrackedLink'
 
 const bullets = [
   'где теряете время и деньги',
@@ -115,6 +116,7 @@ export default function CtaSection() {
             href="https://forms.gle/3QBDFKuK3DvGQm1n6"
             target="_blank"
             rel="noopener noreferrer"
+            goalName="anketa_click"
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-cyan-300 to-violet-500 px-10 py-5 text-lg font-semibold text-slate-950 shadow-[0_0_50px_-8px_rgba(34,211,238,0.8)] hover:shadow-[0_0_80px_-4px_rgba(167,139,250,0.9)]"
           >
             <span
@@ -125,10 +127,11 @@ export default function CtaSection() {
             <ArrowIcon />
           </MagneticCTA>
 
-          <a
+          <TrackedLink
             href="https://t.me/dmitry_hihol"
             target="_blank"
             rel="noopener noreferrer"
+            goalName="telegram_click"
             className="group inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-cyan-300"
           >
             <TelegramIcon />
@@ -138,7 +141,7 @@ export default function CtaSection() {
                 @dmitry_hihol
               </span>
             </span>
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </section>
