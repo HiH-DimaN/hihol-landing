@@ -57,7 +57,9 @@ export default function HeroSection() {
 
           <div className="mt-12 flex flex-col items-center gap-4 lg:items-start">
             <MagneticCTA
-              href="#contact"
+              href="https://forms.gle/3QBDFKuK3DvGQm1n6"
+              target="_blank"
+              rel="noopener noreferrer"
               goalName="anketa_click"
               className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-cyan-300 to-violet-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-[0_0_40px_-8px_rgba(34,211,238,0.7)] hover:shadow-[0_0_60px_-4px_rgba(167,139,250,0.8)]"
             >
