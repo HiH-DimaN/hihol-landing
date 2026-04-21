@@ -42,17 +42,14 @@ export default function HeroSection() {
           </div>
 
           <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
-            <span className="text-gradient-accent">
-              AI-боты и автоматизация
-            </span>{' '}
-            для компаний, которые хотят перестать управлять бизнесом через
-            звонки и Excel
+            Хватит управлять бизнесом через{' '}
+            <span className="text-gradient-accent">звонки и Excel</span>
           </h1>
 
           <p className="mt-8 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
+            AI-боты и автоматизация для компаний 10–100 человек.
             От первого созвона до работающей системы — 1–3 недели.
-            Фиксированная цена, полная документация, поддержка.
-            Работаю с компаниями 10–100 человек.
+            Фиксированная цена, документация, поддержка.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-4 lg:items-start">
