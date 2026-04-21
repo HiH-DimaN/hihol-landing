@@ -42,8 +42,8 @@ export default function HeroSection() {
           </div>
 
           <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
-            <span className="text-gradient-accent">Хватит</span>{' '}
-            управлять бизнесом через звонки и Excel
+            Хватит управлять бизнесом через{' '}
+            <span className="text-gradient-accent">звонки и Excel</span>
           </h1>
 
           <div className="mt-8 flex max-w-2xl flex-col gap-3 text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
