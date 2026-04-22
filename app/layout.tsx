@@ -54,6 +54,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
     },
   },
+  verification: {
+    yandex: '686d44434e40b703',
+  },
 }
 
 export default function RootLayout({
