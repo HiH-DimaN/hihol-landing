@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate min-h-screen overflow-hidden px-6 pb-20 pt-28 md:pt-32 lg:py-24"
+      className="relative isolate min-h-screen overflow-hidden px-6 pb-16 pt-20 md:pt-24 lg:py-16"
     >
       {/* aurora blobs */}
       <div
@@ -86,7 +86,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div className="mt-14 lg:mt-16">
+          <div className="mt-8 lg:mt-10">
             <TrustStrip />
           </div>
         </div>
