@@ -7,9 +7,9 @@ import StructuredData from './components/StructuredData'
 const inter = Inter({ subsets: ['latin', 'cyrillic'], display: 'swap' })
 
 const siteUrl = 'https://hihol.ru'
-const title = 'Дмитрий Хихол — AI-решения и автоматизация для среднего бизнеса'
+const title = 'Дмитрий Хихол — AI-решения и автоматизация для бизнеса'
 const description =
-  'Разработка AI-ботов, автоматизация процессов и интеграции для компаний 10–100 человек. Фиксированная цена, срок 1–3 недели, полная документация.'
+  'AI-боты, автоматизация процессов, Telegram Mini Apps и AI-системы для бизнеса, экспертов и B2B. Фиксированная цена, срок 1–3 недели, полная документация.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     'автоматизация процессов',
     'n8n',
     'интеграция CRM',
+    'AI для экспертов',
+    'B2B автоматизация',
+    'голосовой бот',
+    'Telegram Mini App',
   ],
   authors: [{ name: 'Дмитрий Хихол', url: siteUrl }],
   creator: 'Дмитрий Хихол',
@@ -67,7 +71,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={inter.className}>
-      <body className="bg-slate-950 text-white antialiased">
+      <body className="bg-[#0b0d0a] text-white antialiased">
         {children}
         <StructuredData />
         <YandexMetrika />

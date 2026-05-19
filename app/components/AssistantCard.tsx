@@ -73,14 +73,14 @@ export default function AssistantCard() {
   const tier = tiers.find((t) => t.id === active)!
 
   return (
-    <article className="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 via-slate-900/80 to-transparent p-6 shadow-[0_0_40px_-16px_rgba(34,211,238,0.55)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/55 hover:shadow-[0_0_60px_-8px_rgba(34,211,238,0.75)]">
+    <article className="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-amber-300/40 bg-gradient-to-br from-amber-500/10 via-[#151812]/80 to-transparent p-6 shadow-[0_0_40px_-16px_rgba(245,158,11,0.45)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/60 hover:shadow-[0_0_60px_-8px_rgba(245,158,11,0.58)]">
       <div
         aria-hidden="true"
-        className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-cyan-500/20 blur-2xl"
+        className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-amber-500/20 blur-2xl"
       />
       <div
         aria-hidden="true"
-        className="absolute right-5 top-5 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-300"
+        className="absolute right-5 top-5 rounded-full border border-amber-300/40 bg-amber-400/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-200"
       >
         Флагман
       </div>
@@ -88,12 +88,12 @@ export default function AssistantCard() {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/25 to-violet-500/25 text-3xl"
+          className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 text-3xl"
         >
           <span>💬</span>
         </div>
         <h3 className="text-xl font-bold text-white">AI-ассистент</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+        <p className="mt-2 text-sm leading-relaxed text-stone-300">
           AI-ассистенты и боты в трёх тарифах.
         </p>
       </div>
@@ -101,7 +101,7 @@ export default function AssistantCard() {
       <div
         role="tablist"
         aria-label="Тарифы AI-ассистента"
-        className="relative flex gap-1 rounded-xl border border-slate-700/70 bg-slate-950/50 p-1"
+        className="relative flex gap-1 rounded-xl border border-stone-700/70 bg-[#0b0d0a]/50 p-1"
       >
         {tiers.map((t) => {
           const isActive = active === t.id
@@ -115,8 +115,8 @@ export default function AssistantCard() {
               onClick={() => setActive(t.id)}
               className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${
                 isActive
-                  ? 'bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 shadow-[0_0_20px_-6px_rgba(34,211,238,0.8)]'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-gradient-to-r from-amber-300 to-emerald-400 text-[#0b0d0a] shadow-[0_0_20px_-6px_rgba(245,158,11,0.6)]'
+                  : 'text-stone-400 hover:text-stone-200'
               }`}
             >
               {t.name}
@@ -128,11 +128,11 @@ export default function AssistantCard() {
       <ul
         id={`assistant-${active}`}
         role="tabpanel"
-        className="relative flex min-h-[7rem] flex-col gap-2 text-sm text-slate-200"
+        className="relative flex min-h-[7rem] flex-col gap-2 text-sm text-stone-200"
       >
         {tier.features.map((f) => (
           <li key={f} className="flex items-start gap-2.5">
-            <span className="mt-0.5 text-cyan-400">
+            <span className="mt-0.5 text-amber-300">
               <CheckIcon />
             </span>
             {f}
@@ -140,9 +140,9 @@ export default function AssistantCard() {
         ))}
       </ul>
 
-      <div className="relative mt-auto border-t border-slate-800 pt-4">
-        <div className="text-2xl font-bold text-cyan-300">{tier.price}</div>
-        <div className="mt-1 text-xs text-slate-500">{tier.duration}</div>
+      <div className="relative mt-auto border-t border-stone-800/80 pt-4">
+        <div className="text-2xl font-bold text-amber-200">{tier.price}</div>
+        <div className="mt-1 text-xs text-stone-500">{tier.duration}</div>
       </div>
     </article>
   )

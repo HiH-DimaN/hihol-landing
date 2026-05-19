@@ -35,23 +35,33 @@ export default function TrustStrip() {
         width={88}
         height={88}
         loading="lazy"
-        className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-cyan-400/40 md:h-[88px] md:w-[88px]"
+        className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-amber-300/40 md:h-[88px] md:w-[88px]"
       />
       <div className="flex flex-col gap-1.5 text-left">
-        <div className="text-base text-slate-400">
+        <div className="text-base text-stone-400">
           <span className="font-semibold text-white">Дмитрий Хихол</span>{' '}
           · AI-разработчик · 20 лет CEO/COO/CCO · MBA
         </div>
-        <div className="text-sm text-slate-500">
+        <div className="text-sm text-stone-500">
           40+ AI-решений в продакшне · OSS{' '}
           <TrackedLink
             href="https://github.com/hihol-labs/idea-to-deploy"
             target="_blank"
             rel="noopener noreferrer"
             goalName="oss_click"
-            className="text-slate-400 underline decoration-dotted underline-offset-2 transition-colors hover:text-cyan-300"
+            className="text-stone-400 underline decoration-dotted underline-offset-2 transition-colors hover:text-amber-200"
           >
             idea-to-deploy
+          </TrackedLink>
+          {' '}·{' '}
+          <TrackedLink
+            href="https://github.com/hihol-labs/product-factory-os"
+            target="_blank"
+            rel="noopener noreferrer"
+            goalName="pfo_click"
+            className="text-stone-400 underline decoration-dotted underline-offset-2 transition-colors hover:text-amber-200"
+          >
+            Product Factory OS
           </TrackedLink>
         </div>
         <div className="mt-1 flex items-center gap-4 text-sm font-medium">
@@ -60,7 +70,7 @@ export default function TrustStrip() {
             target="_blank"
             rel="noopener noreferrer"
             goalName="telegram_channel_click"
-            className="inline-flex items-center gap-1.5 text-slate-400 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 text-stone-400 transition-colors hover:text-amber-200"
           >
             <TelegramIcon />
             <span>Telegram-канал</span>
@@ -70,7 +80,7 @@ export default function TrustStrip() {
             target="_blank"
             rel="noopener noreferrer"
             goalName="github_click"
-            className="inline-flex items-center gap-1.5 text-slate-400 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 text-stone-400 transition-colors hover:text-amber-200"
           >
             <GitHubIcon />
             <span>GitHub</span>
