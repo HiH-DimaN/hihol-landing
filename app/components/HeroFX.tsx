@@ -64,7 +64,7 @@ export default function HeroFX() {
       <svg
         viewBox="0 0 1060 560"
         preserveAspectRatio="xMidYMid meet"
-        className="absolute inset-0 h-full w-full scale-[0.92] opacity-[0.5] sm:scale-100 lg:opacity-40 motion-reduce:transform-none"
+        className="absolute inset-y-0 left-0 h-full w-full scale-[0.92] opacity-[0.5] sm:scale-100 lg:w-[70%] lg:opacity-40 motion-reduce:transform-none"
         style={{
           transform:
             'translate3d(calc(var(--mxp) * -10px), calc(var(--myp) * -10px), 0)',
