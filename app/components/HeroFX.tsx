@@ -102,9 +102,9 @@ export default function HeroFX() {
           <path d="M 120 140 Q 280 140 500 280" className="animate-dash-slow" />
           <path d="M 100 280 L 500 280" className="animate-dash" />
           <path d="M 120 420 Q 280 420 500 280" className="animate-dash-fast" />
-          <path d="M 500 280 Q 700 140 880 140" className="animate-dash" />
-          <path d="M 500 280 L 900 280" className="animate-dash-slow" />
-          <path d="M 500 280 Q 700 420 880 420" className="animate-dash-fast" />
+          <path d="M 500 280 Q 640 150 740 150" className="animate-dash" />
+          <path d="M 500 280 L 760 280" className="animate-dash-slow" />
+          <path d="M 500 280 Q 640 410 740 410" className="animate-dash-fast" />
         </g>
 
         {/* Input: Форма */}
@@ -199,26 +199,26 @@ export default function HeroFX() {
         {/* Output: CRM */}
         <g className="pointer-events-auto cursor-help">
           <title>amoCRM / Bitrix24 / 1С — запись клиента</title>
-          <circle cx="880" cy="140" r="28" fill="url(#outputGlow)" />
+          <circle cx="740" cy="150" r="28" fill="url(#outputGlow)" />
           <rect
-            x="872"
-            y="132"
+            x="732"
+            y="142"
             width="16"
             height="16"
             fill="#f59e0b"
             className="animate-node-pulse"
           />
         </g>
-        <text x="920" y="144" textAnchor="start" className={labelClass}>
+        <text x="778" y="154" textAnchor="start" className={labelClass}>
           CRM
         </text>
 
         {/* Output: PDF */}
         <g className="pointer-events-auto cursor-help">
           <title>Счёт, акт, КП, договор — готовый PDF</title>
-          <circle cx="900" cy="280" r="28" fill="url(#outputGlow)" />
+          <circle cx="760" cy="280" r="28" fill="url(#outputGlow)" />
           <rect
-            x="892"
+            x="752"
             y="272"
             width="16"
             height="16"
@@ -227,17 +227,17 @@ export default function HeroFX() {
             style={{ animationDelay: '0.5s' }}
           />
         </g>
-        <text x="940" y="284" textAnchor="start" className={labelClass}>
+        <text x="798" y="284" textAnchor="start" className={labelClass}>
           PDF
         </text>
 
         {/* Output: Telegram */}
         <g className="pointer-events-auto cursor-help">
           <title>Уведомления, напоминания, ответы клиентам</title>
-          <circle cx="880" cy="420" r="28" fill="url(#outputGlow)" />
+          <circle cx="740" cy="410" r="28" fill="url(#outputGlow)" />
           <rect
-            x="872"
-            y="412"
+            x="732"
+            y="402"
             width="16"
             height="16"
             fill="#f59e0b"
@@ -245,7 +245,7 @@ export default function HeroFX() {
             style={{ animationDelay: '1s' }}
           />
         </g>
-        <text x="920" y="424" textAnchor="start" className={labelClass}>
+        <text x="778" y="414" textAnchor="start" className={labelClass}>
           Telegram
         </text>
       </svg>
