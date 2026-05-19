@@ -1,14 +1,14 @@
 const fit = [
-  'Компания 10–100 человек',
-  'Оборот от 3 млн ₽/мес',
-  'Сотрудники тратят 4+ часов на рутину',
-  'Готовы 2–4 ч/неделю на работу со мной',
+  'Бизнес, эксперт или команда с повторяющимися задачами',
+  'Есть заявки, клиенты, документы, звонки или ручная операционка',
+  'Хотите быстрее отвечать клиентам и меньше терять обращения',
+  'Готовы выделить немного времени на внедрение и проверку результата',
 ]
 
 const notFit = [
-  'Микробизнес до 5 человек',
-  'Ищете фрилансера за 30K',
-  'Ждёте, что AI решит всё без команды',
+  'Нужен разовый бот без понимания бизнес-задачи',
+  'Нет доступа к процессам, данным или ответственному человеку',
+  'Ожидаете, что AI всё решит сам без участия команды',
 ]
 
 function CheckIcon() {
@@ -50,7 +50,7 @@ export default function AudienceSection() {
   return (
     <section
       id="audience"
-      className="relative overflow-hidden bg-slate-900 px-6 py-24"
+      className="relative overflow-hidden bg-[#10130f] px-6 py-24"
     >
       <div
         aria-hidden="true"
@@ -63,14 +63,14 @@ export default function AudienceSection() {
         </h2>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="group relative rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/10 via-slate-900/40 to-transparent p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:shadow-[0_0_50px_-12px_rgba(52,211,153,0.45)]">
+          <div className="group relative rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/10 via-[#151812]/50 to-transparent p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:shadow-[0_0_50px_-12px_rgba(52,211,153,0.45)]">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-emerald-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Подходит
             </div>
             <ul className="space-y-4">
               {fit.map((item) => (
-                <li key={item} className="flex gap-3 text-slate-100">
+                <li key={item} className="flex gap-3 text-stone-100">
                   <span className="mt-0.5 text-emerald-400">
                     <CheckIcon />
                   </span>
@@ -80,14 +80,14 @@ export default function AudienceSection() {
             </ul>
           </div>
 
-          <div className="group relative rounded-2xl border border-rose-400/20 bg-gradient-to-br from-rose-500/10 via-slate-900/40 to-transparent p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-rose-400/50 hover:shadow-[0_0_50px_-12px_rgba(251,113,133,0.45)]">
+          <div className="group relative rounded-2xl border border-rose-400/20 bg-gradient-to-br from-rose-500/10 via-[#151812]/50 to-transparent p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-rose-400/50 hover:shadow-[0_0_50px_-12px_rgba(251,113,133,0.45)]">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose-400/30 bg-rose-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-rose-300">
               <span className="h-1.5 w-1.5 rounded-full bg-rose-400" />
-              Не подходит
+              Скорее не подойдёт
             </div>
             <ul className="space-y-4">
               {notFit.map((item) => (
-                <li key={item} className="flex gap-3 text-slate-100">
+                <li key={item} className="flex gap-3 text-stone-100">
                   <span className="mt-0.5 text-rose-400">
                     <XIcon />
                   </span>

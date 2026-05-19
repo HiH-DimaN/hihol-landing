@@ -21,7 +21,7 @@ const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 function BotAvatar() {
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 shadow-[0_0_20px_-4px_rgba(34,211,238,0.6)]">
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-emerald-400 shadow-[0_0_20px_-4px_rgba(245,158,11,0.48)]">
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -30,7 +30,7 @@ function BotAvatar() {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="h-5 w-5 text-slate-950"
+        className="h-5 w-5 text-[#0b0d0a]"
       >
         <rect x="4" y="7" width="16" height="12" rx="3" />
         <path d="M12 7V3m-2 0h4" />
@@ -45,12 +45,12 @@ function BotAvatar() {
 function TypingDots() {
   return (
     <div className="flex justify-start">
-      <div className="rounded-2xl rounded-bl-md border border-slate-700/60 bg-slate-800/80 px-4 py-3">
+      <div className="rounded-2xl rounded-bl-md border border-stone-700/60 bg-[#23271f]/80 px-4 py-3">
         <div className="flex gap-1">
           {[0, 1, 2].map((i) => (
             <span
               key={i}
-              className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-pulse-soft"
+              className="h-1.5 w-1.5 rounded-full bg-stone-400 animate-pulse-soft"
               style={{ animationDelay: `${i * 0.15}s` }}
             />
           ))}
@@ -71,8 +71,8 @@ function Bubble({ msg }: { msg: Msg }) {
       <div
         className={`max-w-[85%] whitespace-pre-line rounded-2xl border px-4 py-2.5 text-sm leading-relaxed ${
           isUser
-            ? 'rounded-br-md border-cyan-400/25 bg-cyan-500/15 text-cyan-50'
-            : 'rounded-bl-md border-slate-700/60 bg-slate-800/80 text-slate-100'
+            ? 'rounded-br-md border-amber-300/30 bg-amber-500/20 text-amber-50'
+            : 'rounded-bl-md border-stone-700/60 bg-[#23271f]/80 text-stone-100'
         }`}
       >
         {msg.text}
@@ -125,16 +125,16 @@ export default function ChatDemo() {
     <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
       <div
         aria-hidden="true"
-        className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-500/25 via-violet-500/15 to-fuchsia-500/20 blur-2xl"
+        className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-amber-500/20 via-lime-500/20 to-emerald-500/20 blur-2xl"
       />
 
-      <div className="relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/80 shadow-2xl backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-3xl border border-stone-700/60 bg-[#151812]/80 shadow-2xl backdrop-blur-xl">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent"
         />
 
-        <div className="flex items-center gap-3 border-b border-slate-800 px-5 py-4">
+        <div className="flex items-center gap-3 border-b border-stone-800/80 px-5 py-4">
           <BotAvatar />
           <div className="min-w-0">
             <div className="truncate text-sm font-semibold text-white">
@@ -149,7 +149,7 @@ export default function ChatDemo() {
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="h-1 w-1 rounded-full bg-slate-600"
+                className="h-1 w-1 rounded-full bg-stone-600"
               />
             ))}
           </div>
@@ -162,9 +162,9 @@ export default function ChatDemo() {
           {typing && <TypingDots />}
         </div>
 
-        <div className="border-t border-slate-800 bg-slate-950/60 px-5 py-3">
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-soft" />
+        <div className="border-t border-stone-800/80 bg-[#0b0d0a]/70 px-5 py-3">
+          <div className="flex items-center gap-2 text-xs text-stone-500">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulse-soft" />
             автоматизация работает 24/7
           </div>
         </div>

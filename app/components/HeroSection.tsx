@@ -2,6 +2,13 @@ import HeroFX from './HeroFX'
 import ChatDemo from './ChatDemo'
 import MagneticCTA from './MagneticCTA'
 import TrustStrip from './TrustStrip'
+import TrackedLink from './TrackedLink'
+
+const heroFacts = [
+  'Запуск за 1–3 недели',
+  'Фиксированная цена до старта',
+  'Код, документация и контекст ваши',
+]
 
 export default function HeroSection() {
   return (
@@ -14,9 +21,9 @@ export default function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-cyan-500/25 blur-[140px] animate-aurora" />
-        <div className="absolute -right-24 -top-24 h-[620px] w-[620px] rounded-full bg-violet-600/25 blur-[160px] animate-aurora-slow" />
-        <div className="absolute bottom-0 left-1/3 h-[420px] w-[420px] rounded-full bg-fuchsia-500/20 blur-[120px] animate-aurora" />
+        <div className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-amber-500/20 blur-[140px] animate-aurora" />
+        <div className="absolute -right-24 -top-24 h-[620px] w-[620px] rounded-full bg-emerald-600/20 blur-[160px] animate-aurora-slow" />
+        <div className="absolute bottom-0 left-1/3 h-[420px] w-[420px] rounded-full bg-lime-500/20 blur-[120px] animate-aurora" />
       </div>
 
       {/* grid pattern */}
@@ -31,14 +38,14 @@ export default function HeroSection() {
       {/* top hairline */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent"
       />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         {/* Left: copy + CTA */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-cyan-300 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-soft" />
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-amber-200 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulse-soft" />
             AI Automation · 2026
           </div>
 
@@ -47,10 +54,21 @@ export default function HeroSection() {
             <span className="text-gradient-accent">звонки и Excel</span>
           </h1>
 
-          <div className="mt-8 flex max-w-2xl flex-col gap-3 text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
-            <p>AI-боты и автоматизация для компаний 10–100 человек.</p>
+          <div className="mt-8 flex max-w-2xl flex-col gap-3 text-pretty text-lg leading-relaxed text-stone-300 md:text-xl">
+            <p>AI-боты и автоматизация для бизнеса, экспертов и B2B-команд.</p>
             <p>От первого созвона до работающей системы — 1–3 недели.</p>
             <p>Фиксированная цена, документация, поддержка.</p>
+          </div>
+
+          <div className="mt-8 grid w-full max-w-2xl gap-3 sm:grid-cols-3">
+            {heroFacts.map((fact) => (
+              <div
+                key={fact}
+                className="rounded-2xl border border-stone-800/80 bg-[#151812]/70 px-4 py-3 text-sm font-medium text-stone-200 backdrop-blur-sm"
+              >
+                {fact}
+              </div>
+            ))}
           </div>
 
           <div className="mt-12 flex flex-col items-center gap-4 lg:items-start">
@@ -59,7 +77,7 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               goalName="anketa_click"
-              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-cyan-300 to-violet-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-[0_0_40px_-8px_rgba(34,211,238,0.7)] hover:shadow-[0_0_60px_-4px_rgba(167,139,250,0.8)]"
+              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-amber-300 via-lime-300 to-emerald-400 px-8 py-4 text-base font-semibold text-[#0b0d0a] shadow-[0_0_40px_-8px_rgba(245,158,11,0.55)] hover:shadow-[0_0_60px_-4px_rgba(74,222,128,0.55)]"
             >
               <span
                 aria-hidden="true"
@@ -81,8 +99,17 @@ export default function HeroSection() {
                 />
               </svg>
             </MagneticCTA>
-            <p className="text-sm text-slate-400">
-              Анкета 10 минут — в ответ PDF-отчёт
+            <TrackedLink
+              href="https://t.me/dmitry_hihol"
+              target="_blank"
+              rel="noopener noreferrer"
+              goalName="hero_telegram_click"
+              className="inline-flex items-center rounded-full border border-stone-700 bg-[#151812]/70 px-5 py-3 text-sm font-semibold text-stone-200 transition-colors hover:border-amber-300/50 hover:text-amber-200"
+            >
+              Написать в Telegram или прислать задачу голосом
+            </TrackedLink>
+            <p className="text-sm text-stone-400">
+              Анкета 10 минут — PDF-отчёт на следующий рабочий день
             </p>
           </div>
 
@@ -102,8 +129,8 @@ export default function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block"
       >
-        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500/40 p-1.5">
-          <div className="h-1.5 w-1 rounded-full bg-slate-400/70 animate-float-slow" />
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-stone-500/40 p-1.5">
+          <div className="h-1.5 w-1 rounded-full bg-stone-400/70 animate-float-slow" />
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 const labelClass =
-  'fill-slate-400 text-[11px] font-medium uppercase tracking-[0.15em]'
+  'fill-stone-400 text-[11px] font-medium uppercase tracking-[0.15em]'
 
 export default function HeroFX() {
   const ref = useRef<HTMLDivElement>(null)
@@ -56,38 +56,38 @@ export default function HeroFX() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(520px circle at var(--mx) var(--my), rgba(34,211,238,0.16), transparent 60%)',
+            'radial-gradient(520px circle at var(--mx) var(--my), rgba(244,211,94,0.13), transparent 60%)',
         }}
       />
 
       {/* flow diagram — parallax against mouse */}
       <svg
-        viewBox="0 0 1000 560"
-        preserveAspectRatio="xMidYMid slice"
-        className="absolute inset-0 h-full w-full opacity-[0.55] lg:opacity-40 motion-reduce:transform-none"
+        viewBox="0 0 1060 560"
+        preserveAspectRatio="xMidYMid meet"
+        className="absolute inset-0 h-full w-full scale-[0.92] opacity-[0.5] sm:scale-100 lg:opacity-40 motion-reduce:transform-none"
         style={{
           transform:
-            'translate3d(calc(var(--mxp) * -16px), calc(var(--myp) * -16px), 0)',
+            'translate3d(calc(var(--mxp) * -10px), calc(var(--myp) * -10px), 0)',
           transition: 'transform 250ms ease-out',
         }}
       >
         <defs>
           <linearGradient id="flowStroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#22d3ee" />
-            <stop offset="50%" stopColor="#a78bfa" />
-            <stop offset="100%" stopColor="#f472b6" />
+            <stop offset="0%" stopColor="#f4d35e" />
+            <stop offset="50%" stopColor="#86efac" />
+            <stop offset="100%" stopColor="#f59e0b" />
           </linearGradient>
           <radialGradient id="hubGlow">
-            <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.75" />
-            <stop offset="70%" stopColor="#a78bfa" stopOpacity="0" />
+            <stop offset="0%" stopColor="#86efac" stopOpacity="0.75" />
+            <stop offset="70%" stopColor="#86efac" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="inputGlow">
-            <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
-            <stop offset="70%" stopColor="#22d3ee" stopOpacity="0" />
+            <stop offset="0%" stopColor="#f4d35e" stopOpacity="0.8" />
+            <stop offset="70%" stopColor="#f4d35e" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="outputGlow">
-            <stop offset="0%" stopColor="#f472b6" stopOpacity="0.75" />
-            <stop offset="70%" stopColor="#f472b6" stopOpacity="0" />
+            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.75" />
+            <stop offset="70%" stopColor="#f59e0b" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -115,7 +115,7 @@ export default function HeroFX() {
             cx="120"
             cy="140"
             r="7"
-            fill="#22d3ee"
+            fill="#f4d35e"
             className="animate-node-pulse"
           />
         </g>
@@ -131,7 +131,7 @@ export default function HeroFX() {
             cx="100"
             cy="280"
             r="6"
-            fill="#22d3ee"
+            fill="#f4d35e"
             className="animate-node-pulse"
             style={{ animationDelay: '0.4s' }}
           />
@@ -148,7 +148,7 @@ export default function HeroFX() {
             cx="120"
             cy="420"
             r="7"
-            fill="#22d3ee"
+            fill="#f4d35e"
             className="animate-node-pulse"
             style={{ animationDelay: '0.8s' }}
           />
@@ -183,7 +183,7 @@ export default function HeroFX() {
             cx="500"
             cy="280"
             r="9"
-            fill="#a78bfa"
+            fill="#86efac"
             className="animate-node-pulse"
           />
         </g>
@@ -191,7 +191,7 @@ export default function HeroFX() {
           x="500"
           y="360"
           textAnchor="middle"
-          className="fill-violet-300 text-[13px] font-bold uppercase tracking-[0.3em]"
+          className="fill-lime-200 text-[13px] font-bold uppercase tracking-[0.3em]"
         >
           AI
         </text>
@@ -205,7 +205,7 @@ export default function HeroFX() {
             y="132"
             width="16"
             height="16"
-            fill="#f472b6"
+            fill="#f59e0b"
             className="animate-node-pulse"
           />
         </g>
@@ -222,7 +222,7 @@ export default function HeroFX() {
             y="272"
             width="16"
             height="16"
-            fill="#f472b6"
+            fill="#f59e0b"
             className="animate-node-pulse"
             style={{ animationDelay: '0.5s' }}
           />
@@ -240,7 +240,7 @@ export default function HeroFX() {
             y="412"
             width="16"
             height="16"
-            fill="#f472b6"
+            fill="#f59e0b"
             className="animate-node-pulse"
             style={{ animationDelay: '1s' }}
           />

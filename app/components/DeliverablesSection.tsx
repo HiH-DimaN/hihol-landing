@@ -28,7 +28,7 @@ export default function DeliverablesSection() {
   return (
     <section
       id="deliverables"
-      className="relative overflow-hidden bg-slate-900 px-6 py-24"
+      className="relative overflow-hidden bg-[#10130f] px-6 py-24"
     >
       <div
         aria-hidden="true"
@@ -47,15 +47,15 @@ export default function DeliverablesSection() {
           {deliverables.map((text) => (
             <li
               key={text}
-              className="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:shadow-[0_0_30px_-16px_rgba(34,211,238,0.5)]"
+              className="group flex items-start gap-4 rounded-2xl border border-stone-800/80 bg-[#151812]/70 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300/40 hover:shadow-[0_0_30px_-16px_rgba(245,158,11,0.42)]"
             >
               <div
                 aria-hidden="true"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/25 to-violet-500/25 text-cyan-300 transition-colors duration-300 group-hover:text-cyan-200"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 text-amber-200 transition-colors duration-300 group-hover:text-amber-100"
               >
                 <CheckIcon />
               </div>
-              <p className="text-base leading-relaxed text-slate-200">
+              <p className="text-base leading-relaxed text-stone-200">
                 {text}
               </p>
             </li>

@@ -10,7 +10,7 @@ function ChevronIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      className="h-5 w-5 shrink-0 text-slate-500 transition-all duration-300 group-open:rotate-180 group-open:text-cyan-400"
+      className="h-5 w-5 shrink-0 text-stone-500 transition-all duration-300 group-open:rotate-180 group-open:text-amber-300"
     >
       <polyline points="6 9 12 15 18 9" />
     </svg>
@@ -21,7 +21,7 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-slate-900 px-6 py-24"
+      className="relative overflow-hidden bg-[#10130f] px-6 py-24"
     >
       <div
         aria-hidden="true"
@@ -37,13 +37,13 @@ export default function FaqSection() {
           {faqs.map((item) => (
             <details
               key={item.q}
-              className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm transition-all duration-300 open:border-cyan-400/40 open:shadow-[0_0_40px_-16px_rgba(34,211,238,0.5)] hover:border-slate-700"
+              className="group overflow-hidden rounded-2xl border border-stone-800/80 bg-[#151812]/70 backdrop-blur-sm transition-all duration-300 open:border-amber-300/40 open:shadow-[0_0_40px_-16px_rgba(245,158,11,0.42)] hover:border-stone-700"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-left font-semibold text-white transition-colors [&::-webkit-details-marker]:hidden">
                 <span className="flex-1">{item.q}</span>
                 <ChevronIcon />
               </summary>
-              <div className="border-t border-slate-800 px-5 pb-5 pt-4 leading-relaxed text-slate-300">
+              <div className="border-t border-stone-800/80 px-5 pb-5 pt-4 leading-relaxed text-stone-300">
                 {item.a}
               </div>
             </details>

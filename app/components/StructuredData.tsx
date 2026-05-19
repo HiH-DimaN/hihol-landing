@@ -46,7 +46,7 @@ const personSchema = {
 const professionalServiceSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'HIHOL — AI-решения и автоматизация для среднего бизнеса',
+  name: 'HIHOL — AI-решения и автоматизация для бизнеса',
   url: siteUrl,
   image: `${siteUrl}/opengraph-image`,
   telephone: '+79051238877',
@@ -61,13 +61,15 @@ const professionalServiceSchema = {
     name: 'Дмитрий Хихол',
   },
   description:
-    'AI-боты, автоматизация процессов, Telegram Mini Apps, голосовые боты, парсинг данных, RAG-ассистенты для компаний 10–100 человек. Фиксированная цена, срок 1–3 недели, полная документация.',
+    'AI-боты, автоматизация процессов, Telegram Mini Apps, голосовые боты, парсинг данных, RAG-ассистенты и AI-системы для бизнеса, экспертов и B2B. Фиксированная цена, срок 1–3 недели, полная документация.',
   serviceType: [
     'AI-ассистент / RAG-чат-бот',
     'Автоматизация процессов (n8n + AI)',
     'Парсинг и структурирование данных',
     'Telegram Mini App',
     'Голосовой бот (STT + LLM + TTS)',
+    'AI-система для экспертов',
+    'B2B автоматизация',
     'Ежемесячное сопровождение AI-решений',
   ],
   sameAs: [

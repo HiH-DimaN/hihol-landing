@@ -113,15 +113,15 @@ export default function ProcessSection() {
   return (
     <section
       id="process"
-      className="relative overflow-hidden bg-slate-950 px-6 py-24"
+      className="relative overflow-hidden bg-[#0b0d0a] px-6 py-24"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 -z-10 h-96 bg-gradient-to-b from-violet-500/10 via-transparent to-transparent"
+        className="absolute inset-x-0 top-0 -z-10 h-96 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-96 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-96 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent"
       />
 
       <div className="mx-auto max-w-6xl">
@@ -134,18 +134,18 @@ export default function ProcessSection() {
           {steps.map((step, idx) => (
             <li
               key={step.title}
-              className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-[0_0_40px_-16px_rgba(34,211,238,0.5)]"
+              className="group relative overflow-hidden rounded-2xl border border-stone-800/80 bg-[#151812]/70 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:shadow-[0_0_40px_-16px_rgba(245,158,11,0.42)]"
             >
               <div
                 aria-hidden="true"
-                className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyan-500/10 blur-2xl transition-colors duration-300 group-hover:bg-violet-500/20"
+                className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-500/10 blur-2xl transition-colors duration-300 group-hover:bg-emerald-500/20"
               />
 
               <div className="relative flex items-baseline justify-between">
-                <span className="bg-gradient-to-br from-cyan-400 to-violet-500 bg-clip-text text-5xl font-bold leading-none text-transparent">
+                <span className="bg-gradient-to-br from-amber-300 to-emerald-400 bg-clip-text text-5xl font-bold leading-none text-transparent">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
-                <span className="text-slate-600 transition-colors duration-300 group-hover:text-cyan-400">
+                <span className="text-stone-600 transition-colors duration-300 group-hover:text-amber-300">
                   {step.icon}
                 </span>
               </div>
@@ -153,7 +153,7 @@ export default function ProcessSection() {
               <h3 className="mt-5 text-lg font-semibold text-white">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+              <p className="mt-2 text-sm leading-relaxed text-stone-400">
                 {step.description}
               </p>
             </li>

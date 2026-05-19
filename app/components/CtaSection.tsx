@@ -89,15 +89,15 @@ export default function CtaSection() {
   return (
     <section
       id="contact"
-      className="relative flex min-h-[70vh] items-center overflow-hidden bg-gradient-to-br from-cyan-900/40 via-slate-950 to-fuchsia-900/20 px-6 py-24"
+      className="relative flex min-h-[70vh] items-center overflow-hidden bg-gradient-to-br from-amber-950/30 via-[#0b0d0a] to-emerald-950/25 px-6 py-24"
     >
       {/* aurora blobs */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute -top-24 left-1/4 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[140px] animate-aurora-slow" />
-        <div className="absolute -bottom-32 right-1/4 h-[600px] w-[600px] rounded-full bg-violet-500/20 blur-[160px] animate-aurora" />
+        <div className="absolute -top-24 left-1/4 h-[500px] w-[500px] rounded-full bg-amber-500/20 blur-[140px] animate-aurora-slow" />
+        <div className="absolute -bottom-32 right-1/4 h-[600px] w-[600px] rounded-full bg-emerald-500/20 blur-[160px] animate-aurora" />
       </div>
 
       {/* grid */}
@@ -109,11 +109,11 @@ export default function CtaSection() {
       {/* top + bottom hairlines */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-violet-400/40 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent"
       />
 
       <div className="relative mx-auto max-w-3xl text-center">
@@ -123,14 +123,14 @@ export default function CtaSection() {
           на рутине?
         </h2>
 
-        <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-200 md:text-xl">
-          Заполните анкету — 10 минут. Через 1–2 рабочих дня пришлю PDF-отчёт:
+        <p className="mt-8 text-pretty text-lg leading-relaxed text-stone-200 md:text-xl">
+          Заполните анкету — 10 минут. На следующий рабочий день пришлю PDF-отчёт:
         </p>
 
-        <ul className="mx-auto mt-6 flex max-w-sm flex-col gap-3 text-left text-slate-200">
+        <ul className="mx-auto mt-6 flex max-w-sm flex-col gap-3 text-left text-stone-200">
           {bullets.map((b) => (
             <li key={b} className="flex items-start gap-3">
-              <span className="mt-1 text-cyan-400">
+              <span className="mt-1 text-amber-300">
                 <CheckIcon />
               </span>
               <span>{b}</span>
@@ -138,7 +138,7 @@ export default function CtaSection() {
           ))}
         </ul>
 
-        <p className="mt-6 text-slate-300">
+        <p className="mt-6 text-stone-300">
           Бесплатно, без звонков, без спама.
         </p>
 
@@ -148,7 +148,7 @@ export default function CtaSection() {
             target="_blank"
             rel="noopener noreferrer"
             goalName="anketa_click"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-cyan-300 to-violet-500 px-10 py-5 text-lg font-semibold text-slate-950 shadow-[0_0_50px_-8px_rgba(34,211,238,0.8)] hover:shadow-[0_0_80px_-4px_rgba(167,139,250,0.9)]"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-amber-300 via-lime-300 to-emerald-400 px-10 py-5 text-lg font-semibold text-[#0b0d0a] shadow-[0_0_50px_-8px_rgba(245,158,11,0.6)] hover:shadow-[0_0_80px_-4px_rgba(74,222,128,0.62)]"
           >
             <span
               aria-hidden="true"
@@ -158,15 +158,26 @@ export default function CtaSection() {
             <ArrowIcon />
           </MagneticCTA>
 
+          <TrackedLink
+            href="https://t.me/dmitry_hihol"
+            target="_blank"
+            rel="noopener noreferrer"
+            goalName="cta_voice_telegram_click"
+            className="inline-flex items-center gap-2 rounded-full border border-stone-700 bg-[#151812]/70 px-6 py-3 text-sm font-semibold text-stone-200 transition-colors hover:border-amber-300/50 hover:text-amber-200"
+          >
+            <TelegramIcon />
+            <span>Или пришлите задачу голосом в Telegram</span>
+          </TrackedLink>
+
           <div className="flex flex-col items-center gap-3">
-            <p className="text-sm text-slate-400">Или напишите напрямую:</p>
+            <p className="text-sm text-stone-400">Или напишите напрямую:</p>
             <div className="flex flex-wrap items-center justify-center gap-5 text-sm font-medium">
               <TrackedLink
                 href="https://t.me/dmitry_hihol"
                 target="_blank"
                 rel="noopener noreferrer"
                 goalName="telegram_click"
-                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
+                className="inline-flex items-center gap-2 text-amber-300 transition-colors hover:text-amber-200"
               >
                 <TelegramIcon />
                 <span>Telegram</span>
@@ -177,7 +188,7 @@ export default function CtaSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 goalName="whatsapp_click"
-                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
+                className="inline-flex items-center gap-2 text-amber-300 transition-colors hover:text-amber-200"
               >
                 <WhatsAppIcon />
                 <span>WhatsApp</span>
@@ -186,7 +197,7 @@ export default function CtaSection() {
               <TrackedLink
                 href="mailto:hihol.dmitry@ya.ru"
                 goalName="email_click"
-                className="inline-flex items-center gap-2 text-cyan-400 transition-colors hover:text-cyan-300"
+                className="inline-flex items-center gap-2 text-amber-300 transition-colors hover:text-amber-200"
               >
                 <EmailIcon />
                 <span>hihol.dmitry@ya.ru</span>
