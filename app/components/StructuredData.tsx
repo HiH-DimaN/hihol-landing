@@ -9,74 +9,121 @@ const personSchema = {
   alternateName: 'Dmitry Hihol',
   url: siteUrl,
   image: `${siteUrl}/dmitry.jpg`,
-  jobTitle: 'AI-разработчик',
+  jobTitle: 'AI-разработчик и консультант по автоматизации бизнес-процессов',
   description:
-    'AI-разработчик с 20-летним бэкграундом в управлении бизнесом (CEO/COO/CCO). 40+ AI-решений в продакшне. Фиксированная цена, срок 1–3 недели.',
+    'AI-разработчик с управленческим операционным бэкграундом. Внедряет AI-автоматизацию бизнес-процессов под ключ: AI-агентов, RAG-ассистентов, чат-ботов, голосовые сценарии, Telegram Mini Apps и интеграции с CRM.',
   sameAs: [
     'https://t.me/dmitry_hihol',
-    'https://t.me/d_hihol',
     'https://github.com/HiH-DimaN',
     'https://github.com/hihol-labs',
   ],
   knowsAbout: [
-    'AI-разработка',
-    'Telegram-боты',
-    'Telegram Mini Apps',
+    'Кастомная разработка AI-решений для бизнеса',
+    'AI-автоматизация бизнес-процессов',
+    'AI-агенты для бизнеса',
+    'RAG-ассистенты',
     'RAG-системы',
-    'n8n автоматизация',
+    'парсинг данных',
+    'Telegram-боты',
+    'CRM-интеграции',
+    'n8n',
     'OpenAI API',
-    'Claude API',
-    'YandexGPT',
-    'GigaChat',
-    'Python',
-    'TypeScript',
-    'FastAPI',
     'Next.js',
-    'PostgreSQL + pgvector',
-  ],
-  alumniOf: [
-    {
-      '@type': 'EducationalOrganization',
-      name: 'City Business School',
-      description: 'MBA (Управление проектами)',
-    },
+    'PostgreSQL',
   ],
 }
 
-const professionalServiceSchema = {
+const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'HIHOL — AI-решения и автоматизация для бизнеса',
+  name: 'HIHOL',
+  legalName: 'Дмитрий Хихол — AI-автоматизация бизнес-процессов под ключ',
   url: siteUrl,
   image: `${siteUrl}/opengraph-image`,
   telephone: '+79051238877',
   email: 'hihol.dmitry@ya.ru',
-  areaServed: {
-    '@type': 'Country',
-    name: 'Россия',
+  priceRange: '40 000 – 400 000 ₽',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Москва',
+    addressCountry: 'RU',
   },
-  priceRange: '15 000 – 400 000 ₽',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 55.7558,
+    longitude: 37.6177,
+  },
+  hasMap: 'https://yandex.ru/maps/?ll=37.617700%2C55.755800&z=3',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+79051238877',
+      contactType: 'sales',
+      areaServed: 'RU',
+      availableLanguage: ['Russian'],
+    },
+  ],
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'Россия',
+    },
+    {
+      '@type': 'Place',
+      name: 'СНГ',
+    },
+  ],
   founder: {
     '@type': 'Person',
     name: 'Дмитрий Хихол',
   },
   description:
-    'AI-боты, автоматизация процессов, Telegram Mini Apps, голосовые боты, парсинг данных, RAG-ассистенты и AI-системы для бизнеса, экспертов и B2B. Фиксированная цена, срок 1–3 недели, полная документация.',
-  serviceType: [
-    'AI-ассистент / RAG-чат-бот',
-    'Автоматизация процессов (n8n + AI)',
-    'Парсинг и структурирование данных',
-    'Telegram Mini App',
-    'Голосовой бот (STT + LLM + TTS)',
-    'AI-система для экспертов',
-    'B2B автоматизация',
-    'Ежемесячное сопровождение AI-решений',
-  ],
-  sameAs: [
-    'https://t.me/dmitry_hihol',
-    'https://t.me/d_hihol',
-    'https://github.com/HiH-DimaN',
-  ],
+    'Внедрение AI-агентов, чат-ботов, RAG-ассистентов, Telegram Mini Apps, голосовых ботов и интеграций с CRM для обработки заявок, поддержки, документов, звонков и аналитики.',
+  sameAs: ['https://t.me/dmitry_hihol', 'https://github.com/hihol-labs'],
+}
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'AI-автоматизация бизнес-процессов под ключ',
+  serviceType:
+    'Внедрение AI-агентов, RAG-ассистентов, CRM-интеграций, Telegram Mini Apps, голосовых ботов и автоматизации документов',
+  provider: {
+    '@type': 'Person',
+    name: 'Дмитрий Хихол',
+    url: siteUrl,
+  },
+  areaServed: 'Россия и СНГ',
+  offers: {
+    '@type': 'Offer',
+    url: siteUrl,
+    priceCurrency: 'RUB',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      priceCurrency: 'RUB',
+      minPrice: 40000,
+      maxPrice: 400000,
+    },
+    availability: 'https://schema.org/InStock',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Услуги AI-автоматизации',
+    itemListElement: [
+      'AI-ассистент Start / Plus / Pro',
+      'Автоматизация заявок и CRM',
+      'Telegram Mini App для бизнеса',
+      'Голосовой бот',
+      'Автоматизация документов и отчетов',
+      'Парсинг данных',
+    ].map((name) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name,
+      },
+    })),
+  },
 }
 
 const faqPageSchema = {
@@ -101,9 +148,11 @@ export default function StructuredData() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(professionalServiceSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <script
         type="application/ld+json"

@@ -3,15 +3,53 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-bg: #0c0f0d;
+    --color-ink: #ffffff;
+    --color-muted: #5d6059;
+    --color-line: #d8d2c3;
+    --color-green: #123c35;
+    --color-gold: #d6b25e;
+    --site-bg: #eef1ed;
+    --site-paper: #fbfaf6;
+    --site-ink: #171b19;
+    --site-muted: #626963;
+    --site-line: #c9cbc2;
+    --site-green: #245447;
+    --site-gold: #b68b3f;
+    --site-blue: #2d5872;
+    --site-red: #8f483d;
+  }
+
   html {
     scroll-behavior: smooth;
   }
   body {
-    background-color: #0b0d0a;
+    background-color: var(--site-bg);
+    color: var(--site-ink);
+    font-family:
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
   }
+
+  .display-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  body.modal-open {
+    overflow: hidden;
+  }
+
   ::selection {
-    background-color: rgb(245 158 11 / 0.28);
-    color: #ffffff;
+    background-color: rgb(182 139 63 / 0.25);
+    color: var(--site-ink);
   }
 }
 
@@ -27,6 +65,70 @@
 }
 
 @layer utilities {
+  .reveal-1,
+  .reveal-2,
+  .reveal-3,
+  .reveal-4,
+  .reveal-5,
+  .reveal-6 {
+    animation: fadeUp 560ms ease both;
+  }
+
+  .reveal-1 {
+    animation-delay: 80ms;
+  }
+
+  .reveal-2 {
+    animation-delay: 180ms;
+  }
+
+  .reveal-3 {
+    animation-delay: 280ms;
+  }
+
+  .reveal-4 {
+    animation-delay: 380ms;
+  }
+
+  .reveal-5 {
+    animation-delay: 480ms;
+  }
+
+  .reveal-6 {
+    animation-delay: 580ms;
+  }
+
+  .fade-in {
+    animation: fadeIn 220ms ease both;
+  }
+
+  .hero-stagger {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: heroFade 640ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 520ms ease,
+      transform 520ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marquee-track {
+    width: max-content;
+    min-width: 240%;
+    animation: marquee 34s linear infinite;
+  }
+
   .bg-grid {
     background-image:
       linear-gradient(to right, rgb(168 162 158 / 0.075) 1px, transparent 1px),
@@ -54,6 +156,37 @@
   }
 }
 
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -62,5 +195,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  a[href^="https://forms.gle/"] {
+    min-height: 56px;
   }
 }

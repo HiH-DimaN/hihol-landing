@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'nodejs'
 export const alt =
-  'HIHOL — AI solutions & automation for SMB'
+  'AI-автоматизация бизнес-процессов под ключ — HIHOL'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -17,10 +17,11 @@ export default function OGImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '80px',
-          backgroundColor: '#0b0d0a',
+          backgroundColor: '#f7f3ea',
           backgroundImage:
-            'radial-gradient(circle at 15% 20%, rgba(245,158,11,0.32) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(74,222,128,0.26) 0%, transparent 45%)',
-          color: '#ffffff',
+            'linear-gradient(to right, rgba(28,31,28,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(28,31,28,0.08) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+          color: '#1c1f1c',
           fontFamily: 'sans-serif',
         }}
       >
@@ -28,29 +29,28 @@ export default function OGImage() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '20px',
-            fontSize: '28px',
-            letterSpacing: '-0.01em',
+          gap: '20px',
+          fontSize: '28px',
+          letterSpacing: '0',
           }}
         >
           <div
             style={{
               width: '64px',
               height: '64px',
-              borderRadius: '16px',
-              backgroundImage:
-                'linear-gradient(135deg, #f4d35e 0%, #5ee08b 100%)',
+              borderRadius: '10px',
+              backgroundColor: '#174c43',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#0b0d0a',
+              color: '#ffffff',
               fontSize: '40px',
               fontWeight: 800,
             }}
           >
             H
           </div>
-          <span style={{ color: '#e7e5e4', fontWeight: 600 }}>hihol.ru</span>
+          <span style={{ color: '#1c1f1c', fontWeight: 600 }}>hihol.ru</span>
         </div>
 
         <div
@@ -62,40 +62,37 @@ export default function OGImage() {
         >
           <div
             style={{
-              fontSize: '112px',
+              fontSize: '78px',
               fontWeight: 800,
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
-              backgroundImage:
-                'linear-gradient(120deg, #ffffff 0%, #fcd34d 55%, #86efac 100%)',
-              backgroundClip: 'text',
-              color: 'transparent',
+              lineHeight: 1.02,
+              letterSpacing: '0',
+              color: '#1c1f1c',
             }}
           >
-            HIHOL
+            AI automation for business processes
           </div>
           <div
             style={{
-              fontSize: '44px',
+              fontSize: '38px',
               fontWeight: 600,
               lineHeight: 1.2,
-              color: '#e7e5e4',
+              color: '#174c43',
               maxWidth: '960px',
-              letterSpacing: '-0.015em',
+              letterSpacing: '0',
             }}
           >
-            AI solutions & automation for SMB
+            Fixed scope, working system, 1-3 weeks
           </div>
           <div
             style={{
               fontSize: '28px',
               fontWeight: 400,
               lineHeight: 1.3,
-              color: '#a8a29e',
+              color: '#62665f',
               maxWidth: '900px',
             }}
           >
-            Telegram bots, RAG assistants, CRM integrations.
+            Dmitry Hihol: AI agents, RAG, CRM, Telegram Mini Apps and document automation.
           </div>
         </div>
 
@@ -109,10 +106,10 @@ export default function OGImage() {
           <span
             style={{
               padding: '12px 24px',
-              borderRadius: '999px',
-              backgroundColor: 'rgba(245,158,11,0.14)',
-              border: '1px solid rgba(245,158,11,0.42)',
-              color: '#fcd34d',
+              borderRadius: '10px',
+              backgroundColor: '#ffffff',
+              border: '1px solid #d6ccba',
+              color: '#1c1f1c',
               fontWeight: 600,
             }}
           >
@@ -121,22 +118,22 @@ export default function OGImage() {
           <span
             style={{
               padding: '12px 24px',
-              borderRadius: '999px',
-              backgroundColor: 'rgba(74,222,128,0.12)',
-              border: '1px solid rgba(74,222,128,0.38)',
-              color: '#86efac',
+              borderRadius: '10px',
+              backgroundColor: '#ffffff',
+              border: '1px solid #d6ccba',
+              color: '#1c1f1c',
               fontWeight: 600,
             }}
           >
-            1–3 weeks
+            1-3 weeks
           </span>
           <span
             style={{
               padding: '12px 24px',
-              borderRadius: '999px',
-              backgroundColor: 'rgba(168,162,158,0.1)',
-              border: '1px solid rgba(168,162,158,0.35)',
-              color: '#d6d3d1',
+              borderRadius: '10px',
+              backgroundColor: '#ffffff',
+              border: '1px solid #d6ccba',
+              color: '#1c1f1c',
               fontWeight: 600,
             }}
           >
