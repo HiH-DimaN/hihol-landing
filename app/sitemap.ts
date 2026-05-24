@@ -1,21 +1,30 @@
 import type { MetadataRoute } from 'next'
+import { guidePageList } from './lib/guidePages'
 import { nichePageList } from './lib/nichePages'
+import { DATE_MODIFIED_SHORT } from './lib/site'
 
 const SITE_URL = 'https://hihol.ru'
+const lastModified = new Date(DATE_MODIFIED_SHORT)
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: SITE_URL,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 1,
     },
     ...nichePageList.map((page) => ({
       url: `${SITE_URL}/${page.slug}`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
+    })),
+    ...guidePageList.map((page) => ({
+      url: `${SITE_URL}/${page.slug}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.72,
     })),
   ]
 }

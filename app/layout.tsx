@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 import YandexMetrika from './components/YandexMetrika'
 import StructuredData from './components/StructuredData'
+import { DATE_MODIFIED, DATE_PUBLISHED, SITE_NAME, SITE_URL } from './lib/site'
 
-const siteUrl = 'https://hihol.ru'
-const title = 'AI-автоматизация бизнес-процессов под ключ — Дмитрий Хихол'
+const siteUrl = SITE_URL
+const title = `AI-автоматизация бизнес-процессов под ключ 2026 — ${SITE_NAME}`
 const description =
   'Кастомная разработка AI-решений для бизнеса: AI-боты, RAG-системы, CRM-интеграции, Telegram Mini Apps, парсинг данных и автоматизация документов. Расчёт потерь, запуск за 1–3 недели.'
 
@@ -39,8 +40,8 @@ export const metadata: Metadata = {
     'парсинг данных',
     'кастомная разработка AI-решений',
   ],
-  authors: [{ name: 'Дмитрий Хихол', url: siteUrl }],
-  creator: 'Дмитрий Хихол',
+  authors: [{ name: SITE_NAME, url: siteUrl }],
+  creator: SITE_NAME,
   alternates: {
     canonical: siteUrl,
   },
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
     url: siteUrl,
-    siteName: 'Дмитрий Хихол',
+    siteName: SITE_NAME,
     title,
     description,
     images: ['/opengraph-image'],
@@ -66,6 +67,8 @@ export const metadata: Metadata = {
     ICBM: '55.7558, 37.6177',
     'business:contact_data:country_name': 'Russia',
     'business:contact_data:locality': 'Moscow',
+    'article:published_time': DATE_PUBLISHED,
+    'article:modified_time': DATE_MODIFIED,
   },
   robots: {
     index: true,
