@@ -1,7 +1,6 @@
-import { faqs } from '../lib/faqs'
+import { homeFaqs } from '../lib/faqs'
 import {
   AD_MATCH_TITLE,
-  guideLinks,
   pains,
   portfolio,
   reasons,
@@ -21,17 +20,6 @@ import HomeCaseProof from './HomeCaseProof'
 import HomeSectionTitle from './HomeSectionTitle'
 import HomeServiceSwitcher from './HomeServiceSwitcher'
 import TrackedLink from './TrackedLink'
-
-const nicheLinks = [
-  { title: 'AI-система для локального B2B', href: '/ai-assistant-business' },
-  { title: 'B2B-автоматизация', href: '/b2b-automation' },
-  { title: 'Telegram Mini App', href: '/telegram-mini-app' },
-  { title: 'Голосовой AI-бот', href: '/voice-bot' },
-  { title: 'AI-система для экспертов', href: '/ai-for-experts' },
-]
-
-const visibleFaqs = faqs.slice(0, 10)
-const extraFaqs = faqs.slice(10)
 
 function LineIcon({ index }: { index: number }) {
   const paths = [
@@ -132,7 +120,6 @@ export default function ConversionLanding() {
             <nav className="hidden items-center gap-6 text-sm text-[var(--site-muted)] md:flex" aria-label="Навигация">
               <a href="#services" className="flex min-h-11 items-center hover:text-[var(--site-ink)]">Услуги</a>
               <a href="#proof" className="flex min-h-11 items-center hover:text-[var(--site-ink)]">Доказательства</a>
-              <a href="#guides" className="flex min-h-11 items-center hover:text-[var(--site-ink)]">Гайды</a>
               <a href="#calculator" className="flex min-h-11 items-center hover:text-[var(--site-ink)]">Расчёт</a>
               <a href="#contacts" className="flex min-h-11 items-center hover:text-[var(--site-ink)]">Контакты</a>
             </nav>
@@ -324,27 +311,6 @@ export default function ConversionLanding() {
         </div>
       </section>
 
-      <section id="guides" className="border-y border-[color:var(--site-line)] bg-[var(--site-paper)] px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-7xl">
-          <HomeSectionTitle
-            kicker="Контентные кластеры"
-            title="Гайды и нишевые страницы для AI-поиска"
-            text="Короткие страницы под конкретные вопросы: цена, RAG, Telegram Mini App, голосовые звонки и нишевые внедрения."
-          />
-          <div className="mt-10 grid gap-4 lg:grid-cols-2">
-            {[...guideLinks, ...nicheLinks].map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="border border-[color:var(--site-line)] bg-white p-5 text-lg font-semibold transition hover:border-[var(--site-ink)]"
-              >
-                {item.title}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="calculator" className="border-y border-[color:var(--site-line)] bg-[var(--site-paper)] px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <HomeCalculator />
@@ -355,7 +321,7 @@ export default function ConversionLanding() {
         <div className="mx-auto max-w-7xl">
           <HomeSectionTitle kicker="FAQ" title="Вопросы, которые нужно закрыть до старта" />
           <div className="mt-10 grid gap-3 lg:grid-cols-2 lg:items-start">
-            {visibleFaqs.map((item) => (
+            {homeFaqs.map((item) => (
               <details key={item.q} className="group border border-[color:var(--site-line)] bg-white">
                 <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
                   <span>{item.q}</span>
@@ -365,25 +331,6 @@ export default function ConversionLanding() {
               </details>
             ))}
           </div>
-          {extraFaqs.length > 0 && (
-            <details className="group mt-4 border border-[color:var(--site-line)] bg-white">
-              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
-                <span>Ещё вопросы по AI, RAG, CRM, Telegram Mini App, голосовым ботам и оплате</span>
-                <span className="text-2xl leading-none text-[var(--site-green)] transition group-open:rotate-45">+</span>
-              </summary>
-              <div className="grid gap-3 border-t border-[color:var(--site-line)] p-5 lg:grid-cols-2 lg:items-start">
-                {extraFaqs.map((item) => (
-                  <details key={item.q} className="group/item border border-[color:var(--site-line)] bg-[#fbf9f3]">
-                    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-4 font-semibold [&::-webkit-details-marker]:hidden">
-                      <span>{item.q}</span>
-                      <span className="text-2xl leading-none text-[var(--site-green)] transition group-open/item:rotate-45">+</span>
-                    </summary>
-                    <div className="border-t border-[color:var(--site-line)] px-4 pb-4 pt-3 leading-relaxed text-[var(--site-muted)]">{item.a}</div>
-                  </details>
-                ))}
-              </div>
-            </details>
-          )}
         </div>
       </section>
 

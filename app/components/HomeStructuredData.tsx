@@ -1,4 +1,4 @@
-import { faqs } from '../lib/faqs'
+import { homeFaqs } from '../lib/faqs'
 import {
   DATE_MODIFIED,
   DATE_PUBLISHED,
@@ -10,7 +10,7 @@ export default function HomeStructuredData() {
   const faqPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
+    mainEntity: homeFaqs.map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: {
