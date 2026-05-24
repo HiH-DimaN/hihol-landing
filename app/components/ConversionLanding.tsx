@@ -168,10 +168,10 @@ const portfolio = [
 
 const stackGroups = [
   ['AI/LLM', 'OpenAI API, Claude API, YandexGPT, GigaChat, LangChain, RAG, embeddings, function calling, prompt engineering, multi-agent systems, Whisper STT, AI agents.'],
-  ['Backend', 'Python, FastAPI, Node.js, Pydantic, REST API, GraphQL, PostgreSQL, PG Vector, Supabase, Redis, Celery, Docker.'],
-  ['Frontend / Telegram', 'Vue 3, React, Next.js, TypeScript, TailwindCSS, Telegram Bot API, aiogram, grammY, Telegram Mini App SDK, Telegram Login Widget.'],
-  ['AI-native development', 'Claude Code, Codex, Cursor, GitHub, Git, архитектура, ревью, тестирование, деплой, CI/CD.'],
-  ['Инфраструктура', 'Docker, Nginx, Caddy, Vercel, VPS/Hetzner, Coolify, ЮKassa, Resend.'],
+  ['Backend', 'Python, FastAPI, Node.js, Pydantic, REST API, GraphQL, PostgreSQL, PG Vector, Supabase, Redis, Celery, Docker, Granian, mypy, Directus.'],
+  ['Frontend / Telegram', 'Vue 3, React, Next.js, TypeScript, TailwindCSS, Telegram Bot API, aiogram, grammY, Telegram Mini App SDK, Telegram Login Widget, Vue Router, HTTP Axios, Lucide Vue.'],
+  ['AI-native development', 'Claude Code, Codex, Cursor, GitHub, Git, Harness Engineering, Agentic Engineering, архитектура, ревью, тестирование, деплой, CI/CD.'],
+  ['Инфраструктура', 'Docker, Nginx, Caddy, Vercel, VPS/Hetzner, Coolify, Minio S3, Task runner, ЮKassa, Resend.'],
 ]
 const techStackItems = stackGroups.flatMap(([title, text]) => [
   title,
@@ -584,7 +584,20 @@ export default function ConversionLanding() {
       <div className="border-b border-[color:var(--site-line)] bg-[var(--site-ink)] py-3 text-white">
         <div className="marquee-track flex gap-10 text-sm">
           {[...Array(6)].flatMap((_, copy) =>
-            ['диагностика процесса', 'карта данных', 'CRM-интеграция', 'контроль ошибок', 'документация', 'передача кода'].map((item) => (
+            [
+              'диагностика процесса',
+              'карта данных',
+              'CRM-интеграции',
+              'контроль ошибок',
+              'документация',
+              'AI-боты',
+              'передача кода',
+              'парсинг данных',
+              'RAG-системы',
+              'техническое задание',
+              'обучение команды',
+              'Mini Apps',
+            ].map((item) => (
               <span key={`${copy}-${item}`} className="whitespace-nowrap">{item}</span>
             )),
           )}
