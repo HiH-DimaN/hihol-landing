@@ -5,7 +5,6 @@ import {
   pains,
   portfolio,
   reasons,
-  services,
   statTargets,
   steps,
   techStackItems,
@@ -20,6 +19,7 @@ import {
 import HomeCalculator from './HomeCalculator'
 import HomeCaseProof from './HomeCaseProof'
 import HomeSectionTitle from './HomeSectionTitle'
+import HomeServiceSwitcher from './HomeServiceSwitcher'
 import TrackedLink from './TrackedLink'
 
 const nicheLinks = [
@@ -29,6 +29,9 @@ const nicheLinks = [
   { title: 'Голосовой AI-бот', href: '/voice-bot' },
   { title: 'AI-система для экспертов', href: '/ai-for-experts' },
 ]
+
+const visibleFaqs = faqs.slice(0, 10)
+const extraFaqs = faqs.slice(10)
 
 function LineIcon({ index }: { index: number }) {
   const paths = [
@@ -116,64 +119,6 @@ function HeroDossier() {
         </a>
       </div>
     </aside>
-  )
-}
-
-function ServiceCard({ service }: { service: (typeof services)[number] }) {
-  return (
-    <article className="flex h-full flex-col border border-[color:var(--site-line)] bg-white p-5 md:p-6">
-      <p className="text-sm font-semibold text-[var(--site-green)]">{service.short}</p>
-      <h3 className="display-title mt-2 text-3xl leading-tight">{service.name}</h3>
-      <p className="mt-4 leading-relaxed text-[var(--site-muted)]">{service.fit}</p>
-      <p className="mt-4 font-semibold leading-relaxed">{service.result}</p>
-      <div className="mt-6 grid gap-2">
-        {service.specs.map((spec) => (
-          <div
-            key={spec}
-            className="border border-[color:var(--site-line)] bg-[#fbf9f3] px-3 py-2 text-sm text-[var(--site-muted)]"
-          >
-            {spec}
-          </div>
-        ))}
-      </div>
-      {service.tiers && (
-        <div className="mt-6 grid gap-3">
-          {service.tiers.map((tier) => (
-            <div key={tier.name} className="border border-[color:var(--site-line)] bg-[#fbf9f3] p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h4 className="text-lg font-semibold">{tier.name}</h4>
-                <p className="font-semibold">{tier.price}</p>
-              </div>
-              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[var(--site-muted)]">
-                {tier.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="mt-auto grid grid-cols-2 gap-3 border-t border-[color:var(--site-line)] pt-5 text-sm">
-        <div>
-          <p className="text-[var(--site-muted)]">Ориентир</p>
-          <p className="mt-1 text-xl font-semibold">{service.price}</p>
-        </div>
-        <div>
-          <p className="text-[var(--site-muted)]">Срок</p>
-          <p className="mt-1 text-xl font-semibold">{service.duration}</p>
-        </div>
-      </div>
-      <TrackedLink
-        href={EXPRESS_FORM_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        goalName="questionnaire_cta_click"
-        goalPayload={{ service: `Услуга: ${service.name}` }}
-        className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-[var(--site-ink)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--site-green)] focus:outline-none focus:ring-2 focus:ring-[var(--site-gold)]"
-      >
-        Получить расчёт
-      </TrackedLink>
-    </article>
   )
 }
 
@@ -286,11 +231,7 @@ export default function ConversionLanding() {
             title="Кастомная разработка AI-решений для бизнеса"
             text="LLM-интеграции, Telegram-боты, Mini Apps, RAG-системы, SaaS, серверные автоматизации и интеграции с внешними сервисами."
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
+          <HomeServiceSwitcher />
         </div>
       </section>
 
@@ -414,7 +355,7 @@ export default function ConversionLanding() {
         <div className="mx-auto max-w-7xl">
           <HomeSectionTitle kicker="FAQ" title="Вопросы, которые нужно закрыть до старта" />
           <div className="mt-10 grid gap-3 lg:grid-cols-2 lg:items-start">
-            {faqs.map((item) => (
+            {visibleFaqs.map((item) => (
               <details key={item.q} className="group border border-[color:var(--site-line)] bg-white">
                 <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
                   <span>{item.q}</span>
@@ -424,6 +365,25 @@ export default function ConversionLanding() {
               </details>
             ))}
           </div>
+          {extraFaqs.length > 0 && (
+            <details className="group mt-4 border border-[color:var(--site-line)] bg-white">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
+                <span>Ещё вопросы по AI, RAG, CRM, Telegram Mini App, голосовым ботам и оплате</span>
+                <span className="text-2xl leading-none text-[var(--site-green)] transition group-open:rotate-45">+</span>
+              </summary>
+              <div className="grid gap-3 border-t border-[color:var(--site-line)] p-5 lg:grid-cols-2 lg:items-start">
+                {extraFaqs.map((item) => (
+                  <details key={item.q} className="group/item border border-[color:var(--site-line)] bg-[#fbf9f3]">
+                    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-4 font-semibold [&::-webkit-details-marker]:hidden">
+                      <span>{item.q}</span>
+                      <span className="text-2xl leading-none text-[var(--site-green)] transition group-open/item:rotate-45">+</span>
+                    </summary>
+                    <div className="border-t border-[color:var(--site-line)] px-4 pb-4 pt-3 leading-relaxed text-[var(--site-muted)]">{item.a}</div>
+                  </details>
+                ))}
+              </div>
+            </details>
+          )}
         </div>
       </section>
 
@@ -442,6 +402,14 @@ export default function ConversionLanding() {
             <div className="mt-9 grid gap-5 border-y border-white/20 py-7 text-sm text-white/75 sm:grid-cols-2 lg:grid-cols-4">
               {['Экспресс-анкета', 'Карта процесса', 'Оценка потерь', 'План внедрения'].map((item, index) => (
                 <div key={item} className="relative flex min-h-28 flex-col items-center justify-center border border-white/20 px-4 py-5">
+                  {index < 3 && (
+                    <span className="absolute -right-6 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center bg-[var(--site-ink)] text-[var(--site-gold)] lg:flex">
+                      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M4 12h15" />
+                        <path d="m13 6 6 6-6 6" />
+                      </svg>
+                    </span>
+                  )}
                   <div className="flex h-11 w-11 items-center justify-center border border-white/25 text-sm font-semibold text-white">
                     {index + 1}
                   </div>
