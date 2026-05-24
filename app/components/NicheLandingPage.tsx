@@ -1,4 +1,10 @@
 import type { NichePage } from '../lib/nichePages'
+import {
+  DATE_MODIFIED,
+  DATE_PUBLISHED,
+  SITE_NAME,
+  SITE_URL,
+} from '../lib/site'
 import MagneticCTA from './MagneticCTA'
 import TrackedLink from './TrackedLink'
 
@@ -35,9 +41,94 @@ function ListCard({ title, items }: { title: string; items: string[] }) {
   )
 }
 
+function NicheStructuredData({ page }: { page: NichePage }) {
+  const url = `${SITE_URL}/${page.slug}`
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: page.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  }
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: page.title,
+    serviceType: page.serviceType,
+    description: page.description,
+    url,
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
+    provider: {
+      '@type': 'Person',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    areaServed: 'Россия и СНГ',
+    offers: {
+      '@type': 'Offer',
+      url,
+      priceCurrency: 'RUB',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'RUB',
+        minPrice: page.minPrice,
+        maxPrice: page.maxPrice,
+      },
+      availability: 'https://schema.org/InStock',
+    },
+  }
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Главная',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: page.title,
+        item: url,
+      },
+    ],
+  }
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    description: page.description,
+    url,
+    inLanguage: 'ru-RU',
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
+  }
+
+  return (
+    <>
+      {[webPageSchema, serviceSchema, breadcrumbSchema, faqSchema].map((schema) => (
+        <script
+          key={schema['@type']}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
+  )
+}
+
 export default function NicheLandingPage({ page }: { page: NichePage }) {
   return (
     <main className="bg-[#0b0d0a] text-white">
+      <NicheStructuredData page={page} />
       <section className="relative isolate overflow-hidden px-6 py-20 md:py-28">
         <div
           aria-hidden="true"
@@ -107,6 +198,32 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
           <ListCard title="Где обычно болит" items={page.pains} />
           <ListCard title="Что собираю" items={page.solution} />
           <ListCard title="Что должно измениться" items={page.result} />
+        </div>
+      </section>
+
+      <section className="bg-[#0b0d0a] px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-balance text-3xl font-bold tracking-tight md:text-5xl">
+            Частые вопросы
+          </h2>
+          <div className="mt-10 grid gap-3 lg:grid-cols-2 lg:items-start">
+            {page.faq.map((item) => (
+              <details
+                key={item.q}
+                className="group border border-stone-800 bg-[#151812]/70"
+              >
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
+                  <span>{item.q}</span>
+                  <span className="text-2xl leading-none text-amber-200 transition group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <div className="border-t border-stone-800 px-5 pb-5 pt-4 leading-relaxed text-stone-300">
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
