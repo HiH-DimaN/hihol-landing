@@ -17,8 +17,10 @@ import {
 } from '../lib/site'
 import HomeCalculator from './HomeCalculator'
 import HomeCaseProof from './HomeCaseProof'
+import ContactIcon from './ContactIcon'
 import HomeSectionTitle from './HomeSectionTitle'
 import HomeServiceSwitcher from './HomeServiceSwitcher'
+import SiteFooter from './SiteFooter'
 import TrackedLink from './TrackedLink'
 
 function LineIcon({ index }: { index: number }) {
@@ -42,31 +44,6 @@ function LineIcon({ index }: { index: number }) {
       aria-hidden="true"
     >
       {paths[index % paths.length]}
-    </svg>
-  )
-}
-
-function ContactIcon({ type }: { type: 'telegram' | 'whatsapp' | 'email' }) {
-  if (type === 'telegram') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 4 3 11l7 3 3 6 8-16Z" />
-        <path d="m10 14 4-4" />
-      </svg>
-    )
-  }
-  if (type === 'whatsapp') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M5 19l1.2-3.4A7 7 0 1 1 9 18.5L5 19Z" />
-        <path d="M9 8.8c.5 3 2.4 5 5.6 5.8" />
-      </svg>
-    )
-  }
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M4 6h16v12H4z" />
-      <path d="m4 7 8 6 8-6" />
     </svg>
   )
 }
@@ -399,37 +376,7 @@ export default function ConversionLanding() {
         </div>
       </section>
 
-      <footer className="border-t border-[color:var(--site-line)] bg-[var(--site-paper)] px-5 py-8 text-[var(--site-ink)] sm:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 text-sm md:grid-cols-[1.2fr_1fr_1fr] md:items-end">
-          <div>
-            <p className="text-base font-semibold">HIHOL · Дмитрий Хихол</p>
-            <p className="mt-2 max-w-xl leading-relaxed text-[var(--site-muted)]">
-              AI-автоматизация бизнес-процессов под ключ: боты, RAG-системы,
-              CRM-интеграции, Mini Apps, документы и серверные автоматизации.
-            </p>
-          </div>
-          <div className="grid gap-2 text-[var(--site-muted)]">
-            <p>Работаю удалённо по РФ и с русскоязычными командами.</p>
-            <p>Самозанятый · НПД · ИНН 683306354810.</p>
-            <p>Код, документация и контекст проекта передаются заказчику.</p>
-            <p>Договор, NDA, реквизиты и чек НПД — по проекту.</p>
-          </div>
-          <div className="grid gap-2 md:justify-items-end">
-            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold hover:text-[var(--site-green)]">
-              <ContactIcon type="telegram" />
-              Telegram
-            </a>
-            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold hover:text-[var(--site-green)]">
-              <ContactIcon type="telegram" />
-              Telegram-канал
-            </a>
-            <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 font-semibold hover:text-[var(--site-green)]">
-              <ContactIcon type="email" />
-              {EMAIL}
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   )
 }

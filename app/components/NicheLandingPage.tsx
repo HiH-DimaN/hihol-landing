@@ -6,6 +6,7 @@ import {
   SITE_URL,
 } from '../lib/site'
 import MagneticCTA from './MagneticCTA'
+import SiteFooter from './SiteFooter'
 import TrackedLink from './TrackedLink'
 
 function ArrowIcon() {
@@ -258,6 +259,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
           </div>
         </div>
       </section>
+      <SiteFooter variant="dark" />
     </main>
   )
 }
