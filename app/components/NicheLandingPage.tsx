@@ -157,9 +157,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <MagneticCTA
-                href="https://forms.gle/3QBDFKuK3DvGQm1n6"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/zayavka?src=niche-${page.slug}`}
                 goalName={`${page.slug}_anketa_click`}
                 className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-amber-300 via-lime-300 to-emerald-400 px-7 py-4 text-base font-semibold text-[#0b0d0a] shadow-[0_0_40px_-8px_rgba(245,158,11,0.55)]"
               >
@@ -241,9 +239,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <MagneticCTA
-              href="https://forms.gle/3QBDFKuK3DvGQm1n6"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/zayavka?src=niche-${page.slug}-bottom`}
               goalName={`${page.slug}_bottom_anketa_click`}
               className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-amber-300 via-lime-300 to-emerald-400 px-7 py-4 text-base font-semibold text-[#0b0d0a] shadow-[0_0_40px_-8px_rgba(245,158,11,0.55)]"
             >

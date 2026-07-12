@@ -1,0 +1,41 @@
+[project]
+name = "hihol-form-api"
+version = "0.1.0"
+description = "Lead-capture form API for hihol.ru (152-FZ compliant, RF-hosted)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.111",
+    "granian>=1.4",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg>=0.29",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "aiosqlite>=0.20",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+# B008: FastAPI intentionally uses Depends()/Field() calls in argument defaults.
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true

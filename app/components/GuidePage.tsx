@@ -3,7 +3,6 @@ import {
   DATE_MODIFIED,
   DATE_MODIFIED_SHORT,
   DATE_PUBLISHED,
-  EXPRESS_BRIEF_URL,
   SITE_NAME,
   SITE_URL,
   TELEGRAM_URL,
@@ -165,9 +164,7 @@ export default function GuidePage({ guide }: { guide: GuidePageData }) {
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2">
             <TrackedLink
-              href={EXPRESS_BRIEF_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/zayavka?src=guide-${guide.slug}`}
               goalName="guide_brief_click"
               goalPayload={{ guide: guide.slug }}
               className="inline-flex min-h-12 items-center justify-center bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--site-green)]"

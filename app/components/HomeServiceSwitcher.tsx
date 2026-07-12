@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { services, type ServiceId } from '../lib/homeData'
-import { EXPRESS_FORM_URL } from '../lib/site'
 import TrackedLink from './TrackedLink'
 
 function ServiceBrief({ service }: { service: (typeof services)[number] }) {
@@ -69,9 +68,7 @@ function ServiceBrief({ service }: { service: (typeof services)[number] }) {
           </div>
         </div>
         <TrackedLink
-          href={EXPRESS_FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`/zayavka?src=service&ctx=${encodeURIComponent(`Услуга: ${service.name}`)}`}
           goalName="questionnaire_cta_click"
           goalPayload={{ service: `Услуга: ${service.name}` }}
           className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-[var(--site-ink)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--site-green)] focus:outline-none focus:ring-2 focus:ring-[var(--site-gold)]"

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react'
 import { tariffOptions } from '../lib/homeData'
-import { EXPRESS_FORM_URL } from '../lib/site'
 import HomeSectionTitle from './HomeSectionTitle'
 import TrackedLink from './TrackedLink'
 
@@ -146,9 +145,7 @@ export default function HomeCalculator() {
             </div>
           </div>
           <TrackedLink
-            href={EXPRESS_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/zayavka?src=calc&ctx=${encodeURIComponent(`Калькулятор: ${tariff.name}`)}`}
             goalName="questionnaire_cta_click"
             goalPayload={{ service: `Калькулятор: ${tariff.name}` }}
             className="mt-7 inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-[var(--site-ink)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--site-green)] focus:outline-none focus:ring-2 focus:ring-[var(--site-gold)]"

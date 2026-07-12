@@ -10,7 +10,6 @@ import {
 } from '../lib/homeData'
 import {
   EMAIL,
-  EXPRESS_FORM_URL,
   TELEGRAM_CHANNEL_URL,
   TELEGRAM_URL,
   WHATSAPP_PHONE,
@@ -118,9 +117,7 @@ export default function ConversionLanding() {
               </p>
               <div className="hero-stagger mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center" style={{ animationDelay: '300ms' }}>
                 <TrackedLink
-                  href={EXPRESS_FORM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/zayavka?src=hero"
                   goalName="questionnaire_cta_click"
                   goalPayload={{ service: 'Hero: бесплатный расчёт' }}
                   className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-[var(--site-ink)] px-5 py-3 text-base font-semibold text-white transition hover:bg-[var(--site-green)] sm:w-auto sm:px-7 sm:py-4"
@@ -347,11 +344,9 @@ export default function ConversionLanding() {
             </p>
             <div className="mt-8 flex justify-center">
               <TrackedLink
-                href={EXPRESS_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/zayavka?src=final"
                 goalName="questionnaire_cta_click"
-                goalPayload={{ service: 'Финальный CTA: Google анкета' }}
+                goalPayload={{ service: 'Финальный CTA: заявка' }}
                 className="inline-flex min-h-14 w-full max-w-2xl items-center justify-center rounded-sm bg-[var(--site-gold)] px-8 py-4 text-base font-semibold text-[var(--site-ink)] transition hover:bg-[#d9b96f] focus:outline-none focus:ring-2 focus:ring-[var(--site-gold)]"
               >
                 Открыть экспресс-анкету

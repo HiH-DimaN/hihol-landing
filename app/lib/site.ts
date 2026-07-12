@@ -2,15 +2,13 @@ export const SITE_URL = 'https://hihol.ru'
 export const SITE_NAME = 'Дмитрий Хихол'
 export const AUTHOR_NAME = 'Дмитрий Хихол'
 export const DATE_PUBLISHED = '2026-01-01T00:00:00+03:00'
-export const DATE_MODIFIED = '2026-07-11T00:00:00+03:00'
-export const DATE_MODIFIED_SHORT = '2026-07-11'
+export const DATE_MODIFIED = '2026-07-12T00:00:00+03:00'
+export const DATE_MODIFIED_SHORT = '2026-07-12'
 
 export const TELEGRAM_URL = 'https://t.me/dmitry_hihol'
 export const TELEGRAM_CHANNEL_URL = 'https://t.me/d_hihol'
 export const WHATSAPP_PHONE = '79051238877'
 export const EMAIL = 'hihol.dmitry@ya.ru'
-export const EXPRESS_FORM_URL = 'https://forms.gle/mXaG5vbff9BaSxHS6'
-export const EXPRESS_BRIEF_URL = 'https://forms.gle/3QBDFKuK3DvGQm1n6'
 
 export const SAME_AS = [
   TELEGRAM_URL,
