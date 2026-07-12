@@ -1,4 +1,4 @@
-import { homeFaqs } from '../lib/faqs'
+import { FAQ, SEO_152 } from '../lib/complianceData'
 import {
   DATE_MODIFIED,
   DATE_PUBLISHED,
@@ -7,10 +7,37 @@ import {
 } from '../lib/site'
 
 export default function HomeStructuredData() {
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Аудит сайта на соответствие 152-ФЗ',
+    name: SEO_152.title,
+    description: SEO_152.description,
+    areaServed: { '@type': 'Country', name: 'RU' },
+    provider: {
+      '@type': 'Person',
+      name: 'Дмитрий Хихол',
+      url: SITE_URL,
+    },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Экспресс-аудит',
+        price: '23900',
+        priceCurrency: 'RUB',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Аудит + исправление под ключ',
+        price: '59900',
+        priceCurrency: 'RUB',
+      },
+    ],
+  }
   const faqPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: homeFaqs.map((f) => ({
+    mainEntity: FAQ.items.map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: {
@@ -22,30 +49,18 @@ export default function HomeStructuredData() {
   const webPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: `AI-автоматизация бизнес-процессов под ключ 2026 — ${SITE_NAME}`,
-    description:
-      'Кастомная разработка AI-ботов, RAG-систем, CRM-интеграций, Telegram Mini Apps, голосовых ботов и автоматизации документов.',
+    name: SEO_152.title,
+    description: SEO_152.description,
     url: SITE_URL,
     inLanguage: 'ru-RU',
     datePublished: DATE_PUBLISHED,
     dateModified: DATE_MODIFIED,
-  }
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Главная',
-        item: SITE_URL,
-      },
-    ],
+    about: SITE_NAME,
   }
 
   return (
     <>
-      {[webPageSchema, breadcrumbSchema, faqPageSchema].map((schema) => (
+      {[serviceSchema, webPageSchema, faqPageSchema].map((schema) => (
         <script
           key={schema['@type']}
           type="application/ld+json"

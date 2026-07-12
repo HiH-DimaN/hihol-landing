@@ -53,10 +53,17 @@ export default function SiteFooter({ variant = 'light' }: { variant?: Variant })
             <ContactIcon type="email" />
             {EMAIL}
           </a>
+          <Link href="/ai" className={s.link}>
+            AI-решения
+          </Link>
           <Link href={PRIVACY_HREF} className={s.privacy}>
             Политика обработки персональных данных
           </Link>
         </div>
+      </div>
+      <div className={`mx-auto mt-6 max-w-7xl text-xs leading-relaxed ${s.muted}`}>
+        Аудит носит характер экспертного заключения и не является юридической
+        консультацией.
       </div>
     </footer>
   )

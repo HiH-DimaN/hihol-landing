@@ -9,8 +9,6 @@ export const TELEGRAM_URL = 'https://t.me/dmitry_hihol'
 export const TELEGRAM_CHANNEL_URL = 'https://t.me/d_hihol'
 export const WHATSAPP_PHONE = '79051238877'
 export const EMAIL = 'hihol.dmitry@ya.ru'
-export const EXPRESS_FORM_URL = 'https://forms.gle/mXaG5vbff9BaSxHS6'
-export const EXPRESS_BRIEF_URL = 'https://forms.gle/3QBDFKuK3DvGQm1n6'
 
 export const SAME_AS = [
   TELEGRAM_URL,

@@ -157,7 +157,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <MagneticCTA
-                href="https://forms.gle/3QBDFKuK3DvGQm1n6"
+                href="https://t.me/dmitry_hihol"
                 target="_blank"
                 rel="noopener noreferrer"
                 goalName={`${page.slug}_anketa_click`}
@@ -241,7 +241,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <MagneticCTA
-              href="https://forms.gle/3QBDFKuK3DvGQm1n6"
+              href="https://t.me/dmitry_hihol"
               target="_blank"
               rel="noopener noreferrer"
               goalName={`${page.slug}_bottom_anketa_click`}

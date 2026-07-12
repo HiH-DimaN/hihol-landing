@@ -3,7 +3,6 @@ import {
   DATE_MODIFIED,
   DATE_MODIFIED_SHORT,
   DATE_PUBLISHED,
-  EXPRESS_BRIEF_URL,
   SITE_NAME,
   SITE_URL,
   TELEGRAM_URL,
@@ -165,7 +164,7 @@ export default function GuidePage({ guide }: { guide: GuidePageData }) {
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2">
             <TrackedLink
-              href={EXPRESS_BRIEF_URL}
+              href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               goalName="guide_brief_click"

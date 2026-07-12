@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import YandexMetrika from './components/YandexMetrika'
+import CookieConsent from './components/CookieConsent'
 import StructuredData from './components/StructuredData'
 import { DATE_MODIFIED, DATE_PUBLISHED, SITE_NAME, SITE_URL } from './lib/site'
 
 const siteUrl = SITE_URL
-const title = `AI-автоматизация бизнес-процессов под ключ 2026 — ${SITE_NAME}`
+const title = `Проверка сайта на соответствие 152-ФЗ за 24 часа - ${SITE_NAME}`
 const description =
-  'Кастомная разработка AI-решений для бизнеса: AI-боты, RAG-системы, CRM-интеграции, Telegram Mini Apps, парсинг данных и автоматизация документов. Расчёт потерь, запуск за 1–3 недели.'
+  'Экспресс-аудит сайта на 152-ФЗ: cookie, политика, формы, чат-боты. Отчет со скриншотами, статьями КоАП и планом устранения. Первые 2 нарушения - бесплатно.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -96,6 +97,7 @@ export default function RootLayout({
       <body className="bg-[var(--site-bg)] text-[var(--site-ink)] antialiased">
         {children}
         <StructuredData />
+        <CookieConsent />
         <YandexMetrika />
       </body>
     </html>

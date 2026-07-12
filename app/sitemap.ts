@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    {
+      url: `${SITE_URL}/ai`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     ...nichePageList.map((page) => ({
       url: `${SITE_URL}/${page.slug}`,
       lastModified,
