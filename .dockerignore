@@ -8,10 +8,16 @@ build
 Dockerfile
 docker-compose.yml
 .env
-.env*.local
+.env*
 *.log
 .DS_Store
 .vscode
 .idea
 .claude
+.itd
+.itd-memory
 CLAUDE.md
+backend
+docs
+tests
+tsconfig.tsbuildinfo
