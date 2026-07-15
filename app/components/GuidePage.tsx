@@ -20,33 +20,15 @@ function GuideStructuredData({ guide }: { guide: GuidePageData }) {
     inLanguage: 'ru-RU',
     datePublished: DATE_PUBLISHED,
     dateModified: DATE_MODIFIED,
-    author: {
-      '@type': 'Person',
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: {
-      '@type': 'Person',
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    author: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
+    publisher: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
   }
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Главная',
-        item: SITE_URL,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: `${guide.title} 2026`,
-        item: url,
-      },
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: `${guide.title} 2026`, item: url },
     ],
   }
   const faqSchema = {
@@ -55,10 +37,7 @@ function GuideStructuredData({ guide }: { guide: GuidePageData }) {
     mainEntity: guide.faq.map((item) => ({
       '@type': 'Question',
       name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
     })),
   }
 
@@ -75,115 +54,130 @@ function GuideStructuredData({ guide }: { guide: GuidePageData }) {
   )
 }
 
+function GuideIntro({ guide }: { guide: GuidePageData }) {
+  return (
+    <>
+      <a href="/" className="text-sm font-semibold text-[var(--site-green)] hover:text-[var(--site-ink)]">
+        ← На главную
+      </a>
+      <p className="mt-10 text-sm font-semibold text-[var(--site-green)]">
+        Гайд · обновлено {DATE_MODIFIED_SHORT}
+      </p>
+      <h1 className="display-title mt-4 text-balance text-4xl leading-[1.05] md:text-6xl">
+        {guide.title} в 2026 году
+      </h1>
+      <p className="mt-6 text-xl leading-relaxed text-[var(--site-muted)]">{guide.lead}</p>
+      <div className="mt-8 border-y border-[color:var(--site-line)] py-5">
+        <p className="text-sm font-semibold text-[var(--site-muted)]">Ориентир бюджета</p>
+        <p className="mt-2 text-3xl font-semibold">{guide.price}</p>
+      </div>
+    </>
+  )
+}
+
+function GuideSections({ guide }: { guide: GuidePageData }) {
+  return (
+    <div className="mt-12 grid gap-10">
+      {guide.sections.map((section) => (
+        <section key={section.title}>
+          <h2 className="text-3xl font-semibold leading-tight">{section.title}</h2>
+          <p className="mt-4 text-lg leading-relaxed text-[var(--site-muted)]">{section.body}</p>
+          {section.items && (
+            <ul className="mt-5 grid gap-3">
+              {section.items.map((item) => (
+                <li
+                  key={item}
+                  className="border-l-4 border-[var(--site-green)] bg-white px-4 py-3 text-[var(--site-muted)]"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+  )
+}
+
+function GuideFaq({ guide }: { guide: GuidePageData }) {
+  return (
+    <section className="mt-14 border-y border-[color:var(--site-line)] py-10">
+      <h2 className="text-3xl font-semibold">FAQ</h2>
+      <div className="mt-6 grid gap-3">
+        {guide.faq.map((item) => (
+          <details key={item.q} className="group border border-[color:var(--site-line)] bg-white">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
+              <span>{item.q}</span>
+              <span className="text-2xl leading-none text-[var(--site-green)] transition group-open:rotate-45">+</span>
+            </summary>
+            <div className="border-t border-[color:var(--site-line)] px-5 pb-5 pt-4 leading-relaxed text-[var(--site-muted)]">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function RelatedGuides({ guide }: { guide: GuidePageData }) {
+  return (
+    <section className="mt-10">
+      <h2 className="text-2xl font-semibold">Связанные страницы</h2>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {guide.related.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="border border-[color:var(--site-line)] bg-white p-4 font-semibold hover:border-[var(--site-ink)]"
+          >
+            {item.title}
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function GuideActions({ guide }: { guide: GuidePageData }) {
+  return (
+    <div className="mt-12 grid gap-3 sm:grid-cols-2">
+      <TrackedLink
+        href={TELEGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        goalName="guide_brief_click"
+        goalPayload={{ guide: guide.slug }}
+        className="inline-flex min-h-12 items-center justify-center bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--site-green)]"
+      >
+        Получить расчёт
+      </TrackedLink>
+      <TrackedLink
+        href={TELEGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        goalName="guide_telegram_click"
+        goalPayload={{ guide: guide.slug }}
+        className="inline-flex min-h-12 items-center justify-center border border-[color:var(--site-line)] bg-white px-6 py-3 text-center font-semibold hover:border-[var(--site-ink)]"
+      >
+        Написать в Telegram
+      </TrackedLink>
+    </div>
+  )
+}
+
 export default function GuidePage({ guide }: { guide: GuidePageData }) {
   return (
     <main className="bg-[var(--site-bg)] text-[var(--site-ink)]">
       <GuideStructuredData guide={guide} />
       <article className="px-5 py-14 sm:px-8 md:py-20">
         <div className="mx-auto max-w-4xl">
-          <a
-            href="/"
-            className="text-sm font-semibold text-[var(--site-green)] hover:text-[var(--site-ink)]"
-          >
-            ← На главную
-          </a>
-          <p className="mt-10 text-sm font-semibold text-[var(--site-green)]">
-            Гайд · обновлено {DATE_MODIFIED_SHORT}
-          </p>
-          <h1 className="display-title mt-4 text-balance text-4xl leading-[1.05] md:text-6xl">
-            {guide.title} в 2026 году
-          </h1>
-          <p className="mt-6 text-xl leading-relaxed text-[var(--site-muted)]">
-            {guide.lead}
-          </p>
-          <div className="mt-8 border-y border-[color:var(--site-line)] py-5">
-            <p className="text-sm font-semibold text-[var(--site-muted)]">
-              Ориентир бюджета
-            </p>
-            <p className="mt-2 text-3xl font-semibold">{guide.price}</p>
-          </div>
-
-          <div className="mt-12 grid gap-10">
-            {guide.sections.map((section) => (
-              <section key={section.title}>
-                <h2 className="text-3xl font-semibold leading-tight">
-                  {section.title}
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-[var(--site-muted)]">
-                  {section.body}
-                </p>
-                {section.items && (
-                  <ul className="mt-5 grid gap-3">
-                    {section.items.map((item) => (
-                      <li
-                        key={item}
-                        className="border-l-4 border-[var(--site-green)] bg-white px-4 py-3 text-[var(--site-muted)]"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            ))}
-          </div>
-
-          <section className="mt-14 border-y border-[color:var(--site-line)] py-10">
-            <h2 className="text-3xl font-semibold">FAQ</h2>
-            <div className="mt-6 grid gap-3">
-              {guide.faq.map((item) => (
-                <details key={item.q} className="group border border-[color:var(--site-line)] bg-white">
-                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
-                    <span>{item.q}</span>
-                    <span className="text-2xl leading-none text-[var(--site-green)] transition group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <div className="border-t border-[color:var(--site-line)] px-5 pb-5 pt-4 leading-relaxed text-[var(--site-muted)]">
-                    {item.a}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-10">
-            <h2 className="text-2xl font-semibold">Связанные страницы</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {guide.related.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="border border-[color:var(--site-line)] bg-white p-4 font-semibold hover:border-[var(--site-ink)]"
-                >
-                  {item.title}
-                </a>
-              ))}
-            </div>
-          </section>
-
-          <div className="mt-12 grid gap-3 sm:grid-cols-2">
-            <TrackedLink
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              goalName="guide_brief_click"
-              goalPayload={{ guide: guide.slug }}
-              className="inline-flex min-h-12 items-center justify-center bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--site-green)]"
-            >
-              Получить расчёт
-            </TrackedLink>
-            <TrackedLink
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              goalName="guide_telegram_click"
-              goalPayload={{ guide: guide.slug }}
-              className="inline-flex min-h-12 items-center justify-center border border-[color:var(--site-line)] bg-white px-6 py-3 text-center font-semibold hover:border-[var(--site-ink)]"
-            >
-              Написать в Telegram
-            </TrackedLink>
-          </div>
+          <GuideIntro guide={guide} />
+          <GuideSections guide={guide} />
+          <GuideFaq guide={guide} />
+          <RelatedGuides guide={guide} />
+          <GuideActions guide={guide} />
         </div>
       </article>
     </main>
