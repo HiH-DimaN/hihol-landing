@@ -1,4 +1,5 @@
 import { CONTACT, PRICING } from '../../lib/complianceData'
+import TrackedLink from '../TrackedLink'
 
 export default function PricingTiers() {
   return (
@@ -28,7 +29,7 @@ export default function PricingTiers() {
             {tier.term && (
               <p className="mt-1 text-sm text-[var(--accent)]">{tier.term}</p>
             )}
-            <ul className="mt-4 grid gap-2 text-sm text-[var(--text-muted)]">
+            <ul className="mt-4 grid flex-1 gap-2 text-sm text-[var(--text-muted)]">
               {tier.features.map((f) => (
                 <li key={f} className="flex gap-2">
                   <span className="text-[var(--accent)]">-</span>
@@ -41,12 +42,14 @@ export default function PricingTiers() {
                 {tier.addon}
               </p>
             )}
-            <a
+            <TrackedLink
               href={CONTACT.checkAnchor}
-              className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-ink)]"
+              goalName="cta_pricing_check"
+              goalPayload={{ tier: tier.name }}
+              className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[var(--accent)] px-4 text-center text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               {PRICING.ctaLabel}
-            </a>
+            </TrackedLink>
           </div>
         ))}
       </div>
@@ -57,12 +60,13 @@ export default function PricingTiers() {
       <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
         {PRICING.extraLine2}
       </p>
-      <a
+      <TrackedLink
         href={PRICING.pdfHref}
+        goalName="download_price_pdf"
         className="mt-3 inline-flex text-sm font-medium text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-strong)]"
       >
         {PRICING.pdfLabel}
-      </a>
+      </TrackedLink>
     </section>
   )
 }

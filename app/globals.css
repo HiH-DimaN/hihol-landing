@@ -85,6 +85,51 @@
     font-weight: 600;
     letter-spacing: -0.01em;
   }
+
+  /* Homepage-only business system. /ai keeps the dark base theme above. */
+  .compliance-theme.compliance-home {
+    --bg: #f4f7f2;
+    --surface: #ffffff;
+    --surface-2: #eaf0eb;
+    --text: #12211a;
+    --text-muted: #56645d;
+    --accent: #2baf69;
+    --accent-strong: #218a53;
+    --accent-ink: #06140c;
+    --danger: #b73f43;
+    --border: #d6e0d8;
+    background:
+      radial-gradient(circle at 80% 30%, rgb(43 175 105 / 0.07), transparent 26rem),
+      var(--bg);
+  }
+
+  .compliance-home-hero,
+  .compliance-final-panel {
+    background:
+      radial-gradient(circle at 90% 0%, rgb(43 175 105 / 0.22), transparent 28rem),
+      linear-gradient(135deg, #0c2017 0%, #102a20 52%, #0b1712 100%);
+  }
+
+  .compliance-home-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(to bottom, black, transparent 92%);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 92%);
+  }
+
+  .compliance-home main > section:not(.compliance-home-hero):not(#check) h2 {
+    color: var(--text);
+    line-height: 1.16;
+  }
+
+  .compliance-home a,
+  .compliance-home button,
+  .compliance-home input,
+  .compliance-home summary {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import TrackedLink from '../TrackedLink'
 import { CONTACT, SELF_CHECK, pluralPriznak } from '../../lib/complianceData'
 
 export default function SelfCheck() {
@@ -47,12 +48,14 @@ export default function SelfCheck() {
               У вас <span className="font-semibold text-[var(--accent)]">{count}</span>{' '}
               {pluralPriznak(count)} {SELF_CHECK.resultTail}
             </p>
-            <a
+            <TrackedLink
               href={CONTACT.checkAnchor}
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-lg bg-[var(--accent)] px-5 text-sm font-semibold text-[var(--accent-ink)] transition-colors hover:bg-[var(--accent-strong)]"
+              goalName="cta_self_check"
+              goalPayload={{ selected: count }}
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-lg bg-[var(--accent)] px-5 text-sm font-semibold text-[var(--accent-ink)] transition-colors hover:bg-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               {SELF_CHECK.ctaLabel}
-            </a>
+            </TrackedLink>
           </div>
         )}
       </div>

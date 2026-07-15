@@ -1,5 +1,6 @@
 import Nav from './compliance/Nav'
 import ComplianceHero from './compliance/ComplianceHero'
+import BusinessProof from './compliance/BusinessProof'
 import SelfCheck from './compliance/SelfCheck'
 import FinesTable from './compliance/FinesTable'
 import AuditScope from './compliance/AuditScope'
@@ -12,10 +13,11 @@ import SiteFooter from './SiteFooter'
 
 export default function Compliance152Landing() {
   return (
-    <div className="compliance-theme min-h-screen">
+    <div className="compliance-theme compliance-home min-h-screen">
       <Nav />
       <main>
         <ComplianceHero />
+        <BusinessProof />
         <SelfCheck />
         <FinesTable />
         <AuditScope />

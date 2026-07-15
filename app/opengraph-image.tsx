@@ -7,6 +7,73 @@ export const contentType = 'image/png'
 
 // Text kept ASCII-safe: next/og has no bundled Cyrillic glyphs and constraint 6
 // forbids a CDN font. The rendered cover is intentionally simple.
+function OgBrand() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '28px' }}>
+      <div
+        style={{
+          width: '64px',
+          height: '64px',
+          borderRadius: '10px',
+          backgroundColor: '#4ade80',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#08130c',
+          fontSize: '40px',
+          fontWeight: 800,
+        }}
+      >
+        H
+      </div>
+      <span style={{ color: '#9aa5b1', fontWeight: 600 }}>hihol.ru</span>
+    </div>
+  )
+}
+
+function OgHeadline() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      <div style={{ fontSize: '84px', fontWeight: 800, lineHeight: 1.02, color: '#e8eaed' }}>
+        Website 152-FZ compliance audit
+      </div>
+      <div
+        style={{
+          fontSize: '38px',
+          fontWeight: 600,
+          lineHeight: 1.2,
+          color: '#4ade80',
+          maxWidth: '960px',
+        }}
+      >
+        Cookie, policy, forms, chat-bots - report in 24 hours
+      </div>
+    </div>
+  )
+}
+
+function OgProofs() {
+  return (
+    <div style={{ display: 'flex', gap: '16px', fontSize: '24px' }}>
+      {['First 2 issues free', 'KoAP article refs', 'Fix plan'].map((text) => (
+        <span
+          key={text}
+          style={{
+            padding: '12px 24px',
+            borderRadius: '10px',
+            backgroundColor: '#1a2129',
+            border: '1px solid #2a3441',
+            color: '#e8eaed',
+            fontWeight: 600,
+          }}
+        >
+          {text}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 export default function OGImage() {
   return new ImageResponse(
     (
@@ -26,74 +93,9 @@ export default function OGImage() {
           fontFamily: 'sans-serif',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-            fontSize: '28px',
-          }}
-        >
-          <div
-            style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '10px',
-              backgroundColor: '#4ade80',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#08130c',
-              fontSize: '40px',
-              fontWeight: 800,
-            }}
-          >
-            H
-          </div>
-          <span style={{ color: '#9aa5b1', fontWeight: 600 }}>hihol.ru</span>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          <div
-            style={{
-              fontSize: '84px',
-              fontWeight: 800,
-              lineHeight: 1.02,
-              color: '#e8eaed',
-            }}
-          >
-            Website 152-FZ compliance audit
-          </div>
-          <div
-            style={{
-              fontSize: '38px',
-              fontWeight: 600,
-              lineHeight: 1.2,
-              color: '#4ade80',
-              maxWidth: '960px',
-            }}
-          >
-            Cookie, policy, forms, chat-bots - report in 24 hours
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: '16px', fontSize: '24px' }}>
-          {['First 2 issues free', 'KoAP article refs', 'Fix plan'].map((t) => (
-            <span
-              key={t}
-              style={{
-                padding: '12px 24px',
-                borderRadius: '10px',
-                backgroundColor: '#1a2129',
-                border: '1px solid #2a3441',
-                color: '#e8eaed',
-                fontWeight: 600,
-              }}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+        <OgBrand />
+        <OgHeadline />
+        <OgProofs />
       </div>
     ),
     { ...size },

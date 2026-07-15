@@ -5,6 +5,14 @@ export default function FinesTable() {
     <section className="mx-auto max-w-[1080px] px-4 py-12 sm:px-6 sm:py-16">
       <h2 className="text-2xl sm:text-3xl">{FINES.h2}</h2>
       <p className="mt-3 text-sm text-[var(--text-muted)]">{FINES.note}</p>
+      <a
+        href={FINES.sourceHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-2 inline-flex text-xs font-medium text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-strong)] sm:text-sm"
+      >
+        {FINES.sourceLabel}
+      </a>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-[var(--border)]">
         <table className="w-full border-collapse text-left">

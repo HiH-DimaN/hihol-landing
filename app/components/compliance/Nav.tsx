@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import TrackedLink from '../TrackedLink'
 import { NAV } from '../../lib/complianceData'
 
 export default function Nav() {
@@ -19,12 +20,13 @@ export default function Nav() {
             </Link>
           ))}
         </div>
-        <Link
+        <TrackedLink
           href={NAV.cta.href}
-          className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] transition-colors hover:bg-[var(--accent-strong)]"
+          goalName="cta_nav_check"
+          className="inline-flex min-h-[44px] items-center rounded-lg bg-[var(--accent)] px-3 text-xs font-semibold text-[var(--accent-ink)] shadow-sm transition-colors hover:bg-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-4 sm:text-sm"
         >
           {NAV.cta.label}
-        </Link>
+        </TrackedLink>
       </nav>
     </header>
   )
