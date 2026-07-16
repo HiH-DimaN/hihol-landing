@@ -91,9 +91,24 @@ async function observePage(page) {
 }
 
 async function readPageSummary(page) {
+  const pricingText = await page.locator('#pricing').innerText()
   return {
     h1: await page.locator('h1').first().innerText(),
-    pricingCards: await page.locator('#pricing h3').count(),
+    pricingTierCtas: await page.locator('#pricing a[href="#check"]').count(),
+    pricingPdfHref: await page
+      .locator('#pricing a[href$=".pdf"]')
+      .getAttribute('href'),
+    hasLatestPrices: [
+      '23 900 руб.',
+      '39 900 руб.',
+      '59 900 руб.',
+      '5 900 руб./мес',
+      '59 900 руб./год',
+      'редакция 15.07.2026',
+    ].every((value) => pricingText.includes(value)),
+    hasObsoleteSupportPrice:
+      pricingText.includes('3 900 руб./мес') ||
+      pricingText.includes('39 900 руб./год'),
     telegramHref: await page
       .locator('#check a[href*="t.me"]')
       .getAttribute('href'),
@@ -207,7 +222,10 @@ function resultIsBlocked(item) {
     item.missingGoals.length > 0,
     !item.finalCtaVisible,
     !item.telegramHref,
-    item.pricingCards !== 3,
+    item.pricingTierCtas !== 4,
+    item.pricingPdfHref !== '/price_152fz_hihol.pdf',
+    !item.hasLatestPrices,
+    item.hasObsoleteSupportPrice,
     item.policyLinks < 1,
     item.consoleErrors.length > 0,
     item.pageErrors.length > 0,
