@@ -8,6 +8,8 @@ import {
   TELEGRAM_URL,
 } from '../lib/site'
 import TrackedLink from './TrackedLink'
+import SiteFooter from './SiteFooter'
+import AiHeader from './ai/AiHeader'
 
 function GuideStructuredData({ guide }: { guide: GuidePageData }) {
   const url = `${SITE_URL}/${guide.slug}`
@@ -28,7 +30,8 @@ function GuideStructuredData({ guide }: { guide: GuidePageData }) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Главная', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: `${guide.title} 2026`, item: url },
+      { '@type': 'ListItem', position: 2, name: 'AI-решения', item: `${SITE_URL}/ai` },
+      { '@type': 'ListItem', position: 3, name: `${guide.title} 2026`, item: url },
     ],
   }
   const faqSchema = {
@@ -57,13 +60,13 @@ function GuideStructuredData({ guide }: { guide: GuidePageData }) {
 function GuideIntro({ guide }: { guide: GuidePageData }) {
   return (
     <>
-      <a href="/" className="text-sm font-semibold text-[var(--site-green)] hover:text-[var(--site-ink)]">
-        ← На главную
+      <a href="/ai" className="text-sm font-semibold text-[var(--accent-text)] hover:text-[var(--site-ink)]">
+        ← К AI-решениям
       </a>
-      <p className="mt-10 text-sm font-semibold text-[var(--site-green)]">
+      <p className="mt-10 text-sm font-semibold text-[var(--accent-text)]">
         Гайд · обновлено {DATE_MODIFIED_SHORT}
       </p>
-      <h1 className="display-title mt-4 text-balance text-4xl leading-[1.05] md:text-6xl">
+      <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] md:text-6xl">
         {guide.title} в 2026 году
       </h1>
       <p className="mt-6 text-xl leading-relaxed text-[var(--site-muted)]">{guide.lead}</p>
@@ -87,7 +90,7 @@ function GuideSections({ guide }: { guide: GuidePageData }) {
               {section.items.map((item) => (
                 <li
                   key={item}
-                  className="border-l-4 border-[var(--site-green)] bg-white px-4 py-3 text-[var(--site-muted)]"
+                  className="border-l-4 border-[var(--accent)] bg-white px-4 py-3 text-[var(--site-muted)]"
                 >
                   {item}
                 </li>
@@ -109,7 +112,7 @@ function GuideFaq({ guide }: { guide: GuidePageData }) {
           <details key={item.q} className="group border border-[color:var(--site-line)] bg-white">
             <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
               <span>{item.q}</span>
-              <span className="text-2xl leading-none text-[var(--site-green)] transition group-open:rotate-45">+</span>
+              <span className="text-2xl leading-none text-[var(--accent-text)] transition group-open:rotate-45">+</span>
             </summary>
             <div className="border-t border-[color:var(--site-line)] px-5 pb-5 pt-4 leading-relaxed text-[var(--site-muted)]">
               {item.a}
@@ -149,7 +152,7 @@ function GuideActions({ guide }: { guide: GuidePageData }) {
         rel="noopener noreferrer"
         goalName="guide_brief_click"
         goalPayload={{ guide: guide.slug }}
-        className="inline-flex min-h-12 items-center justify-center bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--site-green)]"
+        className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--accent-strong)]"
       >
         Получить расчёт
       </TrackedLink>
@@ -169,17 +172,21 @@ function GuideActions({ guide }: { guide: GuidePageData }) {
 
 export default function GuidePage({ guide }: { guide: GuidePageData }) {
   return (
-    <main className="bg-[var(--site-bg)] text-[var(--site-ink)]">
-      <GuideStructuredData guide={guide} />
-      <article className="px-5 py-14 sm:px-8 md:py-20">
-        <div className="mx-auto max-w-4xl">
-          <GuideIntro guide={guide} />
-          <GuideSections guide={guide} />
-          <GuideFaq guide={guide} />
-          <RelatedGuides guide={guide} />
-          <GuideActions guide={guide} />
-        </div>
-      </article>
-    </main>
+    <div className="compliance-theme compliance-home ai-home min-h-screen">
+      <AiHeader linkSectionsToHub />
+      <main className="bg-[var(--bg)] text-[var(--text)]">
+        <GuideStructuredData guide={guide} />
+        <article className="px-5 py-14 sm:px-8 md:py-20">
+          <div className="mx-auto max-w-4xl">
+            <GuideIntro guide={guide} />
+            <GuideSections guide={guide} />
+            <GuideFaq guide={guide} />
+            <RelatedGuides guide={guide} />
+            <GuideActions guide={guide} />
+          </div>
+        </article>
+      </main>
+      <SiteFooter direction="ai" />
+    </div>
   )
 }

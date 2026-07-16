@@ -26,7 +26,7 @@ export default function Compliance152Landing() {
         <ComplianceFaq />
         <FinalCta />
       </main>
-      <SiteFooter variant="dark" />
+      <SiteFooter variant="dark" direction="compliance" />
       <StickyCta />
     </div>
   )

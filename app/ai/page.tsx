@@ -1,22 +1,28 @@
 import type { Metadata } from 'next'
+import AiStructuredData from '../components/AiStructuredData'
 import AiSolutionsPage from '../components/AiSolutionsPage'
-import { SEO_AI } from '../lib/complianceData'
+import { AI_SEO } from '../lib/aiData'
 
 export const metadata: Metadata = {
-  title: SEO_AI.title,
-  description: SEO_AI.description,
-  alternates: { canonical: SEO_AI.canonical },
+  title: AI_SEO.title,
+  description: AI_SEO.description,
+  alternates: { canonical: AI_SEO.canonical },
   openGraph: {
-    title: SEO_AI.title,
-    description: SEO_AI.description,
-    url: SEO_AI.canonical,
+    title: AI_SEO.title,
+    description: AI_SEO.description,
+    url: AI_SEO.canonical,
   },
   twitter: {
-    title: SEO_AI.title,
-    description: SEO_AI.description,
+    title: AI_SEO.title,
+    description: AI_SEO.description,
   },
 }
 
 export default function AiPage() {
-  return <AiSolutionsPage />
+  return (
+    <>
+      <AiStructuredData />
+      <AiSolutionsPage />
+    </>
+  )
 }

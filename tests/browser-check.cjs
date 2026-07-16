@@ -222,7 +222,7 @@ function resultIsBlocked(item) {
     item.missingGoals.length > 0,
     !item.finalCtaVisible,
     !item.telegramHref,
-    item.pricingTierCtas !== 4,
+    item.pricingTierCtas !== 3,
     item.pricingPdfHref !== '/price_152fz_hihol.pdf',
     !item.hasLatestPrices,
     item.hasObsoleteSupportPrice,

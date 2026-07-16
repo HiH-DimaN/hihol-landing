@@ -3,7 +3,7 @@ import './globals.css'
 import YandexMetrika from './components/YandexMetrika'
 import CookieConsent from './components/CookieConsent'
 import StructuredData from './components/StructuredData'
-import { DATE_MODIFIED, DATE_PUBLISHED, SITE_NAME, SITE_URL } from './lib/site'
+import { SITE_NAME, SITE_URL } from './lib/site'
 
 const siteUrl = SITE_URL
 const title = `Проверка сайта на соответствие 152-ФЗ за 24 часа - ${SITE_NAME}`
@@ -14,33 +14,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
-  keywords: [
-    'AI-бот для бизнеса',
-    'AI-автоматизация бизнес-процессов под ключ',
-    'автоматизация',
-    'Telegram-бот',
-    'AI-ассистент',
-    'RAG',
-    'RAG-системы',
-    'чат-бот для клиник',
-    'автоматизация процессов',
-    'n8n',
-    'интеграция CRM',
-    'AI для экспертов',
-    'B2B автоматизация',
-    'голосовой бот',
-    'Telegram Mini App',
-    'AI-автоматизация бизнес-процессов под ключ',
-    'внедрение ИИ в бизнес',
-    'AI-агенты для бизнеса',
-    'ИИ-бот для обработки заявок',
-    'RAG-ассистент для компании',
-    'автоматизация заявок CRM',
-    'Telegram Mini App для бизнеса',
-    'AI голосовой бот',
-    'парсинг данных',
-    'кастомная разработка AI-решений',
-  ],
   authors: [{ name: SITE_NAME, url: siteUrl }],
   creator: SITE_NAME,
   alternates: {
@@ -60,16 +33,6 @@ export const metadata: Metadata = {
     title,
     description,
     images: ['/twitter-image'],
-  },
-  other: {
-    'geo.region': 'RU-MOW',
-    'geo.placename': 'Москва',
-    'geo.position': '55.7558;37.6177',
-    ICBM: '55.7558, 37.6177',
-    'business:contact_data:country_name': 'Russia',
-    'business:contact_data:locality': 'Moscow',
-    'article:published_time': DATE_PUBLISHED,
-    'article:modified_time': DATE_MODIFIED,
   },
   robots: {
     index: true,

@@ -43,6 +43,8 @@ test('static export preserves the niche landing contract', () => {
   assert.match(html, /AI-CRM для продаж и сервиса/)
   assert.match(html, /120–320 тыс\. ₽/)
   assert.match(html, /https:\/\/t\.me\/dmitry_hihol/)
+  assert.match(html, /href="\/ai#solutions"/)
+  assert.match(html, /href="\/ai#pricing-ai"/)
   assert.match(html, /"@type":"Service"/)
   assert.match(html, /"@type":"FAQPage"/)
 })
@@ -53,6 +55,8 @@ test('static export preserves the guide contract', () => {
   assert.match(html, /Как внедрить RAG в бизнесе/)
   assert.match(html, /120 000 – 320 000 ₽/)
   assert.match(html, /План внедрения/)
+  assert.match(html, /href="\/ai#solutions"/)
+  assert.match(html, /href="\/ai#pricing-ai"/)
   assert.match(html, /"@type":"Article"/)
   assert.match(html, /"@type":"FAQPage"/)
 })
@@ -60,10 +64,12 @@ test('static export preserves the guide contract', () => {
 test('static export preserves the AI solutions contract', () => {
   const html = readHtml('ai.html')
 
-  assert.match(html, /AI-решения для бизнеса: боты, интеграции, автоматизация документов/)
-  assert.match(html, /Telegram\/MAX боты и мини-аппы/)
-  assert.match(html, /RAG-системы и базы знаний/)
+  assert.match(html, /AI-автоматизация бизнес-процессов под ключ/)
+  assert.match(html, /Автоматизация B2B-процессов/)
+  assert.match(html, /Публичные продукты вместо обезличенных финансовых обещаний/)
   assert.match(html, /https:\/\/t\.me\/dmitry_hihol/)
+  assert.match(html, /"@type":"Service"/)
+  assert.match(html, /"@type":"BreadcrumbList"/)
 })
 
 test('static export preserves the privacy policy contract', () => {
@@ -71,8 +77,9 @@ test('static export preserves the privacy policy contract', () => {
 
   assert.match(html, /Политика обработки персональных данных/)
   assert.match(html, /Хихол Дмитрий/)
-  assert.match(html, /11 июля 2026 г\./)
+  assert.match(html, /16 июля 2026 г\./)
   assert.match(html, /12\. Заключительные положения/)
+  assert.doesNotMatch(html, /Google LLC|Google Forms/)
 })
 
 test('static export preserves the Open Graph image contract', () => {
@@ -98,6 +105,7 @@ test('target React functions stay within the 80 LOC review limit', () => {
     ['app/components/PrivacyPolicy.tsx', 'PrivacyPolicy'],
     ['app/components/GuidePage.tsx', 'GuidePage'],
     ['app/components/AiSolutionsPage.tsx', 'AiSolutionsPage'],
+    ['app/components/AiStructuredData.tsx', 'AiStructuredData'],
     ['app/opengraph-image.tsx', 'OGImage'],
   ]
 

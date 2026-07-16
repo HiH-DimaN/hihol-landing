@@ -62,6 +62,7 @@
     --text-muted: #9aa5b1;
     --accent: #4ade80;
     --accent-strong: #22c55e;
+    --accent-text: #4ade80;
     --accent-ink: #08130c;
     --danger: #f87171;
     --border: #2a3441;
@@ -95,6 +96,7 @@
     --text-muted: #56645d;
     --accent: #2baf69;
     --accent-strong: #218a53;
+    --accent-text: #1c7a4b;
     --accent-ink: #06140c;
     --danger: #b73f43;
     --border: #d6e0d8;
@@ -103,11 +105,28 @@
       var(--bg);
   }
 
+  .compliance-theme.ai-home {
+    --accent: #2f7f82;
+    --accent-strong: #24666b;
+    --accent-text: #236c73;
+    --accent-ink: #ffffff;
+    background:
+      radial-gradient(circle at 82% 24%, rgb(47 127 130 / 0.08), transparent 28rem),
+      var(--bg);
+  }
+
   .compliance-home-hero,
   .compliance-final-panel {
     background:
       radial-gradient(circle at 90% 0%, rgb(43 175 105 / 0.22), transparent 28rem),
       linear-gradient(135deg, #0c2017 0%, #102a20 52%, #0b1712 100%);
+  }
+
+  .ai-home-hero,
+  .ai-final-panel {
+    background:
+      radial-gradient(circle at 88% 2%, rgb(63 164 166 / 0.24), transparent 30rem),
+      linear-gradient(135deg, #0b1f1c 0%, #123330 54%, #0a1716 100%);
   }
 
   .compliance-home-grid {
@@ -119,7 +138,7 @@
     -webkit-mask-image: linear-gradient(to bottom, black, transparent 92%);
   }
 
-  .compliance-home main > section:not(.compliance-home-hero):not(#check) h2 {
+  .compliance-home main > section:not(.compliance-home-hero):not(.ai-home-hero):not(.ai-final-panel):not(#check) h2 {
     color: var(--text);
     line-height: 1.16;
   }

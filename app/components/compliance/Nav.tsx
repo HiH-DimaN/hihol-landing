@@ -20,6 +20,12 @@ export default function Nav() {
             </Link>
           ))}
         </div>
+        <Link
+          href="/ai"
+          className="inline-flex min-h-[44px] items-center text-xs font-semibold text-[var(--accent-text)] md:hidden"
+        >
+          AI-решения
+        </Link>
         <TrackedLink
           href={NAV.cta.href}
           goalName="cta_nav_check"

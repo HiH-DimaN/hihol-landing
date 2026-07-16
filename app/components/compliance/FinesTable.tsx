@@ -9,7 +9,7 @@ export default function FinesTable() {
         href={FINES.sourceHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-2 inline-flex text-xs font-medium text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-strong)] sm:text-sm"
+        className="mt-2 inline-flex text-xs font-medium text-[var(--accent-text)] underline underline-offset-2 hover:text-[var(--text)] sm:text-sm"
       >
         {FINES.sourceLabel}
       </a>

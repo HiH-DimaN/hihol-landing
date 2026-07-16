@@ -7,182 +7,71 @@ import {
   TELEGRAM_CHANNEL_URL,
 } from '../lib/site'
 
-const siteUrl = SITE_URL
-
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': `${SITE_URL}/#person`,
   name: 'Дмитрий Хихол',
   alternateName: 'Dmitry Hihol',
-  url: siteUrl,
-  image: `${siteUrl}/dmitry.jpg`,
-  jobTitle: 'AI-разработчик и консультант по автоматизации бизнес-процессов',
+  url: SITE_URL,
+  image: `${SITE_URL}/dmitry.jpg`,
+  jobTitle: 'Разработчик AI-систем и специалист по техническому аудиту цифровых контуров',
   description:
-    'AI-разработчик с управленческим операционным бэкграундом. Внедряет AI-автоматизацию бизнес-процессов под ключ: AI-агентов, RAG-ассистентов, чат-ботов, голосовые сценарии, Telegram Mini Apps и интеграции с CRM.',
+    'Разрабатывает AI-автоматизацию для бизнеса и проводит технический аудит сайтов, форм, аналитики, чат-ботов и маршрутов персональных данных.',
   sameAs: SAME_AS,
   knowsAbout: [
-    'Кастомная разработка AI-решений для бизнеса',
     'AI-автоматизация бизнес-процессов',
-    'AI-агенты для бизнеса',
-    'RAG-ассистенты',
-    'RAG-системы',
-    'парсинг данных',
-    'Telegram-боты',
+    'RAG-системы и базы знаний',
     'CRM-интеграции',
-    'n8n',
-    'OpenAI API',
-    'Next.js',
-    'PostgreSQL',
+    'Telegram Mini Apps',
+    'технический аудит сайтов по 152-ФЗ',
+    'маршруты персональных данных',
+    'cookie и веб-аналитика',
   ],
-  hasCredential: ['MBA', '20 лет CEO/COO/CCO до AI-разработки'],
+  hasCredential: ['MBA', '20 лет опыта CEO/COO/CCO'],
 }
 
 const webSiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
   name: 'HIHOL',
-  url: siteUrl,
+  url: SITE_URL,
+  description:
+    'Технический аудит цифровых контуров по 152-ФЗ и разработка AI-автоматизации для бизнеса.',
   inLanguage: 'ru-RU',
   datePublished: DATE_PUBLISHED,
   dateModified: DATE_MODIFIED,
-  publisher: {
-    '@type': 'Person',
-    name: 'Дмитрий Хихол',
-    url: siteUrl,
-  },
+  publisher: { '@id': `${SITE_URL}/#person` },
 }
 
-const localBusinessSchema = {
+const professionalServiceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
+    '@type': 'ProfessionalService',
+  '@id': `${SITE_URL}/#business`,
   name: 'HIHOL',
-  legalName: 'Дмитрий Хихол — AI-автоматизация бизнес-процессов под ключ',
-  url: siteUrl,
-  image: `${siteUrl}/opengraph-image`,
+  legalName: 'Дмитрий Хихол',
+  url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
   telephone: '+79051238877',
   email: EMAIL,
-  priceRange: '40 000 – 400 000 ₽',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Москва',
-    addressCountry: 'RU',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 55.7558,
-    longitude: 37.6177,
-  },
-  hasMap: 'https://yandex.ru/maps/?ll=37.617700%2C55.755800&z=3',
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: '+79051238877',
-      contactType: 'sales',
-      areaServed: 'RU',
-      availableLanguage: ['Russian'],
-    },
-  ],
-  areaServed: [
-    {
-      '@type': 'Country',
-      name: 'Россия',
-    },
-    {
-      '@type': 'Place',
-      name: 'СНГ',
-    },
-  ],
-  founder: {
-    '@type': 'Person',
-    name: 'Дмитрий Хихол',
-  },
+  areaServed: { '@type': 'Country', name: 'Россия' },
+  founder: { '@id': `${SITE_URL}/#person` },
   description:
-    'Внедрение AI-агентов, чат-ботов, RAG-ассистентов, Telegram Mini Apps, голосовых ботов и интеграций с CRM для обработки заявок, поддержки, документов, звонков и аналитики.',
+    'Технический аудит сайтов и интеграций по 152-ФЗ, а также разработка AI-ассистентов, RAG, CRM-интеграций, Mini Apps и автоматизации процессов.',
   sameAs: SAME_AS,
   subjectOf: [
-    {
-      '@type': 'CreativeWork',
-      name: 'Telegram-канал Дмитрия Хихола',
-      url: TELEGRAM_CHANNEL_URL,
-    },
-    {
-      '@type': 'SoftwareSourceCode',
-      name: 'Product Factory OS',
-      url: 'https://github.com/hihol-labs/product-factory-os',
-    },
-    {
-      '@type': 'SoftwareSourceCode',
-      name: 'idea-to-deploy',
-      url: 'https://github.com/HiH-DimaN/idea-to-deploy',
-    },
+    { '@type': 'CreativeWork', name: 'Telegram-канал Дмитрия Хихола', url: TELEGRAM_CHANNEL_URL },
+    { '@type': 'SoftwareSourceCode', name: 'idea-to-deploy', url: 'https://github.com/HiH-DimaN/idea-to-deploy' },
   ],
-}
-
-const serviceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'AI-автоматизация бизнес-процессов под ключ',
-  serviceType:
-    'Внедрение AI-агентов, RAG-ассистентов, CRM-интеграций, Telegram Mini Apps, голосовых ботов и автоматизации документов',
-  provider: {
-    '@type': 'Person',
-    name: 'Дмитрий Хихол',
-    url: siteUrl,
-  },
-  areaServed: 'Россия и СНГ',
-  offers: {
-    '@type': 'Offer',
-    url: siteUrl,
-    priceCurrency: 'RUB',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      priceCurrency: 'RUB',
-      minPrice: 40000,
-      maxPrice: 400000,
-    },
-    availability: 'https://schema.org/InStock',
-  },
-  datePublished: DATE_PUBLISHED,
-  dateModified: DATE_MODIFIED,
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Услуги AI-автоматизации',
-    itemListElement: [
-      'AI-ассистент Start / Plus / Pro',
-      'Автоматизация заявок и CRM',
-      'Telegram Mini App для бизнеса',
-      'Голосовой бот',
-      'Автоматизация документов и отчетов',
-      'Парсинг данных',
-    ].map((name) => ({
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name,
-      },
-    })),
-  },
 }
 
 export default function StructuredData() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
+      {[webSiteSchema, personSchema, professionalServiceSchema].map((schema) => (
+        <script key={schema['@id']} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
     </>
   )
 }

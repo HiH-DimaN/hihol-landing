@@ -28,6 +28,12 @@ export default function HomeStructuredData() {
       },
       {
         '@type': 'Offer',
+        name: 'Полный веб-аудит с участием владельца',
+        price: '39900',
+        priceCurrency: 'RUB',
+      },
+      {
+        '@type': 'Offer',
         name: 'Аудит + исправление под ключ',
         price: '59900',
         priceCurrency: 'RUB',

@@ -45,7 +45,7 @@ export default function SelfCheck() {
         ) : (
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[var(--text)]">
-              У вас <span className="font-semibold text-[var(--accent)]">{count}</span>{' '}
+              У вас <span className="font-semibold text-[var(--accent-text)]">{count}</span>{' '}
               {pluralPriznak(count)} {SELF_CHECK.resultTail}
             </p>
             <TrackedLink

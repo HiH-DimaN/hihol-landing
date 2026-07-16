@@ -12,7 +12,7 @@ export default function ComplianceFaq() {
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-1 text-sm font-medium text-[var(--text)] sm:text-base">
               {item.q}
-              <span className="shrink-0 text-[var(--accent)] transition-transform group-open:rotate-45">
+              <span className="shrink-0 text-[var(--accent-text)] transition-transform group-open:rotate-45">
                 +
               </span>
             </summary>
