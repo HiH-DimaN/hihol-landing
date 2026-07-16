@@ -8,6 +8,10 @@ const evidenceDir = path.resolve(
   process.env.EVIDENCE_DIR || '.itd-memory/evidence/browser',
 )
 const runLabel = process.env.RUN_LABEL || 'browser'
+const transparentPng = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+  'base64',
+)
 
 const isWsl =
   process.platform === 'linux' &&
@@ -65,6 +69,12 @@ async function observePage(page) {
     failedResponses: [],
     metrikaStubbed: process.env.STUB_METRIKA !== '0',
   }
+
+  // Next 14 dev mode returns 500 for the generated /icon route when
+  // output: 'export'; production static export contains the valid icon file.
+  await page.route('**/icon?*', (route) =>
+    route.fulfill({ status: 200, contentType: 'image/png', body: transparentPng }),
+  )
 
   if (observed.metrikaStubbed) {
     await page.route(/https:\/\/mc\.yandex\.(?:ru|com)\//, (route) =>

@@ -6,6 +6,7 @@ const { execFileSync, spawnSync } = require('node:child_process')
 const target = process.env.TARGET_URL || 'http://127.0.0.1:3100/ai'
 const evidenceDir = path.resolve(process.env.EVIDENCE_DIR || '.itd-memory/evidence/browser-ai')
 const runLabel = process.env.RUN_LABEL || 'ai-browser'
+const transparentPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64')
 const isWsl = process.platform === 'linux' && /microsoft/i.test(readFileSync('/proc/version', 'utf8'))
 
 if (isWsl && process.env.PW_FORCE_LINUX !== '1') {
@@ -39,6 +40,7 @@ async function checkViewport(browser, viewport) {
   const context = await browser.newContext({ viewport })
   const page = await context.newPage()
   const observed = { consoleErrors: [], pageErrors: [], failedResponses: [], metrikaRequests: [] }
+  await page.route('**/icon?*', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: transparentPng }))
   await page.route(/https:\/\/mc\.yandex\.(?:ru|com)\//, (route) => route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }))
   page.on('console', (message) => { if (message.type() === 'error') observed.consoleErrors.push(message.text()) })
   page.on('pageerror', (error) => observed.pageErrors.push(error.message))
@@ -96,6 +98,7 @@ function blocked(item) {
 async function checkChildHeader(browser, route) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
   const page = await context.newPage()
+  await page.route('**/icon?*', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: transparentPng }))
   const url = new URL(route, target).toString()
   const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 })
   const hubLinks = await page.locator('header a[href^="/ai#"]').evaluateAll((links) =>

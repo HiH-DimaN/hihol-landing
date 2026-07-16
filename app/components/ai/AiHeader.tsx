@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { AI_NAV } from '../../lib/aiData'
-import { TELEGRAM_URL } from '../../lib/site'
+import { aiIntakeHref } from '../../lib/aiIntakeData'
 import TrackedLink from '../TrackedLink'
 
 export default function AiHeader({ linkSectionsToHub = false }: { linkSectionsToHub?: boolean }) {
@@ -31,13 +31,12 @@ export default function AiHeader({ linkSectionsToHub = false }: { linkSectionsTo
           152-ФЗ
         </Link>
         <TrackedLink
-          href={TELEGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          goalName="ai_nav_telegram"
+          href={aiIntakeHref('ai_nav')}
+          goalName="ai_nav_diagnostic"
           className="inline-flex min-h-11 items-center rounded-lg bg-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]"
         >
-          Обсудить задачу
+          <span className="sm:hidden">Диагностика</span>
+          <span className="hidden sm:inline">Пройти диагностику</span>
         </TrackedLink>
       </nav>
     </header>

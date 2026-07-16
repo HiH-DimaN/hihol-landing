@@ -27,6 +27,8 @@ test('Caddy serves exported routes and preserves production edge behavior', () =
   assert.match(caddyfile, /header @metadata_image Content-Type image\/png/)
   assert.match(caddyfile, /try_files \{path\} \{path\}\.html \{path\}\/index\.html/)
   assert.match(caddyfile, /rewrite @404 \/404\.html/)
+  assert.match(caddyfile, /handle_path \/api\/\*/)
+  assert.match(caddyfile, /reverse_proxy \{\$INTAKE_UPSTREAM:api:8000\}/)
 })
 
 test('Docker context excludes secrets, local state, build output and unrelated backend', () => {
@@ -53,4 +55,20 @@ test('Docker context excludes secrets, local state, build output and unrelated b
   ]) {
     assert.ok(ignored.has(required), `.dockerignore must exclude ${required}`)
   }
+})
+
+test('intake API image applies reversible migrations before serving', () => {
+  const dockerfile = readProjectFile('backend/Dockerfile')
+  const entrypoint = readProjectFile('backend/entrypoint.sh')
+  const migration = readProjectFile('backend/alembic/versions/20260716_0001_create_leads.py')
+
+  assert.match(dockerfile, /COPY alembic \.\/alembic/)
+  assert.match(dockerfile, /COPY alembic\.ini entrypoint\.sh \.\//)
+  assert.match(dockerfile, /CMD \["\.\/entrypoint\.sh"\]/)
+  assert.match(entrypoint, /set -eu/)
+  assert.ok(entrypoint.indexOf('alembic upgrade head') < entrypoint.indexOf('exec granian'))
+  assert.match(migration, /revision: str = "20260716_0001"/)
+  assert.match(migration, /op\.create_table\(\s*"leads"/)
+  assert.match(migration, /op\.create_index\("ix_leads_created_at"/)
+  assert.match(migration, /op\.drop_table\("leads"\)/)
 })

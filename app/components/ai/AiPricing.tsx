@@ -1,4 +1,5 @@
 import { AI_ECONOMICS, AI_PRICE_GROUPS } from '../../lib/aiData'
+import { aiIntakeHref } from '../../lib/aiIntakeData'
 import { TELEGRAM_URL } from '../../lib/site'
 import TrackedLink from '../TrackedLink'
 import AiSectionHeading from './AiSectionHeading'
@@ -28,8 +29,11 @@ export default function AiPricing() {
             </ul>
           </div>
           <div className="flex flex-col justify-between rounded-xl bg-[var(--text)] p-6 text-white">
-            <p className="leading-relaxed text-slate-300">Пришлите описание процесса или голосовое сообщение. Если задача пока не требует разработки, скажу об этом до оценки проекта.</p>
-            <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_pricing_telegram" className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--accent)] px-5 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Получить первичную оценку</TrackedLink>
+            <p className="leading-relaxed text-slate-300">Ответьте на вопросы о процессе, объёме и текущем контуре. Если задача пока не требует разработки, скажу об этом до оценки проекта.</p>
+            <div className="mt-6 grid gap-3">
+              <TrackedLink href={aiIntakeHref('ai_pricing')} goalName="ai_pricing_diagnostic" className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--accent)] px-5 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Получить предварительный разбор</TrackedLink>
+              <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_pricing_telegram" className="inline-flex min-h-11 items-center justify-center text-sm font-semibold text-teal-200 underline underline-offset-4">Сначала задать вопрос в Telegram</TrackedLink>
+            </div>
           </div>
         </div>
       </div>

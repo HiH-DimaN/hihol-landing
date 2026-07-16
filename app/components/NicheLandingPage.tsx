@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { NichePage } from '../lib/nichePages'
+import { aiIntakeHref } from '../lib/aiIntakeData'
 import { DATE_MODIFIED, DATE_PUBLISHED, SITE_NAME, SITE_URL, TELEGRAM_URL } from '../lib/site'
 import SiteFooter from './SiteFooter'
 import TrackedLink from './TrackedLink'
@@ -89,7 +90,10 @@ function NicheHero({ page }: { page: NichePage }) {
           <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-teal-200">{page.eyebrow}</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] md:text-6xl">{page.title}</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">{page.lead}</p>
-          <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName={`${page.slug}_telegram_click`} className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Обсудить задачу</TrackedLink>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <TrackedLink href={aiIntakeHref('niche_hero', page.slug)} goalName={`${page.slug}_diagnostic_click`} className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Получить предварительный разбор</TrackedLink>
+            <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName={`${page.slug}_telegram_click`} className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-white/20 px-7 font-semibold hover:bg-white/10">Telegram</TrackedLink>
+          </div>
         </div>
         <aside className="rounded-2xl border border-white/15 bg-white/[0.07] p-6 backdrop-blur-sm">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-200">Ориентир</p>
@@ -139,7 +143,7 @@ function NicheFaq({ page }: { page: NichePage }) {
 function NicheFinalCta({ page }: { page: NichePage }) {
   return (
     <section className="ai-final-panel px-4 py-16 text-white sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-3xl text-center"><h2 className="text-balance text-3xl font-semibold md:text-5xl">Начать можно с короткой диагностики</h2><p className="mt-6 text-lg leading-relaxed text-slate-300">Пришлите описание процесса. В ответ определим возможный первый контур, вопросы к данным и порядок оценки.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName={`${page.slug}_bottom_telegram_click`} className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Написать в Telegram</TrackedLink><Link href="/ai" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-white/20 px-7 font-semibold hover:bg-white/10">Вернуться к AI-решениям</Link></div></div>
+      <div className="mx-auto max-w-3xl text-center"><h2 className="text-balance text-3xl font-semibold md:text-5xl">Начать можно с короткой диагностики</h2><p className="mt-6 text-lg leading-relaxed text-slate-300">Ответьте на вопросы о процессе. В предварительном разборе определим возможный первый контур, вопросы к данным и порядок оценки.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><TrackedLink href={aiIntakeHref('niche_final', page.slug)} goalName={`${page.slug}_bottom_diagnostic_click`} className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Пройти диагностику</TrackedLink><TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName={`${page.slug}_bottom_telegram_click`} className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-white/20 px-7 font-semibold hover:bg-white/10">Написать в Telegram</TrackedLink></div><Link href="/ai" className="mt-5 inline-flex font-semibold text-teal-200 underline underline-offset-4">Вернуться к AI-решениям</Link></div>
     </section>
   )
 }

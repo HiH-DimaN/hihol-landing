@@ -106,6 +106,8 @@ test('target React functions stay within the 80 LOC review limit', () => {
     ['app/components/GuidePage.tsx', 'GuidePage'],
     ['app/components/AiSolutionsPage.tsx', 'AiSolutionsPage'],
     ['app/components/AiStructuredData.tsx', 'AiStructuredData'],
+    ['app/components/AiDiagnosticForm.tsx', 'AiDiagnosticForm'],
+    ['app/ai-diagnostika/page.tsx', 'AiDiagnosticPage'],
     ['app/opengraph-image.tsx', 'OGImage'],
   ]
 

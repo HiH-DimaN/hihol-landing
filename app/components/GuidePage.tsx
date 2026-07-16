@@ -1,4 +1,5 @@
 import type { GuidePage as GuidePageData } from '../lib/guidePages'
+import { aiIntakeHref } from '../lib/aiIntakeData'
 import {
   DATE_MODIFIED,
   DATE_MODIFIED_SHORT,
@@ -147,14 +148,12 @@ function GuideActions({ guide }: { guide: GuidePageData }) {
   return (
     <div className="mt-12 grid gap-3 sm:grid-cols-2">
       <TrackedLink
-        href={TELEGRAM_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={aiIntakeHref('guide', guide.slug)}
         goalName="guide_brief_click"
         goalPayload={{ guide: guide.slug }}
         className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--site-ink)] px-6 py-3 text-center font-semibold text-white hover:bg-[var(--accent-strong)]"
       >
-        Получить расчёт
+        Получить предварительный разбор
       </TrackedLink>
       <TrackedLink
         href={TELEGRAM_URL}

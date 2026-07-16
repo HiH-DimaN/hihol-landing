@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { AI_CAPABILITIES, AI_HERO } from '../../lib/aiData'
+import { aiIntakeHref } from '../../lib/aiIntakeData'
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_URL } from '../../lib/site'
 import TrackedLink from '../TrackedLink'
 
@@ -25,13 +26,14 @@ export default function AiHero() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">{AI_HERO.lead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_hero_telegram" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-6 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">
+            <TrackedLink href={aiIntakeHref('ai_hero')} goalName="ai_hero_diagnostic" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-6 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">
               {AI_HERO.primaryCta}
             </TrackedLink>
             <Link href="#solutions" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-white/20 px-6 font-semibold text-white hover:bg-white/10">
               {AI_HERO.secondaryCta}
             </Link>
           </div>
+          <p className="mt-4 text-sm text-slate-300">Не готовы к анкете? <TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_hero_telegram" className="font-semibold text-teal-200 underline underline-offset-4">Задайте вопрос в Telegram</TrackedLink>.</p>
           <div className="mt-8 grid gap-0 border-y border-white/15 text-sm text-slate-300 sm:grid-cols-3">
             {AI_HERO.trust.map((item) => <p key={item} className="border-b border-white/15 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:px-4 sm:first:pl-0 sm:last:border-r-0">{item}</p>)}
           </div>

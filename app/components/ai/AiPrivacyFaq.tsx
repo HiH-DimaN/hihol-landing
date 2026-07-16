@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { AI_FAQ } from '../../lib/aiData'
+import { aiIntakeHref } from '../../lib/aiIntakeData'
 import { TELEGRAM_URL } from '../../lib/site'
 import TrackedLink from '../TrackedLink'
 import AiSectionHeading from './AiSectionHeading'
@@ -28,7 +29,7 @@ export function AiFaq() {
 export function AiFinalCta() {
   return (
     <section id="contacts-ai" className="ai-final-panel px-4 py-16 text-white sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-4xl text-center"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-200">Первый шаг</p><h2 className="mt-3 text-balance text-3xl font-semibold sm:text-5xl">Разберём один процесс и определим границы пилота</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Пришлите задачу, пример входных данных и текущий способ работы. В ответ получите вопросы для оценки, возможный первый контур и диапазон бюджета.</p><TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_final_telegram" className="mt-8 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)] sm:w-auto">Написать Дмитрию в Telegram</TrackedLink></div>
+      <div className="mx-auto max-w-4xl text-center"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-200">Первый шаг</p><h2 className="mt-3 text-balance text-3xl font-semibold sm:text-5xl">Разберём один процесс и определим границы пилота</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Структурированная анкета соберёт данные для карты процесса, возможного первого контура и предварительного диапазона бюджета.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><TrackedLink href={aiIntakeHref('ai_final')} goalName="ai_final_diagnostic" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-[var(--accent)] px-7 font-semibold text-[var(--accent-ink)] hover:bg-[var(--accent-strong)]">Получить предварительный разбор</TrackedLink><TrackedLink href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" goalName="ai_final_telegram" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-white/20 px-7 font-semibold hover:bg-white/10">Написать в Telegram</TrackedLink></div></div>
     </section>
   )
 }

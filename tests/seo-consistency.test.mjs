@@ -63,6 +63,7 @@ test('metadata, dates, llms and policy tell one current story', async () => {
   assert.match(policy, /16 июля 2026 г\./)
   assert.doesNotMatch(policy, /Google LLC|Google Forms/)
   assert.match(policy, /hihol_consent/)
+  assert.match(policy, /AI-диагностик/i)
   assert.match(sitemap, /2026-07-16/)
 })
 
@@ -78,5 +79,5 @@ test('footer copy is route-aware and does not mix disclaimers', async () => {
   assert.match(landing, /direction="compliance"/)
   assert.match(ai, /direction="ai"/)
   assert.match(niche, /direction="ai"/)
-  assert.match(footer, /На сайте нет форм заявки/)
+  assert.match(footer, /AI-диагностик/i)
 })

@@ -1,6 +1,6 @@
 # hihol-landing
 
-Бизнес-лендинг HiHol для ручной продажи технического аудита сайтов по 152-ФЗ. Главная цель текущего этапа — проверить спрос на 3–5 оплаченных аудитов; backend, формы и автоматическая генерация PDF пока не входят в продукт.
+Бизнес-сайт HiHol с двумя направлениями: технический аудит сайтов по 152-ФЗ и AI-автоматизация процессов. Для AI-направления в репозитории есть собственная многошаговая диагностика и изолированный lead API; автоматическая генерация отчёта/PDF не выполняется.
 
 ## Стек
 
@@ -9,7 +9,8 @@
 - Tailwind CSS 3.4
 - Inter через `next/font/google`
 - Playwright 1.61 для browser-smoke
-- База данных, API, авторизация и платежи: отсутствуют
+- FastAPI + Granian + SQLAlchemy для внутреннего write-only intake API
+- PostgreSQL 16 для заявок; авторизация, платежи и публичная admin-панель отсутствуют
 
 ## Визуальная система
 
@@ -25,6 +26,17 @@ npm run dev
 ```
 
 Страница откроется на `http://localhost:3100`. Порт 3000 зарезервирован за другим проектом и не используется.
+
+Backend проверяется отдельно (его не нужно запускать для статической разработки UI):
+
+```bash
+cd backend
+python -m venv .venv
+. .venv/bin/activate
+pip install -e ".[dev]"
+alembic upgrade head
+pytest
+```
 
 ## Команды
 
@@ -51,6 +63,7 @@ app/
   components/
     Compliance152Landing.tsx
     CookieConsent.tsx
+    AiDiagnosticForm.tsx
     TrackedLink.tsx
     YandexMetrika.tsx
     compliance/
@@ -65,6 +78,7 @@ app/
       FinalCta.tsx
       StickyCta.tsx
   lib/
+    aiIntakeData.ts
     complianceData.ts
     consent.ts
     metrika.ts
@@ -72,16 +86,24 @@ tests/
   smoke.test.mjs
   compliance-ux.test.mjs
   browser-check.cjs
+backend/
+  app/
+  tests/
+deploy/
+  Caddyfile
+  intake.compose.yml
 public/
 ```
 
 ## Аналитика и данные
 
-`NEXT_PUBLIC_YM_ID` можно задать через окружение; без него используется публичный ID счётчика проекта. Метрика монтируется только после явного согласия. Все CTA остаются обычными ссылками, когда согласие не дано или `window.ym` недоступен. Лид-форма и серверное хранение данных отсутствуют.
+`NEXT_PUBLIC_YM_ID` можно задать через окружение; без него используется публичный ID счётчика проекта. Метрика монтируется только после явного согласия. Собственная `/ai-diagnostika` отправляет минимизированный бриф на same-origin `/api/leads`; IP/User-Agent не сохраняются, Telegram получает только ID и безопасный источник, срок хранения — до 12 месяцев.
+
+Схема intake-базы управляется Alembic. API-контейнер сначала выполняет `alembic upgrade head` и только после успешного обновления запускает Granian; runtime `create_all` не используется. Любой downgrade вне временной тестовой БД требует отдельного backup и разрешения.
 
 ## Сборка и деплой
 
-Production-контур: `git push` → Coolify собирает многоэтапный `Dockerfile` → внутренний Caddy раздаёт `out/` на порту 3000 → Coolify Traefik принимает публичный HTTP/HTTPS. Серверный Next runtime, системный Caddy и `/var/www/hihol` не используются.
+Текущий подтверждённый production-контур остаётся static-only: `git push` → Coolify собирает `Dockerfile` → внутренний Caddy раздаёт `out/` на порту 3000 → Coolify Traefik принимает публичный HTTP/HTTPS. Активация анкеты требует отдельного перехода на `deploy/intake.compose.yml` (web + internal API + PostgreSQL) и ещё не выполнена. Серверный Next runtime, системный Caddy и `/var/www/hihol` не используются.
 
 Локальная проверка точного production image не занимает порты 3000 и 3100:
 
