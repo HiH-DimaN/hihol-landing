@@ -12,7 +12,9 @@
 		Permissions-Policy "camera=(), microphone=(), geolocation=()"
 	}
 
-	respond /healthz 200
+	handle /healthz {
+		respond 200
+	}
 
 	# Redirect retained from the former Next runtime.
 	redir /rag /kak-vnedrit-rag 301

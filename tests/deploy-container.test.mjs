@@ -21,7 +21,11 @@ test('Caddy serves exported routes and preserves production edge behavior', () =
   const caddyfile = readProjectFile('deploy/Caddyfile')
 
   assert.match(caddyfile, /^:3000\s*\{/m)
-  assert.match(caddyfile, /respond \/healthz 200/)
+  assert.match(caddyfile, /handle \/healthz\s*\{\s*respond 200\s*\}/)
+  assert.ok(
+    caddyfile.indexOf('handle /healthz') < caddyfile.indexOf('\n\thandle {'),
+    'the exact health route must precede the catch-all static handle',
+  )
   assert.match(caddyfile, /redir \/rag \/kak-vnedrit-rag 301/)
   assert.match(caddyfile, /@metadata_image path \/opengraph-image \/twitter-image \/icon \/apple-icon/)
   assert.match(caddyfile, /header @metadata_image Content-Type image\/png/)
