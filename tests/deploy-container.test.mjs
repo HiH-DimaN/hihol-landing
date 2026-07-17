@@ -90,3 +90,10 @@ test('Coolify resolves Compose build contexts from the repository root', () => {
     assert.ok(existsSync(resolve(projectRoot, context)), `build context must exist: ${context}`)
   }
 })
+
+test('PostgreSQL healthcheck probes the final TCP listener without env expansion', () => {
+  const compose = readProjectFile('deploy/intake.compose.yml')
+
+  assert.match(compose, /pg_isready -h 127\.0\.0\.1 -p 5432/)
+  assert.doesNotMatch(compose, /pg_isready[^\n]*\$+POSTGRES_/)
+})
