@@ -29,9 +29,22 @@ test('AI hub restores the complete conversion architecture', async () => {
     'Карта решения',
     'Пилот',
     'Запуск',
+    'Product Factory OS',
     'Skutr Docs',
     '50–320 тыс. ₽',
   ]) assert.match(data, new RegExp(fact))
+})
+
+test('public proof includes Product Factory OS in a balanced four-card grid', async () => {
+  const [data, proof] = await Promise.all([
+    read('app/lib/aiData.ts'),
+    read('app/components/ai/AiProof.tsx'),
+  ])
+
+  assert.match(data, /https:\/\/github\.com\/hihol-labs\/product-factory-os/)
+  assert.match(data, /Операционная система разработки продуктов в Codex/)
+  assert.match(proof, /sm:grid-cols-2/)
+  assert.doesNotMatch(proof, /lg:grid-cols-3/)
 })
 
 test('AI hub links every commercial route and guide from the hub', async () => {

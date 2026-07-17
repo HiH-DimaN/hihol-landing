@@ -153,6 +153,12 @@ export const AI_PRODUCTS = [
     href: 'https://github.com/HiH-DimaN/idea-to-deploy',
   },
   {
+    title: 'Product Factory OS',
+    status: 'Open source · MIT',
+    text: 'Операционная система разработки продуктов в Codex: маршрутизация задач, контракты качества, проверки и восстанавливаемая память проекта.',
+    href: 'https://github.com/hihol-labs/product-factory-os',
+  },
+  {
     title: 'Skutr Docs',
     status: 'Открытая бета',
     text: 'Сервис подготовки бизнес-документов из голоса, текста или фото с выдачей готового файла.',
