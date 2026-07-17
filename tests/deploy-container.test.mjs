@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import test from 'node:test'
+
+const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 
 function readProjectFile(relativePath) {
   return readFileSync(new URL(`../${relativePath}`, import.meta.url), 'utf8')
@@ -75,4 +79,14 @@ test('intake API image applies reversible migrations before serving', () => {
   assert.match(migration, /op\.create_table\(\s*"leads"/)
   assert.match(migration, /op\.create_index\("ix_leads_created_at"/)
   assert.match(migration, /op\.drop_table\("leads"\)/)
+})
+
+test('Coolify resolves Compose build contexts from the repository root', () => {
+  const compose = readProjectFile('deploy/intake.compose.yml')
+  const contexts = [...compose.matchAll(/^\s+context:\s+(.+)$/gm)].map((match) => match[1].trim())
+
+  assert.deepEqual(contexts, ['.', './backend'])
+  for (const context of contexts) {
+    assert.ok(existsSync(resolve(projectRoot, context)), `build context must exist: ${context}`)
+  }
 })
