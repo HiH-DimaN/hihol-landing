@@ -42,11 +42,61 @@ test('offer facts are visible without invented social proof', async () => {
   assert.match(data, /примерно 2 месяца без дополнительной оплаты/i)
 })
 
-test('public price sheet is the supplied revision from 15.07.2026', async () => {
-  const pdf = await readBytes('public/price_152fz_hihol.pdf')
-  const sha256 = createHash('sha256').update(pdf).digest('hex').toUpperCase()
+test('official 420-FZ source and the full price open safely in new tabs', async () => {
+  const [data, fines, pricing] = await Promise.all([
+    read('app/lib/complianceData.ts'),
+    read('app/components/compliance/FinesTable.tsx'),
+    read('app/components/compliance/PricingTiers.tsx'),
+  ])
 
-  assert.equal(sha256, 'F74CF84CC7FF85529434255D511CA20DC962F229947722637304C748296050D6')
+  assert.match(data, /http:\/\/www\.kremlin\.ru\/acts\/bank\/51388\//)
+  assert.match(data, /Официальный текст 420-ФЗ/)
+
+  for (const source of [fines, pricing]) {
+    assert.match(source, /target="_blank"/)
+    assert.match(source, /rel="noopener noreferrer"/)
+  }
+})
+
+test('generated price sheet is deterministic, branded and content-invariant', async () => {
+  const [publicPdf, outputPdf, generator] = await Promise.all([
+    readBytes('public/price_152fz_hihol.pdf'),
+    readBytes('output/pdf/price_152fz_hihol.pdf'),
+    read('scripts/generate_price_pdf.py'),
+  ])
+  const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
+
+  assert.equal(publicPdf.subarray(0, 5).toString(), '%PDF-')
+  assert.equal(sha256(publicPdf), sha256(outputPdf))
+
+  for (const [name, color] of [
+    ['BG', 'F4F7F2'],
+    ['SURFACE_2', 'EAF0EB'],
+    ['INK', '12211A'],
+    ['MUTED', '56645D'],
+    ['ACCENT', '2BAF69'],
+    ['ACCENT_STRONG', '218A53'],
+    ['DANGER', 'B73F43'],
+    ['BORDER', 'D6E0D8'],
+  ]) {
+    assert.match(generator, new RegExp(`${name} = colors\\.HexColor\\("#${color}"\\)`))
+  }
+
+  for (const invariant of [
+    '15.07.2026',
+    '23 900',
+    '39 900',
+    '59 900',
+    '5 900',
+    '17 900',
+    '37 900',
+    '19 900',
+    '149 000',
+    '30%',
+    '@dmitry_hihol',
+  ]) {
+    assert.match(generator, new RegExp(invariant.replace('.', '\\.').replace('+', '\\+')))
+  }
 })
 
 test('website prices and add-ons match the latest price sheet', async () => {

@@ -111,6 +111,8 @@ export default function PricingTiers() {
       <TrackedLink
         href={PRICING.pdfHref}
         goalName="download_price_pdf"
+        target="_blank"
+        rel="noopener noreferrer"
         className="mt-3 inline-flex text-sm font-medium text-[var(--accent-text)] underline underline-offset-2 hover:text-[var(--accent-strong)]"
       >
         {PRICING.pdfLabel}

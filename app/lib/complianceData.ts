@@ -80,8 +80,8 @@ export const FINES = {
   h2: 'Что грозит по закону',
   note:
     'Ориентиры для юридических лиц по ст. 13.11 КоАП РФ. Точный состав и сумма зависят от обстоятельств нарушения.',
-  sourceHref: 'https://www.consultant.ru/document/cons_doc_LAW_491932/',
-  sourceLabel: 'Текст 420-ФЗ · опубликование № 0001202411300011',
+  sourceHref: 'http://www.kremlin.ru/acts/bank/51388/',
+  sourceLabel: 'Официальный текст 420-ФЗ на сайте Президента России',
   rows: [
     { label: 'Нет политики обработки ПДн', amount: '30 000 - 60 000 руб.' },
     {
