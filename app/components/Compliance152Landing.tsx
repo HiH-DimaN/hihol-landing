@@ -3,6 +3,7 @@ import ComplianceHero from './compliance/ComplianceHero'
 import BusinessProof from './compliance/BusinessProof'
 import SelfCheck from './compliance/SelfCheck'
 import FinesTable from './compliance/FinesTable'
+import ReportPreview from './compliance/ReportPreview'
 import AuditScope from './compliance/AuditScope'
 import PricingTiers from './compliance/PricingTiers'
 import ExpertBlock from './compliance/ExpertBlock'
@@ -20,6 +21,7 @@ export default function Compliance152Landing() {
         <BusinessProof />
         <SelfCheck />
         <FinesTable />
+        <ReportPreview />
         <AuditScope />
         <PricingTiers />
         <ExpertBlock />

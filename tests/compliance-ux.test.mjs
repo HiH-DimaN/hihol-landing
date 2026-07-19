@@ -157,6 +157,42 @@ test('six CTA positions and the PDF link use distinct analytics goals', async ()
   assert.ok((source.match(/<TrackedLink/g) ?? []).length >= 7)
 })
 
+test('report preview is evidence-shaped and explicitly demonstrational', async () => {
+  const [data, preview, landing] = await Promise.all([
+    read('app/lib/complianceData.ts'),
+    read('app/components/compliance/ReportPreview.tsx'),
+    read('app/components/Compliance152Landing.tsx'),
+  ])
+
+  for (const claim of [
+    'Демонстрационный фрагмент формата отчёта',
+    'Это не результат проверки конкретного сайта',
+    'Техническое наблюдение',
+    'Доказательство',
+    'Приоритет',
+    'Что исправить',
+  ]) {
+    assert.match(data, new RegExp(claim))
+  }
+
+  assert.match(preview, /REPORT_PREVIEW/)
+  assert.match(preview, /aria-label=/)
+  assert.ok(landing.indexOf('<FinesTable />') < landing.indexOf('<ReportPreview />'))
+  assert.ok(landing.indexOf('<ReportPreview />') < landing.indexOf('<AuditScope />'))
+  assert.ok(landing.indexOf('<AuditScope />') < landing.indexOf('<PricingTiers />'))
+})
+
+test('free two-observation offer stays distinct from the paid express audit', async () => {
+  const data = await read('app/lib/complianceData.ts')
+
+  assert.match(data, /Получить 2 наблюдения бесплатно/)
+  assert.match(data, /Два предварительных наблюдения — не полный аудит/)
+  assert.match(data, /Внешняя экспресс-проверка сайта/)
+  assert.match(data, /23 900 руб\./)
+  assert.match(data, /24-48 часов/)
+  assert.doesNotMatch(data, /Бесплатная экспресс-проверка/)
+})
+
 test('Playwright is pinned as project browser-test tooling', async () => {
   const packageJson = JSON.parse(await read('package.json'))
 
