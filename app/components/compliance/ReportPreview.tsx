@@ -1,4 +1,5 @@
 import { REPORT_PREVIEW } from '../../lib/complianceData'
+import TrackedLink from '../TrackedLink'
 
 const reportDetails = [
   {
@@ -15,6 +16,11 @@ const reportDetails = [
     label: REPORT_PREVIEW.observation.fixLabel,
     text: REPORT_PREVIEW.observation.fix,
     mark: '03',
+  },
+  {
+    label: REPORT_PREVIEW.observation.repeatLabel,
+    text: REPORT_PREVIEW.observation.repeat,
+    mark: '04',
   },
 ]
 
@@ -98,6 +104,15 @@ export default function ReportPreview() {
           <p className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm leading-relaxed text-[var(--text-muted)]">
             {REPORT_PREVIEW.boundary}
           </p>
+          <TrackedLink
+            href={REPORT_PREVIEW.pdfHref}
+            goalName="download_report_sample_pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-text)] transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-ink)]"
+          >
+            {REPORT_PREVIEW.pdfLabel}
+          </TrackedLink>
         </div>
         <ReportCard />
       </div>

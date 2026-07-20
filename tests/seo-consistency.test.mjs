@@ -60,7 +60,7 @@ test('metadata, dates, llms and policy tell one current story', async () => {
   assert.match(llms, /Проверка сайта по 152-ФЗ: https:\/\/hihol\.ru\//)
   assert.match(llms, /AI-решения для бизнеса: https:\/\/hihol\.ru\/ai/)
   assert.doesNotMatch(llms, /Product Factory OS|сотни пользователей|40\+ AI/)
-  assert.match(policy, /16 июля 2026 г\./)
+  assert.match(policy, /19 июля 2026 г\./)
   assert.doesNotMatch(policy, /Google LLC|Google Forms/)
   assert.match(policy, /hihol_consent/)
   assert.match(policy, /AI-диагностик/i)

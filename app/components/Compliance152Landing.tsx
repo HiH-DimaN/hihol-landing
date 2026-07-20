@@ -6,6 +6,7 @@ import FinesTable from './compliance/FinesTable'
 import ReportPreview from './compliance/ReportPreview'
 import AuditScope from './compliance/AuditScope'
 import PricingTiers from './compliance/PricingTiers'
+import AgencyPartner from './compliance/AgencyPartner'
 import ExpertBlock from './compliance/ExpertBlock'
 import ComplianceFaq from './compliance/ComplianceFaq'
 import FinalCta from './compliance/FinalCta'
@@ -24,6 +25,7 @@ export default function Compliance152Landing() {
         <ReportPreview />
         <AuditScope />
         <PricingTiers />
+        <AgencyPartner />
         <ExpertBlock />
         <ComplianceFaq />
         <FinalCta />

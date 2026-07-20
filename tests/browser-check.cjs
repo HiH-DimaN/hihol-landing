@@ -102,11 +102,18 @@ async function observePage(page) {
 
 async function readPageSummary(page) {
   const pricingText = await page.locator('#pricing').innerText()
+  const agencyText = await page.locator('#agencies').innerText()
   return {
     h1: await page.locator('h1').first().innerText(),
     pricingTierCtas: await page.locator('#pricing a[href="#check"]').count(),
     pricingPdfHref: await page
       .locator('#pricing a[href$=".pdf"]')
+      .getAttribute('href'),
+    reportSampleHref: await page
+      .locator('a[href="/report_sample_152fz_hihol.pdf"]')
+      .getAttribute('href'),
+    agencyCtaHref: await page
+      .locator('#agencies a[href*="t.me"]')
       .getAttribute('href'),
     hasLatestPrices: [
       '23 900 руб.',
@@ -114,8 +121,16 @@ async function readPageSummary(page) {
       '59 900 руб.',
       '5 900 руб./мес',
       '59 900 руб./год',
-      'редакция 15.07.2026',
+      'редакция 19.07.2026',
+      '7 календарных дней',
+      '20 000 руб.',
     ].every((value) => pricingText.includes(value)),
+    hasAgencyOffer: [
+      'минус 30% от прайса',
+      'White-label',
+      'SLA',
+      'Один платный пилот',
+    ].every((value) => agencyText.includes(value)),
     hasObsoleteSupportPrice:
       pricingText.includes('3 900 руб./мес') ||
       pricingText.includes('39 900 руб./год'),
@@ -156,6 +171,8 @@ async function exerciseTrackedActions(page, viewport) {
   await clickWithoutNavigation(page.locator('#check-yourself a[href="#check"]'))
   await clickWithoutNavigation(page.locator('#pricing a[href="#check"]').first())
   await clickWithoutNavigation(page.locator('#pricing a[href$=".pdf"]'))
+  await clickWithoutNavigation(page.locator('a[href="/report_sample_152fz_hihol.pdf"]'))
+  await clickWithoutNavigation(page.locator('#agencies a[href*="t.me"]'))
   await clickWithoutNavigation(page.locator('#check a[href*="t.me"]'))
 
   if (viewport.width < 768) {
@@ -175,6 +192,8 @@ function findMissingGoals(goalNames, viewport) {
     'cta_pricing_check',
     'cta_final_telegram',
     'download_price_pdf',
+    'download_report_sample_pdf',
+    'cta_agency_pilot',
     ...(viewport.width < 768 ? ['cta_sticky_check'] : []),
   ]
   return expected.filter((goal) => !goalNames.includes(goal))
@@ -234,7 +253,10 @@ function resultIsBlocked(item) {
     !item.telegramHref,
     item.pricingTierCtas !== 3,
     item.pricingPdfHref !== '/price_152fz_hihol.pdf',
+    item.reportSampleHref !== '/report_sample_152fz_hihol.pdf',
+    !item.agencyCtaHref,
     !item.hasLatestPrices,
+    !item.hasAgencyOffer,
     item.hasObsoleteSupportPrice,
     item.policyLinks < 1,
     item.consoleErrors.length > 0,

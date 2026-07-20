@@ -78,6 +78,31 @@ function SupportCard() {
   )
 }
 
+function AuditCredit() {
+  return (
+    <aside className="mt-6 overflow-hidden rounded-2xl border border-[var(--accent)] bg-[var(--surface-2)] shadow-[0_18px_50px_rgba(15,35,25,0.1)]">
+      <div className="grid gap-4 p-5 sm:p-6 md:grid-cols-[0.8fr_1.2fr] md:items-center">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent-text)]">
+            {PRICING.credit.eyebrow}
+          </p>
+          <h3 className="mt-2 text-xl font-semibold text-[var(--text)]">
+            {PRICING.credit.title}
+          </h3>
+        </div>
+        <div>
+          <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            {PRICING.credit.text}
+          </p>
+          <p className="mt-3 text-sm font-medium leading-relaxed text-[var(--text)]">
+            {PRICING.credit.boundary}
+          </p>
+        </div>
+      </div>
+    </aside>
+  )
+}
+
 export default function PricingTiers() {
   return (
     <section id="pricing" className="mx-auto max-w-[1080px] px-4 py-12 sm:px-6 sm:py-16">
@@ -92,6 +117,8 @@ export default function PricingTiers() {
         ))}
       </div>
 
+      <AuditCredit />
+
       <h3 className="mt-8 text-lg font-semibold text-[var(--text)]">После основного аудита</h3>
       <SupportCard />
 
@@ -103,9 +130,6 @@ export default function PricingTiers() {
       </div>
 
       <p className="mt-5 text-sm leading-relaxed text-[var(--text-muted)]">
-        {PRICING.partnerLine}
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
         {PRICING.termsNote}
       </p>
       <TrackedLink

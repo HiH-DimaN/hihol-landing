@@ -77,7 +77,7 @@ test('static export preserves the privacy policy contract', () => {
 
   assert.match(html, /Политика обработки персональных данных/)
   assert.match(html, /Хихол Дмитрий/)
-  assert.match(html, /16 июля 2026 г\./)
+  assert.match(html, /19 июля 2026 г\./)
   assert.match(html, /12\. Заключительные положения/)
   assert.doesNotMatch(html, /Google LLC|Google Forms/)
 })

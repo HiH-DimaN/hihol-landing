@@ -83,7 +83,7 @@ test('generated price sheet is deterministic, branded and content-invariant', as
   }
 
   for (const invariant of [
-    '15.07.2026',
+    '19.07.2026',
     '23 900',
     '39 900',
     '59 900',
@@ -119,7 +119,72 @@ test('website prices and add-ons match the latest price sheet', async () => {
 
   assert.doesNotMatch(data, /3 900 руб\.\/мес/)
   assert.doesNotMatch(data, /39 900 руб\.\/год/)
-  assert.match(data, /редакция 15\.07\.2026/)
+  assert.match(data, /редакция 19\.07\.2026/)
+})
+
+test('paid full audit becomes a credited implementation stage for seven calendar days', async () => {
+  const [data, pricing, generator, llms] = await Promise.all([
+    read('app/lib/complianceData.ts'),
+    read('app/components/compliance/PricingTiers.tsx'),
+    read('scripts/generate_price_pdf.py'),
+    read('public/llms.txt'),
+  ])
+  const publicSources = { data, generator, llms }
+
+  for (const [sourceName, source] of Object.entries(publicSources)) {
+    for (const claim of [
+      '7 календарных дней',
+      '39 900 руб.',
+      '59 900 руб.',
+      '20 000 руб.',
+      'до 3 форм',
+      'фиксируется в договоре',
+    ]) {
+      assert.match(source, new RegExp(claim.replaceAll('.', '\\.')), `${sourceName}: ${claim}`)
+    }
+  }
+
+  assert.match(pricing, /PRICING\.credit/)
+  for (const source of Object.values(publicSources)) {
+    assert.doesNotMatch(source, /7 рабочих дней/i)
+    assert.doesNotMatch(source, /автоматически засчитывается/i)
+  }
+})
+
+test('privacy wording matches the form-free audit page and the real first-party AI form', async () => {
+  const [data, policy] = await Promise.all([
+    read('app/lib/complianceData.ts'),
+    read('app/components/PrivacyPolicy.tsx'),
+  ])
+
+  assert.match(data, /На этой странице формы нет/)
+  assert.match(policy, /На главной странице аудита форма отсутствует/i)
+  assert.match(policy, /\/ai-diagnostika/)
+  assert.match(policy, /отдельн[^.]*согласи/i)
+  assert.doesNotMatch(policy, /Google Forms/i)
+  assert.match(policy, /Само использование Сайта не означает согласия/i)
+  assert.doesNotMatch(policy, /использовани[^.]*Сайт[^.]*подтверждает[^.]*согласи/i)
+})
+
+test('agencies get a prominent white-label entry with one paid pilot', async () => {
+  const [data, agency, landing, generator] = await Promise.all([
+    read('app/lib/complianceData.ts'),
+    read('app/components/compliance/AgencyPartner.tsx'),
+    read('app/components/Compliance152Landing.tsx'),
+    read('scripts/generate_price_pdf.py'),
+  ])
+  assert.match(data, /минус 30%/i)
+  assert.match(generator, /−30% от прайса/)
+  for (const source of [data, generator]) {
+    for (const claim of ['White-label', 'SLA', 'Один платный пилот']) {
+      assert.match(source, new RegExp(claim, 'i'))
+    }
+  }
+
+  assert.match(agency, /id="agencies"/)
+  assert.match(agency, /cta_agency_pilot/)
+  assert.ok(landing.indexOf('<PricingTiers />') < landing.indexOf('<AgencyPartner />'))
+  assert.ok(landing.indexOf('<AgencyPartner />') < landing.indexOf('<ExpertBlock />'))
 })
 
 test('express and full web audit keep their permission boundaries distinct', async () => {
@@ -132,12 +197,14 @@ test('express and full web audit keep their permission boundaries distinct', asy
   assert.match(data, /только с подтверждением владельца/i)
 })
 
-test('six CTA positions and the PDF link use distinct analytics goals', async () => {
+test('conversion CTAs and both PDF links use distinct analytics goals', async () => {
   const files = [
     'app/components/compliance/Nav.tsx',
     'app/components/compliance/ComplianceHero.tsx',
     'app/components/compliance/SelfCheck.tsx',
     'app/components/compliance/PricingTiers.tsx',
+    'app/components/compliance/ReportPreview.tsx',
+    'app/components/compliance/AgencyPartner.tsx',
     'app/components/compliance/StickyCta.tsx',
     'app/components/compliance/FinalCta.tsx',
   ]
@@ -150,9 +217,11 @@ test('six CTA positions and the PDF link use distinct analytics goals', async ()
     'cta_sticky_check',
     'cta_final_telegram',
     'download_price_pdf',
+    'download_report_sample_pdf',
+    'cta_agency_pilot',
   ]
 
-  for (const goal of goals) assert.match(source, new RegExp(goal))
+  for (const goal of goals) assert.match(source, new RegExp(`goalName="${goal}"`))
   assert.equal(new Set(goals).size, goals.length)
   assert.ok((source.match(/<TrackedLink/g) ?? []).length >= 7)
 })
@@ -167,19 +236,43 @@ test('report preview is evidence-shaped and explicitly demonstrational', async (
   for (const claim of [
     'Демонстрационный фрагмент формата отчёта',
     'Это не результат проверки конкретного сайта',
-    'Техническое наблюдение',
+    'Факт',
     'Доказательство',
     'Приоритет',
     'Что исправить',
+    'Повторная проверка',
   ]) {
     assert.match(data, new RegExp(claim))
   }
 
   assert.match(preview, /REPORT_PREVIEW/)
   assert.match(preview, /aria-label=/)
+  assert.match(preview, /goalName="download_report_sample_pdf"/)
   assert.ok(landing.indexOf('<FinesTable />') < landing.indexOf('<ReportPreview />'))
   assert.ok(landing.indexOf('<ReportPreview />') < landing.indexOf('<AuditScope />'))
   assert.ok(landing.indexOf('<AuditScope />') < landing.indexOf('<PricingTiers />'))
+})
+
+test('report sample is a deterministic four-page demonstration, never a client case', async () => {
+  const [publicPdf, outputPdf, generator, data] = await Promise.all([
+    readBytes('public/report_sample_152fz_hihol.pdf'),
+    readBytes('output/pdf/report_sample_152fz_hihol.pdf'),
+    read('scripts/generate_report_sample_pdf.py'),
+    read('app/lib/complianceData.ts'),
+  ])
+  const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
+
+  assert.equal(publicPdf.subarray(0, 5).toString(), '%PDF-')
+  assert.equal(sha256(publicPdf), sha256(outputPdf))
+  assert.match(generator, /EXPECTED_PAGES = 4/)
+  assert.match(generator, /ДЕМОНСТРАЦИОННЫЙ МАТЕРИАЛ/)
+  assert.match(generator, /Факт/)
+  assert.match(generator, /Доказательство/)
+  assert.match(generator, /Риск/)
+  assert.match(generator, /Что исправить/)
+  assert.match(generator, /Повторная проверка/)
+  assert.match(data, /Демо-отчёт: 4 страницы \(PDF\)/)
+  assert.doesNotMatch(generator, /реальн(?:ый|ого) клиент/i)
 })
 
 test('free two-observation offer stays distinct from the paid express audit', async () => {

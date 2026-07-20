@@ -5,13 +5,14 @@ from __future__ import annotations
 
 import argparse
 import html
+import re
 import sys
 from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
@@ -32,6 +33,13 @@ OUTPUTS = (
     ROOT / "public" / "price_152fz_hihol.pdf",
     ROOT / "output" / "pdf" / "price_152fz_hihol.pdf",
 )
+EXPECTED_PAGES = 3
+
+CREDIT_TEXT = (
+    "При заказе стандартного исправления под ключ в течение 7 календарных дней "
+    "после передачи полного аудита оплаченные 39 900 руб. засчитываются в пакет "
+    "59 900 руб. К доплате - 20 000 руб.; объем - до 3 форм; условие фиксируется в договоре."
+)
 
 # Current compliance-home palette from app/globals.css.
 BG = colors.HexColor("#F4F7F2")
@@ -49,6 +57,7 @@ WHITE = colors.white
 def find_font(*names: str) -> Path:
     roots = (
         Path("C:/Windows/Fonts"),
+        Path("/mnt/c/Windows/Fonts"),
         Path("/usr/share/fonts/truetype/dejavu"),
         Path("/usr/share/fonts/truetype/liberation2"),
     )
@@ -144,7 +153,7 @@ def draw_page(canvas, doc) -> None:
         canvas.drawString(15 * mm, height - 9.5 * mm, "HIHOL  •  ПРАЙС 152-ФЗ")
         canvas.setFont("HiHol", 7.1)
         canvas.setFillColor(MUTED)
-        canvas.drawRightString(width - 15 * mm, height - 9.5 * mm, "редакция 15.07.2026")
+        canvas.drawRightString(width - 15 * mm, height - 9.5 * mm, "редакция 19.07.2026")
 
     canvas.setStrokeColor(BORDER)
     canvas.setLineWidth(0.55)
@@ -154,7 +163,7 @@ def draw_page(canvas, doc) -> None:
     canvas.drawString(15 * mm, 8.3 * mm, "hihol.ru  •  Telegram @dmitry_hihol")
     canvas.setFont("HiHol-Bold", 7.2)
     canvas.setFillColor(ACCENT_STRONG)
-    canvas.drawRightString(width - 15 * mm, 8.3 * mm, f"{doc.page} / 3")
+    canvas.drawRightString(width - 15 * mm, 8.3 * mm, f"{doc.page} / {EXPECTED_PAGES}")
     canvas.restoreState()
 
 
@@ -172,7 +181,7 @@ def hero(styles) -> list:
     )
     meta = Paragraph(
         "<font color='#8EE0B2'><b>РЕДАКЦИЯ</b></font><br/>"
-        "<font size='13' color='#FFFFFF'><b>15.07.2026</b></font><br/>"
+        "<font size='13' color='#FFFFFF'><b>19.07.2026</b></font><br/>"
         "<font size='7.6' color='#DDE9E0'>Дмитрий Хихол<br/>НПД • без НДС</font>",
         ParagraphStyle(
             "HeroMeta",
@@ -326,6 +335,7 @@ def service(spec: ServiceSpec, styles) -> list:
 def conditions_table(styles) -> Table:
     rows = [
         ("Оплата", "Предоплата 50%, остаток — после сдачи отчета или выполненных работ."),
+        ("Зачет аудита", CREDIT_TEXT),
         ("Разрешение", "Тестовые заявки, прохождение ботов и работа с внутренними скриншотами выполняются только с подтверждением владельца."),
         ("Объем", "В цену входит стандартный сайт до 3 форм. Самописные CMS, сложные интеграции, миграция хостинга и доработка CRM оцениваются отдельно."),
         ("Правовая оценка", "Часть КоАП и возможная санкция указываются только при достаточных доказательствах и после ручной квалификации. Штрафы не складываются автоматически."),
@@ -450,7 +460,7 @@ SERVICES = (
     ),
     ServiceSpec(
         "8", "Партнерам: веб-студии и агентства", "−30% от прайса",
-        "White-label при согласованном потоке и SLA.",
+        "White-label, согласованный SLA и один платный пилот на старте.",
         (
             "Работа под брендом партнера, обезличенная коммуникация и единый формат сдачи.",
             "Партнер определяет конечную цену клиенту; состав работ и сроки фиксируются до старта.",
@@ -485,26 +495,12 @@ def closing_sections(styles) -> list:
         ("TOPPADDING", (0, 0), (-1, -1), 3 * mm),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 3 * mm),
     ]))
-    contact = Paragraph(
-        "<font size='8' color='#8EE0B2'><b>ЗАЯВКА НА ПРОВЕРКУ</b></font><br/>"
-        "<font size='15' color='#FFFFFF'><b>Telegram @dmitry_hihol</b></font><br/>"
-        "<font size='8' color='#DDE9E0'>hihol.ru • договор • чек • без НДС</font>",
-        ParagraphStyle("Contact", fontName="HiHol", leading=15, alignment=TA_LEFT),
-    )
-    contact_box = Table([[contact]], colWidths=[170 * mm], rowHeights=[27 * mm])
-    contact_box.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), INK),
-        ("LINEBELOW", (0, 0), (-1, -1), 3, ACCENT),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 6 * mm),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 6 * mm),
-    ]))
     return [
         Paragraph("Условия и границы", styles["section"]), Spacer(1, 1.5 * mm),
-        conditions_table(styles), Spacer(1, 4 * mm),
+        conditions_table(styles), Spacer(1, 2 * mm),
         Paragraph("Что требуется для полного веб-аудита", styles["section"]), Spacer(1, 1.2 * mm),
-        bullet_rows(list(REQUIREMENTS), styles), Spacer(1, 3 * mm),
-        legal_box, Spacer(1, 3.5 * mm), contact_box,
+        bullet_rows(list(REQUIREMENTS), styles), Spacer(1, 2 * mm),
+        legal_box,
     ]
 
 
@@ -534,13 +530,17 @@ def generate_pdf() -> bytes:
         bottomMargin=17 * mm,
         title="HiHol — прайс на услуги по 152-ФЗ",
         author="Дмитрий Хихол",
-        subject="Редакция от 15.07.2026",
+        subject="Редакция от 19.07.2026",
         creator="HiHol deterministic PDF generator",
         invariant=1,
         pageCompression=1,
     )
     doc.build(build_story(styles), onFirstPage=draw_page, onLaterPages=draw_page)
-    return buffer.getvalue()
+    pdf = buffer.getvalue()
+    pages = len(re.findall(rb"/Type\s*/Page\b", pdf))
+    if pages != EXPECTED_PAGES:
+        raise RuntimeError(f"EXPECTED_{EXPECTED_PAGES}_PAGES_GOT_{pages}")
+    return pdf
 
 
 def main() -> int:

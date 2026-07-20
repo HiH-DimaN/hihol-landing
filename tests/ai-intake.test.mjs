@@ -83,6 +83,10 @@ test('privacy, search, project docs and static deployment describe one intake ar
   ])
 
   assert.match(policy, /AI-диагностик/i)
+  assert.match(policy, /На главной странице аудита форма отсутствует/i)
+  assert.match(policy, /\/ai-diagnostika/)
+  assert.match(policy, /Само использование Сайта не означает согласия/i)
+  assert.doesNotMatch(policy, /использовани[^.]*Сайт[^.]*подтверждает[^.]*согласи/i)
   assert.match(policy, /россий/i)
   assert.match(policy, /12 месяцев/i)
   assert.match(policy, /техническ[^.]*уведомлен/i)
