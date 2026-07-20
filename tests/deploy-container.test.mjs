@@ -91,6 +91,16 @@ test('Coolify resolves Compose build contexts from the repository root', () => {
   }
 })
 
+test('Traefik routes web through the explicit shared Coolify network', () => {
+  const compose = readProjectFile('deploy/intake.compose.yml')
+  const webBlock = compose.match(/^  web:\n[\s\S]*?(?=^  api:)/m)?.[0]
+
+  assert.ok(webBlock, 'web service block must exist')
+  assert.match(webBlock, /labels:\s*\n\s+- traefik\.docker\.network=coolify/)
+  assert.match(webBlock, /networks:\s*\n\s+- coolify\s*\n\s+- intake/)
+  assert.match(compose, /^  coolify:\s*\n\s+external: true$/m)
+})
+
 test('PostgreSQL healthcheck probes the final TCP listener without env expansion', () => {
   const compose = readProjectFile('deploy/intake.compose.yml')
 

@@ -10,7 +10,10 @@ services:
         condition: service_healthy
     expose:
       - "3000"
+    labels:
+      - traefik.docker.network=coolify
     networks:
+      - coolify
       - intake
 
   api:
@@ -57,4 +60,6 @@ volumes:
   intake-db:
 
 networks:
+  coolify:
+    external: true
   intake:
