@@ -7,9 +7,19 @@ import TrackedLink from '../TrackedLink'
 
 export function AiCapabilityStrip() {
   return (
-    <div className="border-y border-white/10 bg-[#0b221d] py-3 text-white">
-      <div className="mx-auto flex max-w-[1120px] flex-wrap justify-center gap-x-6 gap-y-2 px-4 text-xs text-white/75 sm:text-sm">
-        {AI_CAPABILITIES.map((item) => <span key={item}>{item}</span>)}
+    <div className="overflow-hidden border-y border-white/10 bg-[#0b221d] py-3 text-white">
+      <div className="marquee-track flex gap-10 text-xs text-white/75 sm:text-sm">
+        {[...Array(4)].flatMap((_, copy) =>
+          AI_CAPABILITIES.map((item) => (
+            <span
+              key={`${copy}-${item}`}
+              aria-hidden={copy > 0 || undefined}
+              className={copy > 0 ? 'marquee-dup whitespace-nowrap' : 'whitespace-nowrap'}
+            >
+              {item}
+            </span>
+          )),
+        )}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { AI_PRODUCTS } from '../../lib/aiData'
+import { AI_PRODUCTS, AI_STACK_ITEMS } from '../../lib/aiData'
 import AiSectionHeading from './AiSectionHeading'
 
 export default function AiProof() {
@@ -14,6 +14,22 @@ export default function AiProof() {
             <p className="mt-6 border-t border-[var(--border)] pt-4 font-semibold text-[var(--accent-text)]">Открыть проект ↗</p>
           </a>
         ))}
+      </div>
+
+      <div className="relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden border-y border-white/10 bg-[#0b221d] py-3 text-white">
+        <div className="marquee-track flex gap-8 text-sm text-white/75" style={{ animationDuration: '140s' }}>
+          {[...Array(4)].flatMap((_, copy) =>
+            AI_STACK_ITEMS.map((item) => (
+              <span
+                key={`${copy}-${item}`}
+                aria-hidden={copy > 0 || undefined}
+                className={copy > 0 ? 'marquee-dup whitespace-nowrap' : 'whitespace-nowrap'}
+              >
+                {item}
+              </span>
+            )),
+          )}
+        </div>
       </div>
     </section>
   )

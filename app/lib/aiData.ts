@@ -44,6 +44,17 @@ export const AI_CAPABILITIES = [
   'передача кода',
 ]
 
+// Flat ticker list: group label first, then its items (feeds the stack marquee in AiProof).
+const AI_STACK_GROUPS: Array<[string, string[]]> = [
+  ['AI/LLM', ['OpenAI API', 'Claude API', 'YandexGPT', 'GigaChat', 'LangChain', 'RAG', 'embeddings', 'function calling', 'prompt engineering', 'multi-agent systems', 'Whisper STT', 'AI agents']],
+  ['Backend', ['Python', 'FastAPI', 'Node.js', 'Pydantic', 'REST API', 'PostgreSQL', 'PG Vector', 'Supabase', 'Redis', 'Celery']],
+  ['Frontend / Telegram', ['Vue 3', 'React', 'Next.js', 'TypeScript', 'TailwindCSS', 'Telegram Bot API', 'aiogram', 'grammY', 'Telegram Mini App SDK']],
+  ['AI-native development', ['Claude Code', 'Codex', 'Cursor', 'GitHub', 'CI/CD', 'ревью', 'тестирование']],
+  ['Инфраструктура', ['Docker', 'Traefik', 'Caddy', 'Nginx', 'VPS', 'Coolify', 'ЮKassa', 'Resend']],
+]
+
+export const AI_STACK_ITEMS = AI_STACK_GROUPS.flatMap(([title, items]) => [title, ...items])
+
 export const AI_PAINS = [
   {
     title: 'Заявки теряются между каналами',
