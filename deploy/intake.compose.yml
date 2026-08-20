@@ -1,3 +1,11 @@
+# WARNING: the `${VAR:?message}` guards below only work with plain
+# `docker compose`. Coolify does NOT honour that syntax - it substitutes the
+# message text as the value, so a missing variable silently becomes a literal
+# credential like "set POSTGRES_PASSWORD" (production ran that way until
+# 2026-08-20). POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, and the optional
+# TELEGRAM_* pair MUST be set in the Coolify environment of the application.
+# The API refuses to start on placeholder credentials - see
+# backend/app/config.py::assert_database_credentials and docs/RUNBOOK.md.
 services:
   web:
     build:

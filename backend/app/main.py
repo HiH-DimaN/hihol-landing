@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.middleware.base import RequestResponseEndpoint
 from starlette.responses import JSONResponse, Response
 
-from .config import settings
+from .config import assert_database_credentials, settings
 from .db import (
     Lead,
     cleanup_expired_leads,
@@ -35,6 +35,8 @@ async def retention_worker() -> None:
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    # Before touching the database at all: refuse to serve on placeholder creds.
+    assert_database_credentials(settings.database_url)
     await cleanup_expired_leads_once()
     retention_task = asyncio.create_task(retention_worker())
     try:
