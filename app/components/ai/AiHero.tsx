@@ -50,7 +50,7 @@ export default function AiHero() {
         </div>
         <aside className="rounded-2xl border border-white/15 bg-white/[0.07] p-6 shadow-2xl backdrop-blur-sm">
           <div className="flex items-start gap-4">
-            <Image src="/dmitry.jpg" alt={AI_HERO.expert.name} width={104} height={128} priority className="h-32 w-[104px] shrink-0 rounded-xl object-cover grayscale" />
+            <Image src="/dmitry-color.jpg" alt={AI_HERO.expert.name} width={104} height={128} priority className="h-32 w-[104px] shrink-0 rounded-xl object-cover" />
             <div>
               <h2 className="text-2xl font-semibold">{AI_HERO.expert.name}</h2>
               <p className="mt-2 text-sm font-semibold text-teal-200">{AI_HERO.expert.role}</p>

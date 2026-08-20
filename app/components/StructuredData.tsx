@@ -14,7 +14,7 @@ const personSchema = {
   name: 'Дмитрий Хихол',
   alternateName: 'Dmitry Hihol',
   url: SITE_URL,
-  image: `${SITE_URL}/dmitry.jpg`,
+  image: `${SITE_URL}/dmitry-color.jpg`,
   jobTitle: 'Разработчик AI-систем и специалист по техническому аудиту цифровых контуров',
   description:
     'Разрабатывает AI-автоматизацию для бизнеса и проводит технический аудит сайтов, форм, аналитики, чат-ботов и маршрутов персональных данных.',

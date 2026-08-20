@@ -50,7 +50,7 @@ export default function ComplianceHero() {
 
           <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
             <Image
-              src="/dmitry.jpg"
+              src="/dmitry-color.jpg"
               alt={HERO.expert.name}
               width={56}
               height={56}
