@@ -6,9 +6,9 @@ import StructuredData from './components/StructuredData'
 import { SITE_NAME, SITE_URL } from './lib/site'
 
 const siteUrl = SITE_URL
-const title = `Проверка сайта на соответствие 152-ФЗ за 24 часа - ${SITE_NAME}`
+const title = `Аудит по 152-ФЗ: сайт, CRM, чат-боты, AI - ${SITE_NAME}`
 const description =
-  'Экспресс-аудит сайта на 152-ФЗ: cookie, политика, формы, чат-боты. Отчет со скриншотами, статьями КоАП и планом устранения. Первые 2 нарушения - бесплатно.'
+  'Аудит контура персональных данных по 152-ФЗ: формы, cookie, политика, маршрут данных до CRM, чат-боты и AI. Отчет с доказательствами и планом исправления. Первые 2 наблюдения - бесплатно.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

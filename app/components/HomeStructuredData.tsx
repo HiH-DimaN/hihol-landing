@@ -22,7 +22,7 @@ export default function HomeStructuredData() {
     offers: [
       {
         '@type': 'Offer',
-        name: 'Экспресс-аудит',
+        name: 'Внешняя экспресс-проверка сайта',
         price: '23900',
         priceCurrency: 'RUB',
       },
@@ -36,6 +36,12 @@ export default function HomeStructuredData() {
         '@type': 'Offer',
         name: 'Аудит + исправление под ключ',
         price: '59900',
+        priceCurrency: 'RUB',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Модуль "Чат-бот / мини-апп"',
+        price: '17900',
         priceCurrency: 'RUB',
       },
     ],

@@ -2,7 +2,10 @@ import Nav from './compliance/Nav'
 import ComplianceHero from './compliance/ComplianceHero'
 import BusinessProof from './compliance/BusinessProof'
 import SelfCheck from './compliance/SelfCheck'
+import ScannerDiff from './compliance/ScannerDiff'
 import FinesTable from './compliance/FinesTable'
+import RknDemand from './compliance/RknDemand'
+import BotsAi from './compliance/BotsAi'
 import ReportPreview from './compliance/ReportPreview'
 import AuditScope from './compliance/AuditScope'
 import PricingTiers from './compliance/PricingTiers'
@@ -21,9 +24,12 @@ export default function Compliance152Landing() {
         <ComplianceHero />
         <BusinessProof />
         <SelfCheck />
+        <ScannerDiff />
         <FinesTable />
+        <RknDemand />
         <ReportPreview />
         <AuditScope />
+        <BotsAi />
         <PricingTiers />
         <AgencyPartner />
         <ExpertBlock />
