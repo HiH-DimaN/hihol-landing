@@ -1,0 +1,105 @@
+# External uptime probe for hihol.ru.
+#
+# Runs off-server on purpose: Coolify and its notifications live on the same
+# host as the site, so a proxy/host failure can silence them. GitHub Actions
+# is an independent vantage point.
+#
+# Alerting: the job exits non-zero on failure, which makes GitHub email the
+# repository owner. If TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID repository
+# secrets are set, it also pushes an instant Telegram message.
+name: uptime
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub queues cron jobs, so expect drift of a few minutes.
+    #
+    # Billing note: Actions rounds every job up to a full minute. At */30 this is
+    # ~1440 min/month, inside the 2000 free minutes of a private repo. A public
+    # repo runs Actions for free - there you can safely tighten this to '*/10'
+    # (~4300 min/month) for a 10-minute detection window.
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    # Generous on purpose: a full outage makes every probe wait out its timeout,
+    # and a cancelled job would skip the alert step (cancelled is not failure).
+    timeout-minutes: 10
+    steps:
+      - name: Probe public endpoints
+        id: probe
+        run: |
+          set -u
+          ATTEMPTS=3
+          SLEEP=20
+          FAILURES=""
+
+          probe_one() {
+            url="$1"
+            marker="$2"
+            # Keep curl's stderr: on a transport failure (DNS, TLS, refused) it is
+            # the only clue about what broke.
+            if ! body=$(curl -sS --max-time 15 --retry 0 -w '\n%{http_code}' "$url" 2>&1); then
+              # curl's own message sits above the -w output, so pick it by prefix.
+              detail=$(printf '%s' "$body" | grep -m1 'curl:')
+              echo "  $url -> transport error: ${detail:-no detail from curl}"
+              return 1
+            fi
+            code=$(printf '%s' "$body" | tail -n1)
+            html=$(printf '%s' "$body" | sed '$d')
+            [ "$code" = "200" ] || { echo "  $url -> HTTP $code"; return 1; }
+            if [ -n "$marker" ]; then
+              printf '%s' "$html" | grep -q "$marker" || { echo "  $url -> HTTP 200 but marker '$marker' missing (${#html} bytes)"; return 1; }
+            fi
+            return 0
+          }
+
+          check_all() {
+            out=""
+            probe_one "https://hihol.ru/healthz" "" || out="${out}healthz "
+            probe_one "https://hihol.ru/" "HIHOL" || out="${out}home "
+            probe_one "https://hihol.ru/ai" "HIHOL" || out="${out}ai "
+            FAILURES="$out"
+            [ -z "$FAILURES" ]
+          }
+
+          # Retry so a single network blip does not page anyone.
+          for i in $(seq 1 $ATTEMPTS); do
+            if check_all; then
+              exit 0
+            fi
+            [ "$i" -lt "$ATTEMPTS" ] && sleep "$SLEEP"
+          done
+
+          echo "failed=$FAILURES" >> "$GITHUB_OUTPUT"
+          echo "hihol.ru DOWN after $ATTEMPTS attempts: $FAILURES"
+          echo "FIX: Coolify -> Server -> Proxy -> Restart Proxy, then app Restart. See docs/RUNBOOK.md"
+          exit 1
+
+      - name: Telegram alert
+        if: failure()
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FAILED: ${{ steps.probe.outputs.failed }}
+        run: |
+          set -u
+          if [ -z "${TOKEN:-}" ] || [ -z "${CHAT_ID:-}" ]; then
+            echo "Telegram secrets not set - relying on GitHub failure email."
+            exit 0
+          fi
+          TEXT="hihol.ru недоступен. Проверки: ${FAILED:-unknown}. Что делать: Coolify -> Server -> Proxy -> Restart Proxy, затем Restart приложения. Runbook: docs/RUNBOOK.md"
+          # A monitor whose alert fails silently is not a monitor: verify delivery.
+          code=$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' -X POST \
+            "https://api.telegram.org/bot${TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${TEXT}")
+          if [ "$code" != "200" ]; then
+            echo "Telegram delivery failed: HTTP $code"
+            echo "FIX: проверить секреты TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID в Settings -> Secrets and variables -> Actions"
+            exit 1
+          fi
