@@ -51,6 +51,36 @@ export default function ScannerDiff() {
           </TrackedLink>
         </div>
       </div>
+
+      <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--border)]">
+        <table className="w-full border-collapse text-left text-sm sm:text-base">
+          <caption className="sr-only">{SCANNER_DIFF.tableCaption}</caption>
+          <thead>
+            <tr className="border-b border-[var(--border)] bg-[var(--surface-2)] text-xs uppercase tracking-[0.08em] text-[var(--text-muted)]">
+              {SCANNER_DIFF.tableHead.map((h) => (
+                <th key={h} scope="col" className="px-4 py-3 font-semibold">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {SCANNER_DIFF.tableRows.map((row) => (
+              <tr key={row[0]} className="border-b border-[var(--border)] last:border-b-0">
+                <th scope="row" className="bg-[var(--surface)] px-4 py-3 font-normal text-[var(--text)]">
+                  {row[0]}
+                </th>
+                <td className="whitespace-nowrap bg-[var(--surface)] px-4 py-3 text-[var(--text-muted)]">
+                  {row[1]}
+                </td>
+                <td className="whitespace-nowrap bg-[var(--surface)] px-4 py-3 font-medium text-[var(--accent-text)]">
+                  {row[2]}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   )
 }

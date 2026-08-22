@@ -107,6 +107,7 @@ export default function PricingTiers() {
   return (
     <section id="pricing" className="mx-auto max-w-[1080px] px-4 py-12 sm:px-6 sm:py-16">
       <h2 className="text-2xl sm:text-3xl">{PRICING.h2}</h2>
+      <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text)]">{PRICING.answer}</p>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
         {PRICING.lead}
       </p>
@@ -127,6 +128,38 @@ export default function PricingTiers() {
         {PRICING.extras.map((extra) => (
           <PricingExtraCard key={extra.name} extra={extra} />
         ))}
+      </div>
+
+      <div className="mt-8 overflow-x-auto rounded-xl border border-[var(--border)]">
+        <table className="w-full border-collapse text-left text-sm sm:text-base">
+          <caption className="px-4 py-3 text-left text-sm font-semibold text-[var(--text)]">
+            {PRICING.summaryCaption}
+          </caption>
+          <thead>
+            <tr className="border-b border-[var(--border)] bg-[var(--surface-2)] text-xs uppercase tracking-[0.08em] text-[var(--text-muted)]">
+              {PRICING.summaryHead.map((h) => (
+                <th key={h} scope="col" className="px-4 py-3 font-semibold">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {PRICING.summaryRows.map((row) => (
+              <tr key={row[0]} className="border-b border-[var(--border)] last:border-b-0">
+                <th scope="row" className="bg-[var(--surface)] px-4 py-3 font-normal text-[var(--text)]">
+                  {row[0]}
+                </th>
+                <td className="whitespace-nowrap bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--text)]">
+                  {row[1]}
+                </td>
+                <td className="whitespace-nowrap bg-[var(--surface)] px-4 py-3 text-[var(--text-muted)]">
+                  {row[2]}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <p className="mt-5 text-sm leading-relaxed text-[var(--text-muted)]">

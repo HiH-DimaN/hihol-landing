@@ -16,6 +16,7 @@ export default function ExpertBlock() {
         </aside>
         <div>
           <p className="max-w-2xl leading-relaxed text-[var(--text-muted)]">{EXPERT.text}</p>
+          <p className="mt-3 text-xs text-[var(--text-muted)] sm:text-sm">{EXPERT.authorLine}</p>
           <a
             href={CONTACT.telegramChannel}
             target="_blank"

@@ -1,41 +1,42 @@
-import { FAQ, SEO_152 } from '../lib/complianceData'
-import {
-  DATE_MODIFIED,
-  DATE_PUBLISHED,
-  SITE_NAME,
-  SITE_URL,
-} from '../lib/site'
+import { FAQ, PRICING, SEO_152 } from '../lib/complianceData'
+import { DATE_MODIFIED, DATE_PUBLISHED, SITE_URL } from '../lib/site'
+
+// Homepage JSON-LD as a single @graph: Service, WebPage, FAQPage.
+// Person (@id ".../#person") and the business entity (ProfessionalService,
+// @id ".../#business") are published site-wide by components/StructuredData.tsx
+// and are referenced here by @id, never duplicated - two nodes describing the
+// same business confuse entity resolution.
+// Offers mirror PRICING so visible prices stay in sync.
+// Review/AggregateRating are intentionally absent until real reviews exist.
+const ORG_ID = `${SITE_URL}/#business`
+const PERSON_ID = `${SITE_URL}/#person`
+const SERVICE_ID = `${SITE_URL}/#service-152fz`
+const PAGE_ID = `${SITE_URL}/#page`
+
+function offerPrice(price: string): string {
+  return price.replace(/[^0-9]/g, '')
+}
 
 export default function HomeStructuredData() {
-  const serviceSchema = {
-    '@context': 'https://schema.org',
+  const service = {
     '@type': 'Service',
+    '@id': SERVICE_ID,
     serviceType: 'Аудит сайта на соответствие 152-ФЗ',
     name: SEO_152.title,
     description: SEO_152.description,
     areaServed: { '@type': 'Country', name: 'RU' },
-    provider: {
-      '@type': 'Person',
-      name: 'Дмитрий Хихол',
-      url: SITE_URL,
-    },
+    provider: { '@id': PERSON_ID },
     offers: [
-      {
+      ...PRICING.tiers.map((tier) => ({
         '@type': 'Offer',
-        name: 'Внешняя экспресс-проверка сайта',
-        price: '23900',
+        name: tier.name,
+        price: offerPrice(tier.price),
         priceCurrency: 'RUB',
-      },
+      })),
       {
         '@type': 'Offer',
-        name: 'Полный веб-аудит с участием владельца',
-        price: '39900',
-        priceCurrency: 'RUB',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Аудит + исправление под ключ',
-        price: '59900',
+        name: PRICING.support.name,
+        price: offerPrice(PRICING.support.price),
         priceCurrency: 'RUB',
       },
       {
@@ -46,8 +47,20 @@ export default function HomeStructuredData() {
       },
     ],
   }
-  const faqPageSchema = {
-    '@context': 'https://schema.org',
+  const webPage = {
+    '@type': 'WebPage',
+    '@id': PAGE_ID,
+    name: SEO_152.title,
+    description: SEO_152.description,
+    url: SITE_URL,
+    inLanguage: 'ru-RU',
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
+    author: { '@id': PERSON_ID },
+    publisher: { '@id': ORG_ID },
+    about: { '@id': SERVICE_ID },
+  }
+  const faqPage = {
     '@type': 'FAQPage',
     mainEntity: FAQ.items.map((f) => ({
       '@type': 'Question',
@@ -58,27 +71,15 @@ export default function HomeStructuredData() {
       },
     })),
   }
-  const webPageSchema = {
+  const graph = {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: SEO_152.title,
-    description: SEO_152.description,
-    url: SITE_URL,
-    inLanguage: 'ru-RU',
-    datePublished: DATE_PUBLISHED,
-    dateModified: DATE_MODIFIED,
-    about: SITE_NAME,
+    '@graph': [service, webPage, faqPage],
   }
 
   return (
-    <>
-      {[serviceSchema, webPageSchema, faqPageSchema].map((schema) => (
-        <script
-          key={schema['@type']}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   )
 }

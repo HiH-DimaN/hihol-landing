@@ -14,6 +14,7 @@ export default function AuditScope() {
   return (
     <section className="mx-auto max-w-[1080px] px-4 py-12 sm:px-6 sm:py-16">
       <h2 className="text-2xl sm:text-3xl">{DELIVERABLES.h2}</h2>
+      <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text)]">{DELIVERABLES.answer}</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {DELIVERABLES.cards.map((card, i) => (
