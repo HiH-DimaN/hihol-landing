@@ -5,6 +5,7 @@ import AiDiagnosticForm from '../components/AiDiagnosticForm'
 import SiteFooter from '../components/SiteFooter'
 import AiHeader from '../components/ai/AiHeader'
 import { AI_INTAKE_RESULTS } from '../lib/aiIntakeData'
+import { OG_IMAGE, TWITTER_IMAGE } from '../lib/seo'
 import { SITE_NAME, SITE_URL, TELEGRAM_URL } from '../lib/site'
 
 const canonical = `${SITE_URL}/ai-diagnostika`
@@ -14,8 +15,21 @@ export const metadata: Metadata = {
   title: `Предварительная AI-диагностика — ${SITE_NAME}`,
   description,
   alternates: { canonical },
-  openGraph: { title: `Предварительная AI-диагностика — ${SITE_NAME}`, description, url: canonical },
-  twitter: { title: `Предварительная AI-диагностика — ${SITE_NAME}`, description },
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    siteName: SITE_NAME,
+    title: `Предварительная AI-диагностика — ${SITE_NAME}`,
+    description,
+    url: canonical,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Предварительная AI-диагностика — ${SITE_NAME}`,
+    description,
+    images: [TWITTER_IMAGE],
+  },
 }
 
 function StructuredData() {

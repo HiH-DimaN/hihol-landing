@@ -97,3 +97,39 @@ test('footer copy is route-aware and does not mix disclaimers', async () => {
   assert.match(niche, /direction="ai"/)
   assert.match(footer, /AI-диагностик/i)
 })
+
+test('every built page ships a complete social card', async () => {
+  const { readdir } = await import('node:fs/promises')
+  const pages = (await readdir(new URL('out/', root)))
+    // 404 and the Google Search Console verification stub are not content pages.
+    .filter(
+      (name) =>
+        name.endsWith('.html') &&
+        name !== '404.html' &&
+        !name.startsWith('google'),
+    )
+
+  assert.ok(pages.length >= 14, 'expected the full static export to be present')
+
+  for (const page of pages) {
+    const html = await read(`out/${page}`)
+    const tag = (attr, key) =>
+      html.match(new RegExp(`<meta ${attr}="${key}" content="([^"]*)"`))?.[1]
+
+    // A partial `openGraph`/`twitter` block in a page replaces the one from the
+    // root layout instead of merging with it, so each page must be complete.
+    assert.ok(tag('property', 'og:type'), `${page}: og:type missing`)
+    assert.equal(tag('property', 'og:locale'), 'ru_RU', `${page}: og:locale`)
+    assert.ok(tag('property', 'og:site_name'), `${page}: og:site_name missing`)
+    assert.ok(tag('property', 'og:url'), `${page}: og:url missing`)
+    assert.ok(tag('property', 'og:image'), `${page}: og:image missing`)
+    assert.equal(tag('property', 'og:image:width'), '1200', `${page}: og:image:width`)
+    assert.ok(tag('property', 'og:image:alt'), `${page}: og:image:alt missing`)
+    assert.equal(
+      tag('name', 'twitter:card'),
+      'summary_large_image',
+      `${page}: twitter:card must stay the large card`,
+    )
+    assert.ok(tag('name', 'twitter:image'), `${page}: twitter:image missing`)
+  }
+})
