@@ -7,3 +7,9 @@ build
 next-env.d.ts
 .DS_Store
 *.log
+tsconfig.tsbuildinfo
+
+# idea-to-deploy local state
+.itd/
+.itd-memory/
+events.jsonl
