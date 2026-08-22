@@ -14,7 +14,12 @@ test('homepage leads with a concrete business outcome and an honest trust bounda
     read('app/components/Compliance152Landing.tsx'),
   ])
 
-  assert.match(data, /Аудит сайта по 152-ФЗ: покажу риски и дам план исправления/)
+  // H1 follows the current offer. When the offer is repositioned, update this
+  // literal in the SAME commit - a silently stale contract is what broke here.
+  assert.match(
+    data,
+    /h1: 'Аудит контура персональных данных: сайт, формы, CRM, чат-боты, AI'/,
+  )
   assert.match(data, /24-48 часов/)
   assert.match(data, /Не юридическое заключение/)
   assert.match(hero, /Получить 2 примера нарушений|HERO\.ctaLabel/)

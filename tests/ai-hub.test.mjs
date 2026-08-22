@@ -87,7 +87,14 @@ test('AI offer remains evidence-bound and uses one portrait', async () => {
     /первых 5 проектов/i,
   ]) assert.doesNotMatch(source, unsupported)
 
-  assert.equal((source.match(/\/dmitry\.jpg/g) ?? []).length, 1)
+  // One portrait, referenced once, and the file must actually ship in public/.
+  // Pinning a file name alone let a rename (da4a953) rot this contract silently.
+  const portraits = [...source.matchAll(/\/(dmitry[\w-]*\.jpg)/g)].map((m) => m[1])
+  assert.equal(portraits.length, 1, `expected exactly one portrait, got ${portraits}`)
+  await assert.doesNotReject(
+    readFile(new URL(`public/${portraits[0]}`, root)),
+    `portrait ${portraits[0]} is referenced but missing from public/`,
+  )
   assert.match(source, /Не публикую точные финансовые результаты клиента/)
 })
 
