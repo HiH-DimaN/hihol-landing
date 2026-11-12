@@ -1,12 +1,26 @@
 import Link from 'next/link'
-import { AI_GUIDES, AI_SOLUTIONS } from '../../lib/aiData'
+import { AI_FEATURED, AI_GUIDES, AI_SOLUTIONS } from '../../lib/aiData'
 import AiSectionHeading from './AiSectionHeading'
 
 export default function AiSolutions() {
   return (
     <section id="solutions" className="mx-auto max-w-[1120px] px-4 py-16 sm:px-6 sm:py-20">
       <AiSectionHeading eyebrow="Решения" title="Выберите процесс, а не модное название технологии" text="Каждая карточка ведёт на подробную страницу с задачами, составом решения, ориентиром цены и сроком." />
-      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <Link href={AI_FEATURED.href} className="group mt-10 flex flex-col gap-6 rounded-2xl border border-[var(--accent)] bg-[var(--surface)] p-6 transition hover:shadow-lg sm:p-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent-text)]">{AI_FEATURED.eyebrow}</p>
+          <h3 className="mt-4 text-2xl font-semibold group-hover:text-[var(--accent-text)]">{AI_FEATURED.title}</h3>
+          <p className="mt-3 leading-relaxed text-[var(--text-muted)]">{AI_FEATURED.text}</p>
+        </div>
+        <div className="shrink-0 text-sm">
+          <div className="grid grid-cols-2 gap-6">
+            <div><p className="text-[var(--text-muted)]">Бюджет</p><p className="mt-1 font-semibold">{AI_FEATURED.price}</p></div>
+            <div><p className="text-[var(--text-muted)]">Срок</p><p className="mt-1 font-semibold">{AI_FEATURED.duration}</p></div>
+          </div>
+          <p className="mt-5 text-base font-semibold text-[var(--accent-text)]">{AI_FEATURED.cta} →</p>
+        </div>
+      </Link>
+      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {AI_SOLUTIONS.map((solution) => (
           <Link key={solution.href} href={solution.href} className="group flex min-h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-lg">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent-text)]">{solution.eyebrow}</p>
