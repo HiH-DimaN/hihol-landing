@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import type { NichePage } from '../lib/nichePages'
 import { aiIntakeHref } from '../lib/aiIntakeData'
@@ -128,6 +129,40 @@ function NicheProofSection({ page }: { page: NichePage }) {
   )
 }
 
+function NicheAuthorSection({ page }: { page: NichePage }) {
+  if (!page.author) return null
+  const { title, name, role, text, points } = page.author
+  return (
+    <section className="border-b border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto max-w-[1120px]">
+        <h2 className="text-3xl font-semibold md:text-4xl">{title}</h2>
+        <div className="mt-8 flex flex-col gap-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:flex-row sm:gap-8 sm:p-8">
+          <Image
+            src="/dmitry-color.jpg"
+            alt={name}
+            width={160}
+            height={197}
+            className="h-[197px] w-40 shrink-0 rounded-xl object-cover"
+          />
+          <div>
+            <p className="text-2xl font-semibold">{name}</p>
+            <p className="mt-2 text-sm font-semibold text-[var(--accent-text)]">{role}</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--text-muted)]">{text}</p>
+            <ul className="mt-5 space-y-2 text-sm leading-relaxed text-[var(--text)]">
+              {points.map((point) => (
+                <li key={point} className="flex gap-3">
+                  <span aria-hidden="true" className="text-[var(--accent-text)]">-</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function ListCard({ title, items }: { title: string; items: string[] }) {
   return (
     <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
@@ -178,6 +213,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
         <NicheStructuredData page={page} />
         <NicheHero page={page} />
         <NicheProofSection page={page} />
+        <NicheAuthorSection page={page} />
         <NicheValueCards page={page} />
         <NicheFaq page={page} />
         <NicheFinalCta page={page} />
