@@ -106,6 +106,28 @@ function NicheHero({ page }: { page: NichePage }) {
   )
 }
 
+function NicheProofSection({ page }: { page: NichePage }) {
+  if (!page.proof) return null
+  const { title, lead, items, note } = page.proof
+  return (
+    <section className="border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto max-w-[1120px]">
+        <h2 className="text-3xl font-semibold md:text-4xl">{title}</h2>
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--text-muted)]">{lead}</p>
+        <dl className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item) => (
+            <div key={item.value} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+              <dt className="text-3xl font-semibold text-[var(--accent-text)]">{item.value}</dt>
+              <dd className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{item.label}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-6 text-sm text-[var(--text-muted)]">{note}</p>
+      </div>
+    </section>
+  )
+}
+
 function ListCard({ title, items }: { title: string; items: string[] }) {
   return (
     <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
@@ -155,6 +177,7 @@ export default function NicheLandingPage({ page }: { page: NichePage }) {
       <main>
         <NicheStructuredData page={page} />
         <NicheHero page={page} />
+        <NicheProofSection page={page} />
         <NicheValueCards page={page} />
         <NicheFaq page={page} />
         <NicheFinalCta page={page} />
