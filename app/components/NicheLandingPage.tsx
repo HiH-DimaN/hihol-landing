@@ -148,7 +148,7 @@ function NicheAuthorSection({ page }: { page: NichePage }) {
             <p className="text-2xl font-semibold">{name}</p>
             <p className="mt-2 text-sm font-semibold text-[var(--accent-text)]">{role}</p>
             <p className="mt-4 max-w-2xl leading-relaxed text-[var(--text-muted)]">{text}</p>
-            <ul className="mt-5 space-y-2 text-sm leading-relaxed text-[var(--text)]">
+            <ul className="mt-5 max-w-2xl space-y-2 leading-relaxed text-[var(--text-muted)]">
               {points.map((point) => (
                 <li key={point} className="flex gap-3">
                   <span aria-hidden="true" className="text-[var(--accent-text)]">-</span>
