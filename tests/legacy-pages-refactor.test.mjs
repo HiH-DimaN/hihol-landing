@@ -66,7 +66,8 @@ test('static export preserves the AI solutions contract', () => {
 
   assert.match(html, /AI-автоматизация бизнес-процессов под ключ/)
   assert.match(html, /Автоматизация B2B-процессов/)
-  assert.match(html, /Публичные продукты вместо обезличенных финансовых обещаний/)
+  assert.match(html, /Цифры из работающих систем/)
+  assert.match(html, /href="\/avtomatizaciya-ucheta"/)
   assert.match(html, /https:\/\/t\.me\/dmitry_hihol/)
   assert.match(html, /"@type":"Service"/)
   assert.match(html, /"@type":"BreadcrumbList"/)

@@ -7,6 +7,8 @@ import {
   BUDGET_OPTIONS,
   FREQUENCY_OPTIONS,
   TIME_SPENT_OPTIONS,
+  intakeOverrideFor,
+  type IntakeOverride,
 } from '../lib/aiIntakeData'
 import { trackGoal } from '../lib/metrika'
 import { TELEGRAM_URL } from '../lib/site'
@@ -177,34 +179,34 @@ function RadioGroup({
   )
 }
 
-function ProcessStep({ values, errors, setValue }: StepProps) {
+function ProcessStep({ values, errors, setValue, texts }: StepProps) {
   return (
     <fieldset className="grid gap-6">
       <legend className="text-2xl font-semibold">Как устроен процесс сейчас</legend>
       <p className="text-sm leading-relaxed text-[var(--text-muted)]">Опишите один повторяющийся процесс. Не добавляйте персональные данные клиентов, пароли и содержимое конфиденциальных документов.</p>
-      <TextAreaField id="process" label="Что происходит сейчас? *" hint="Кто запускает процесс, какие действия выполняются и где возникают задержки или ошибки." value={values.process} maxLength={2000} error={errors.process} onChange={(value) => setValue('process', value)} />
-      <TextAreaField id="desired_result" label="Что должно измениться? *" hint="Какой наблюдаемый результат будет полезен: быстрее отвечать, не терять заявки, готовить документ, находить знания." value={values.desired_result} maxLength={1500} error={errors.desired_result} onChange={(value) => setValue('desired_result', value)} />
+      <TextAreaField id="process" label="Что происходит сейчас? *" hint={texts?.processHint ?? "Кто запускает процесс, какие действия выполняются и где возникают задержки или ошибки."} value={values.process} maxLength={2000} error={errors.process} onChange={(value) => setValue('process', value)} />
+      <TextAreaField id="desired_result" label="Что должно измениться? *" hint={texts?.resultHint ?? "Какой наблюдаемый результат будет полезен: быстрее отвечать, не терять заявки, готовить документ, находить знания."} value={values.desired_result} maxLength={1500} error={errors.desired_result} onChange={(value) => setValue('desired_result', value)} />
     </fieldset>
   )
 }
 
-function VolumeStep({ values, errors, setValue }: StepProps) {
+function VolumeStep({ values, errors, setValue, texts }: StepProps) {
   return (
     <fieldset className="grid gap-7">
       <legend className="text-2xl font-semibold">Объём и трудозатраты</legend>
       <p className="text-sm leading-relaxed text-[var(--text-muted)]">Диапазонов достаточно — точные цифры на этом этапе не нужны.</p>
-      <RadioGroup name="frequency" legend="Как часто выполняется процесс? *" options={FREQUENCY_OPTIONS} value={values.frequency} error={errors.frequency} onChange={(value) => setValue('frequency', value)} />
-      <RadioGroup name="time_spent" legend="Сколько ручного времени он занимает? *" options={TIME_SPENT_OPTIONS} value={values.time_spent} error={errors.time_spent} onChange={(value) => setValue('time_spent', value)} />
+      <RadioGroup name="frequency" legend={texts?.frequencyLegend ?? 'Как часто выполняется процесс? *'} options={texts?.frequencyOptions ?? FREQUENCY_OPTIONS} value={values.frequency} error={errors.frequency} onChange={(value) => setValue('frequency', value)} />
+      <RadioGroup name="time_spent" legend={texts?.timeLegend ?? 'Сколько ручного времени он занимает? *'} options={texts?.timeOptions ?? TIME_SPENT_OPTIONS} value={values.time_spent} error={errors.time_spent} onChange={(value) => setValue('time_spent', value)} />
     </fieldset>
   )
 }
 
-function ContextStep({ values, errors, setValue }: StepProps) {
+function ContextStep({ values, errors, setValue, texts }: StepProps) {
   return (
     <fieldset className="grid gap-6">
       <legend className="text-2xl font-semibold">Системы и ограничения</legend>
-      <TextAreaField id="current_tools" label="Какие системы уже используются?" hint="Например: 1С, Bitrix24, amoCRM, Telegram, Excel, корпоративная база знаний." value={values.current_tools} maxLength={1000} error={errors.current_tools} onChange={(value) => setValue('current_tools', value)} />
-      <TextAreaField id="constraints" label="Какие есть ограничения?" hint="Например: данные нельзя передавать во внешние AI-сервисы, нужен журнал действий или согласование человеком." value={values.constraints} maxLength={1000} error={errors.constraints} onChange={(value) => setValue('constraints', value)} />
+      <TextAreaField id="current_tools" label="Какие системы уже используются?" hint={texts?.toolsHint ?? "Например: 1С, Bitrix24, amoCRM, Telegram, Excel, корпоративная база знаний."} value={values.current_tools} maxLength={1000} error={errors.current_tools} onChange={(value) => setValue('current_tools', value)} />
+      <TextAreaField id="constraints" label="Какие есть ограничения?" hint={texts?.constraintsHint ?? "Например: данные нельзя передавать во внешние AI-сервисы, нужен журнал действий или согласование человеком."} value={values.constraints} maxLength={1000} error={errors.constraints} onChange={(value) => setValue('constraints', value)} />
       <RadioGroup name="budget" legend="Какой бюджет реалистично рассматривать? *" options={BUDGET_OPTIONS} value={values.budget} error={errors.budget} onChange={(value) => setValue('budget', value)} />
     </fieldset>
   )
@@ -242,6 +244,7 @@ type StepProps = {
   values: FormValues
   errors: FieldErrors
   setValue: (field: keyof FormValues, value: string | boolean) => void
+  texts?: IntakeOverride
 }
 
 function CurrentStep({ step, ...props }: StepProps & { step: number }) {
@@ -328,7 +331,8 @@ function useDiagnosticForm() {
     }
   }
 
-  return { step, values, errors, status, statusMessage, leadId, setValue, goNext, goBack, handleSubmit }
+  const texts = intakeOverrideFor(context)
+  return { step, values, errors, status, statusMessage, leadId, setValue, goNext, goBack, handleSubmit, texts }
 }
 
 function ProgressHeader({ step }: { step: number }) {
@@ -395,7 +399,7 @@ export default function AiDiagnosticForm() {
     <form onSubmit={controller.handleSubmit} noValidate className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm sm:p-8">
       <input type="text" name="website" value={controller.values.website} onChange={(event) => controller.setValue('website', event.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 opacity-0" />
       <ProgressHeader step={controller.step} />
-      <CurrentStep step={controller.step} values={controller.values} errors={controller.errors} setValue={controller.setValue} />
+      <CurrentStep step={controller.step} values={controller.values} errors={controller.errors} setValue={controller.setValue} texts={controller.texts} />
       {controller.status === 'error' && <FailureNotice message={controller.statusMessage} />}
       <FormNavigation step={controller.step} consent={controller.values.consent_personal} status={controller.status} goBack={controller.goBack} goNext={controller.goNext} />
     </form>

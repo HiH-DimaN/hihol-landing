@@ -127,6 +127,20 @@ async def test_retention_cleanup_removes_expired_leads(client):
     assert await lead_count() == 0
 
 
+async def test_trade_page_volume_scale_is_accepted(client):
+    response = await client.post(
+        "/leads",
+        json=valid_payload(
+            frequency="больше 10 тысяч в месяц",
+            time_spent="больше 40 часов в неделю",
+            source="niche_final",
+            service_context="avtomatizaciya-ucheta",
+        ),
+    )
+    assert response.status_code == 200
+    assert await lead_count() == 1
+
+
 def test_telegram_notification_contains_no_lead_pii():
     lead = Lead(
         id=42,

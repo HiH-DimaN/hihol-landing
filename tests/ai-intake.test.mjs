@@ -25,6 +25,26 @@ test('AI diagnostic is a four-step, data-minimised first-party form', async () =
   assert.doesNotMatch(form, /выручк|зарплат/i)
 })
 
+test('context-specific diagnostic options are all accepted by the backend', async () => {
+  const [data, schemas, form] = await Promise.all([
+    read('app/lib/aiIntakeData.ts'),
+    read('backend/app/schemas.py'),
+    read('app/components/AiDiagnosticForm.tsx'),
+  ])
+
+  const overrides = data.slice(data.indexOf('export const INTAKE_OVERRIDES'))
+  assert.match(overrides, /'avtomatizaciya-ucheta'/)
+  const optionBlocks = [...overrides.matchAll(/(?:frequencyOptions|timeOptions): \[([^\]]+)\]/g)]
+  assert.equal(optionBlocks.length, 2)
+  const options = optionBlocks.flatMap((block) => [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]))
+  assert.ok(options.length >= 8)
+  for (const option of options) {
+    assert.ok(schemas.includes(`"${option}"`), `backend does not accept "${option}"`)
+  }
+  assert.match(form, /intakeOverrideFor\(context\)/)
+  assert.match(form, /texts\?\.frequencyOptions \?\? FREQUENCY_OPTIONS/)
+})
+
 test('AI conversion entry points use the diagnostic with route context and retain Telegram', async () => {
   const files = [
     'app/components/ai/AiHeader.tsx',
