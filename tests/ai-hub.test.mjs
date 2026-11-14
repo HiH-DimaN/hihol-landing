@@ -29,22 +29,27 @@ test('AI hub restores the complete conversion architecture', async () => {
     'Карта решения',
     'Пилот',
     'Запуск',
-    'Product Factory OS',
-    'Skutr Docs',
+    'Цифры из работающих систем',
+    '/avtomatizaciya-ucheta',
     '50–320 тыс. ₽',
   ]) assert.match(data, new RegExp(fact))
 })
 
-test('public proof includes Product Factory OS in a balanced four-card grid', async () => {
+test('public proof shows the measured results of the trade page and no own products', async () => {
   const [data, proof] = await Promise.all([
     read('app/lib/aiData.ts'),
     read('app/components/ai/AiProof.tsx'),
   ])
 
-  assert.match(data, /https:\/\/github\.com\/hihol-labs\/product-factory-os/)
-  assert.match(data, /Операционная система разработки продуктов в Codex/)
-  assert.match(proof, /sm:grid-cols-2/)
-  assert.doesNotMatch(proof, /lg:grid-cols-3/)
+  // One source of truth for the figures: the trade automation page.
+  assert.match(proof, /nichePages\.tradeAutomation\.proof/)
+  assert.match(proof, /AI_PROOF\.linkHref/)
+  assert.match(proof, /lg:grid-cols-4/)
+  assert.match(data, /linkHref: '\/avtomatizaciya-ucheta'/)
+  for (const removed of [/Product Factory OS/, /Skutr Docs/, /НейроЭксперт/, /AI_PRODUCTS/]) {
+    assert.doesNotMatch(data, removed)
+    assert.doesNotMatch(proof, removed)
+  }
 })
 
 test('AI hub links every commercial route and guide from the hub', async () => {
@@ -95,7 +100,7 @@ test('AI offer remains evidence-bound and uses one portrait', async () => {
     readFile(new URL(`public/${portraits[0]}`, root)),
     `portrait ${portraits[0]} is referenced but missing from public/`,
   )
-  assert.match(source, /Не публикую точные финансовые результаты клиента/)
+  assert.match(source, /Название компании не раскрываю по договоренности с ней/)
 })
 
 test('AI cluster returns to the AI hub and shares the business UI', async () => {

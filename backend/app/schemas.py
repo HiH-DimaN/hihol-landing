@@ -8,6 +8,11 @@ Frequency = Literal[
     "ежедневно",
     "несколько раз в день",
     "пока не знаю",
+    # volume scale shown to visitors of /avtomatizaciya-ucheta (app/lib/aiIntakeData.ts)
+    "до 100 в месяц",
+    "100-1 000 в месяц",
+    "1-10 тысяч в месяц",
+    "больше 10 тысяч в месяц",
 ]
 TimeSpent = Literal[
     "до 2 часов в месяц",
@@ -15,6 +20,10 @@ TimeSpent = Literal[
     "1–5 часов в неделю",
     "более 5 часов в неделю",
     "пока не знаю",
+    # workload scale shown to visitors of /avtomatizaciya-ucheta
+    "до 10 часов в неделю",
+    "10-40 часов в неделю",
+    "больше 40 часов в неделю",
 ]
 Budget = Literal[
     "до 50 тыс. ₽",
